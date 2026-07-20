@@ -1,0 +1,13 @@
+# Cloudflare Wrangler build & dev outputs
+.wrangler/
+
+# Dependency directories
+node_modules/
+
+# OS metadata
+.DS_Store
+Thumbs.db
+
+# Scratch and temporary files
+scratch/
+*.log

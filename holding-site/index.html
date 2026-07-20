@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Under Construction | Compitiello &amp; Donofrio Private Investigations</title>
+  <meta name="description" content="Compitiello & Donofrio Private Investigations website is undergoing a scheduled upgrade. Our professional, discreet, and trustworthy investigator services remain fully operational. Contact us for consultations.">
+  
+  <!-- Favicons (using local assets if uploaded, otherwise falls back gracefully) -->
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16x16.png">
+
+  <!-- Google Fonts: Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --bg-primary: #020C1B;
+      --bg-secondary: #05162E;
+      --bg-card: rgba(8, 34, 69, 0.4);
+      --border-color: rgba(255, 255, 255, 0.08);
+      --border-glow: rgba(212, 175, 55, 0.2);
+      
+      --text-primary: #F8FAFC;
+      --text-secondary: #E2E8F0;
+      --text-muted: #94A3B8;
+      
+      --accent-gold: #D4AF37;
+      --accent-gold-hover: #E6C655;
+      --accent-gold-rgb: 212, 175, 55;
+      --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      
+      --transition-smooth: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-primary);
+      color: var(--text-primary);
+      font-family: var(--font-sans);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      overflow-x: hidden;
+      position: relative;
+      line-height: 1.6;
+      padding: 1.5rem;
+    }
+
+    /* Ambient Background Animations */
+    .bg-glow {
+      position: absolute;
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, rgba(212, 175, 55, 0.06) 0%, rgba(8, 34, 69, 0.2) 50%, rgba(0,0,0,0) 70%);
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 1;
+      pointer-events: none;
+      animation: pulse 10s infinite alternate ease-in-out;
+    }
+
+    .bg-grid {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-image: 
+        linear-gradient(rgba(255, 255, 255, 0.01) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.01) 1px, transparent 1px);
+      background-size: 50px 50px;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    @keyframes pulse {
+      0% {
+        transform: translate(-50%, -50%) scale(0.9);
+        opacity: 0.8;
+      }
+      100% {
+        transform: translate(-50%, -50%) scale(1.1);
+        opacity: 1.2;
+      }
+    }
+
+    /* Container Card with Glassmorphism */
+    .container {
+      background: var(--bg-card);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid var(--border-color);
+      border-radius: 20px;
+      padding: 3.5rem 2.5rem;
+      max-width: 650px;
+      width: 100%;
+      text-align: center;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.6);
+      position: relative;
+      z-index: 2;
+      transition: var(--transition-smooth);
+    }
+
+    .container:hover {
+      border-color: rgba(212, 175, 55, 0.25);
+      box-shadow: 
+        0 30px 60px -10px rgba(0, 0, 0, 0.7),
+        0 0 40px rgba(212, 175, 55, 0.05);
+      transform: translateY(-2px);
+    }
+
+    /* Brand Logo / Fallback Emblem styling */
+    .logo-container {
+      margin-bottom: 2rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .logo-img {
+      max-height: 90px;
+      width: auto;
+      object-fit: contain;
+    }
+
+    /* Fallback emblem shown if image fails to load */
+    .logo-fallback {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 70px;
+      height: 70px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(8, 34, 69, 0.8) 0%, rgba(2, 12, 27, 0.9) 100%);
+      border: 2px solid var(--accent-gold);
+      box-shadow: 0 0 20px rgba(212, 175, 55, 0.15);
+      margin-bottom: 0.5rem;
+    }
+
+    .logo-fallback svg {
+      width: 32px;
+      height: 32px;
+      fill: var(--accent-gold);
+    }
+
+    .brand-title {
+      font-size: 1.35rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-primary);
+      margin-top: 0.5rem;
+    }
+
+    .brand-subtitle {
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: var(--accent-gold);
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+    }
+
+    /* Divider */
+    .divider {
+      width: 60px;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--accent-gold), transparent);
+      margin: 2rem auto;
+    }
+
+    /* Holding status info */
+    .status-badge {
+      display: inline-block;
+      padding: 0.4rem 1rem;
+      border-radius: 100px;
+      background: rgba(212, 175, 55, 0.1);
+      border: 1px solid rgba(212, 175, 55, 0.2);
+      color: var(--accent-gold);
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 1.5rem;
+    }
+
+    h1 {
+      font-size: 2rem;
+      font-weight: 700;
+      line-height: 1.25;
+      letter-spacing: -0.02em;
+      color: var(--text-primary);
+      margin-bottom: 1rem;
+    }
+
+    h1 span {
+      background: linear-gradient(135deg, #FFF 30%, var(--accent-gold) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .description {
+      font-size: 1.05rem;
+      color: var(--text-secondary);
+      max-width: 500px;
+      margin: 0 auto 2.5rem auto;
+      font-weight: 300;
+    }
+
+    /* Interactive Contact Info Cards */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.25rem;
+      margin-bottom: 2rem;
+    }
+
+    @media (max-width: 550px) {
+      .contact-grid {
+        grid-template-columns: 1fr;
+      }
+      .container {
+        padding: 2.5rem 1.5rem;
+      }
+      h1 {
+        font-size: 1.75rem;
+      }
+    }
+
+    .contact-card {
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 1.5rem;
+      text-decoration: none;
+      color: inherit;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.75rem;
+      transition: var(--transition-smooth);
+    }
+
+    .contact-card:hover {
+      background: rgba(212, 175, 55, 0.03);
+      border-color: rgba(212, 175, 55, 0.3);
+      transform: translateY(-3px);
+    }
+
+    .contact-card:focus-visible {
+      outline: 2px solid var(--accent-gold);
+      outline-offset: 2px;
+    }
+
+    .contact-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.04);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      transition: var(--transition-smooth);
+    }
+
+    .contact-card:hover .contact-icon {
+      background: rgba(212, 175, 55, 0.1);
+    }
+
+    .contact-icon svg {
+      width: 20px;
+      height: 20px;
+      fill: var(--text-secondary);
+      transition: var(--transition-smooth);
+    }
+
+    .contact-card:hover .contact-icon svg {
+      fill: var(--accent-gold);
+      transform: scale(1.1);
+    }
+
+    .contact-label {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-muted);
+      font-weight: 600;
+    }
+
+    .contact-value {
+      font-size: 0.95rem;
+      font-weight: 500;
+      color: var(--text-primary);
+      transition: var(--transition-smooth);
+    }
+
+    .contact-card:hover .contact-value {
+      color: var(--accent-gold);
+    }
+
+    /* Footer elements */
+    .meta-info {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      letter-spacing: 0.05em;
+      margin-top: 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .badge-row {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      margin-top: 0.5rem;
+      flex-wrap: wrap;
+    }
+
+    .badge-item {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      color: var(--accent-gold);
+      opacity: 0.85;
+    }
+
+    .badge-item svg {
+      width: 12px;
+      height: 12px;
+      fill: var(--accent-gold);
+    }
+
+    .copyright {
+      position: relative;
+      z-index: 2;
+      margin-top: 3rem;
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      text-align: center;
+      letter-spacing: 0.05em;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="bg-glow"></div>
+  <div class="bg-grid"></div>
+
+  <div class="container">
+    
+    <!-- Logo area -->
+    <div class="logo-container">
+      <!-- We load the transparent PNG logo if available -->
+      <img src="assets/logo_transparent.png" class="logo-img" alt="Compitiello & Donofrio Private Investigations Logo" onerror="this.style.display='none'; document.getElementById('logo-fallback-icon').style.display='flex';">
+      
+      <!-- Fallback stylized SVG emblem if assets/logo_transparent.png is not present/accessible -->
+      <div id="logo-fallback-icon" class="logo-fallback" style="display: none;">
+        <!-- Shield icon -->
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+        </svg>
+      </div>
+
+      <div class="brand-title">Compitiello &amp; Donofrio</div>
+      <div class="brand-subtitle">Private Investigations</div>
+    </div>
+
+    <div class="divider"></div>
+
+    <span class="status-badge">System Upgrade In Progress</span>
+
+    <h1>Our Site is <span>Under Construction</span></h1>
+    
+    <p class="description">
+      We are designing a new digital experience to serve you better. In the meantime, our office remains fully operational and our investigators are actively accepting new cases.
+    </p>
+
+    <!-- Actionable Contact Methods -->
+    <div class="contact-grid">
+      
+      <!-- Phone Call -->
+      <a href="tel:+14806302533" class="contact-card" title="Call our office">
+        <div class="contact-icon">
+          <!-- Telephone SVG -->
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M6.62 10.79a15.15 15.15 0 006.59 6.59l2.2-2.2a1 1 0 011.11-.27 11.72 11.72 0 003.7 1.01 1 1 0 01.88 1v3.5a1 1 0 01-1 1A16 16 0 013 4a1 1 0 011-1h3.5a1 1 0 011 .88 11.72 11.72 0 001.01 3.7 1 1 0 01-.27 1.11l-2.2 2.2z"/>
+          </svg>
+        </div>
+        <span class="contact-label">Call Office</span>
+        <span class="contact-value">+1 (480) 630-2533</span>
+      </a>
+
+      <!-- Send Email -->
+      <a href="mailto:johnd@cadprivateinvestigations.com" class="contact-card" title="Send us an email">
+        <div class="contact-icon">
+          <!-- Envelope SVG -->
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+          </svg>
+        </div>
+        <span class="contact-label">Email Us</span>
+        <span class="contact-value">johnd@cadprivateinvestigations.com</span>
+      </a>
+
+    </div>
+
+    <!-- Office Address and Accreditations -->
+    <div class="meta-info">
+      <div>6991 E Camelback Rd. STE D-300, Scottsdale, AZ 85251</div>
+      
+      <div class="badge-row">
+        <div class="badge-item">
+          <!-- Check Shield SVG -->
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+          </svg>
+          Licensed
+        </div>
+        <div class="badge-item">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+          </svg>
+          Bonded
+        </div>
+        <div class="badge-item">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+          </svg>
+          Insured
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="copyright">
+    &copy; 2026 Compitiello &amp; Donofrio. All rights reserved.
+  </div>
+
+</body>
+</html>

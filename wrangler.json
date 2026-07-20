@@ -1,0 +1,13 @@
+{
+  "name": "cad-live-worker",
+  "main": "worker.js",
+  "compatibility_date": "2026-07-14",
+  "assets": {
+    "directory": "./"
+  },
+  "routes": [
+    { "pattern": "cadprivateinvestigations.com/*", "zone_name": "cadprivateinvestigations.com" },
+    { "pattern": "www.cadprivateinvestigations.com/*", "zone_name": "cadprivateinvestigations.com" }
+  ],
+  "workers_dev": false
+}
