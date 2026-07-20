@@ -193,14 +193,30 @@ document.addEventListener('DOMContentLoaded', () => {
         const origText = btnText.textContent;
         btnText.textContent = 'Submitting Securing Request...';
 
-        // Simulate form submission (e.g. AJAX POST)
-        setTimeout(() => {
-          // Success Action
-          showToast();
-          form.reset();
+        // Submit form data to Web3Forms via AJAX POST
+        const formData = new FormData(form);
+
+        fetch('https://api.web3forms.com/submit', {
+          method: 'POST',
+          body: formData
+        })
+        .then(async (response) => {
+          const json = await response.json();
+          if (response.status === 200 && json.success) {
+            showToast();
+            form.reset();
+          } else {
+            alert(json.message || 'Something went wrong. Please try again or call us directly.');
+          }
+        })
+        .catch((error) => {
+          console.error('Form submission error:', error);
+          alert('Unable to send message at this time. Please call (480) 630-2533.');
+        })
+        .finally(() => {
           submitBtn.disabled = false;
           btnText.textContent = origText;
-        }, 1500);
+        });
       } else {
         // Focus on the first invalid field
         if (!isNameValid) {

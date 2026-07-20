@@ -912,7 +912,12 @@
               <p class="form-subtitle">Fill out the secure form below. All initial evaluations are strictly confidential.</p>
               
               <!-- Lead Form -->
-              <form id="consultation-form" action="#" method="POST" class="secure-form" novalidate>
+              <form id="consultation-form" action="https://api.web3forms.com/submit" method="POST" class="secure-form" novalidate>
+                <!-- Web3Forms Access Key -->
+                <input type="hidden" name="access_key" value="369865">
+                <input type="hidden" name="subject" value="New Confidential Inquiry - CAD Private Investigations">
+                <input type="hidden" name="from_name" value="CAD Private Investigations Website">
+                
                 <div class="form-group">
                   <label for="full-name" class="form-label">Name *</label>
                   <input type="text" id="full-name" name="name" class="form-control" autocomplete="name" required aria-required="true" aria-describedby="name-error" placeholder="John Doe">
