@@ -2713,17 +2713,81 @@ button.payment-badge:hover {
   color: var(--text-muted);
 }
 
-.coverage-map-note {
-  text-align: center;
-  max-width: 800px;
-  margin: 0 auto;
-  font-size: 0.95rem;
-  line-height: 1.5;
+.coverage-keynote-banner {
+  max-width: 900px;
+  margin: 0 auto 3rem auto;
+  padding: 2.25rem 2.5rem;
+  border-radius: 16px;
+  background: linear-gradient(135deg, rgba(212, 175, 55, 0.1), rgba(15, 23, 42, 0.5));
+  border: 1px solid rgba(212, 175, 55, 0.35);
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.25);
+  position: relative;
+  overflow: hidden;
+  backdrop-filter: blur(12px);
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 100%;
+    background: linear-gradient(to bottom, var(--accent-gold), rgba(212, 175, 55, 0.2));
+  }
+}
+
+.keynote-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--accent-gold);
+  background-color: rgba(212, 175, 55, 0.12);
+  padding: 0.35rem 0.85rem;
+  border-radius: 20px;
+  border: 1px solid rgba(212, 175, 55, 0.25);
+  margin-block-end: 1rem;
+}
+
+.keynote-title {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-block-end: 0.75rem;
+  letter-spacing: -0.01em;
+}
+
+.keynote-quote {
+  font-size: 1.05rem;
+  line-height: 1.65;
   color: var(--text-secondary);
-  background-color: rgba(212, 175, 55, 0.05);
-  border: 1px solid rgba(212, 175, 55, 0.15);
-  padding: 1.25rem 2rem;
-  border-radius: 8px;
+
+  strong {
+    color: var(--accent-gold);
+    font-weight: 600;
+  }
+}
+
+.coverage-card-highlight {
+  border: 1px solid rgba(212, 175, 55, 0.4) !important;
+  background: linear-gradient(145deg, rgba(212, 175, 55, 0.08), var(--bg-card)) !important;
+  box-shadow: 0 8px 24px rgba(212, 175, 55, 0.1);
+
+  .coverage-city {
+    color: var(--accent-gold);
+    font-weight: 700;
+  }
+}
+
+.status-beacon-gold {
+  background-color: #D4AF37 !important;
+
+  &::after {
+    border-color: #D4AF37 !important;
+  }
 }
 
 /* ============================================================
