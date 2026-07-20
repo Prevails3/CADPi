@@ -2294,7 +2294,13 @@ dialog.zelle-dialog::backdrop {
   border-color: rgba(255, 255, 255, 0.08);
 }
 
-.zelle-qr-placeholder {
+.zelle-qr-img {
+  max-width: 220px;
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.12);
+  background: #ffffff;
   display: block;
 }
 
