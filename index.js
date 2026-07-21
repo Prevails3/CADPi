@@ -1,14 +1,26 @@
 document.addEventListener('DOMContentLoaded', () => {
   let lastActiveElement = null;
-  // --- Header Scroll Effect ---
+  // --- Header Scroll Effect & Reading Progress Bar ---
   const header = document.querySelector('.global-header');
-  window.addEventListener('scroll', () => {
-    if (window.scrollY > 20) {
+  const scrollProgress = document.getElementById('scroll-progress');
+  
+  function updateScrollState() {
+    const scrollY = window.scrollY;
+    if (scrollY > 20) {
       header.classList.add('scrolled');
     } else {
       header.classList.remove('scrolled');
     }
-  });
+
+    if (scrollProgress) {
+      const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const progressPercent = totalHeight > 0 ? (scrollY / totalHeight) * 100 : 0;
+      scrollProgress.style.width = `${Math.min(100, Math.max(0, progressPercent))}%`;
+    }
+  }
+
+  window.addEventListener('scroll', updateScrollState, { passive: true });
+  updateScrollState();
 
   // --- Mobile Navigation Menu Toggle ---
   const mobileToggle = document.querySelector('.mobile-toggle');
@@ -388,6 +400,30 @@ document.addEventListener('DOMContentLoaded', () => {
       localStorage.setItem('theme', isNight ? 'dark' : 'light');
     });
   }
+
+  // --- Dynamic Spotlight Cursor Glow Handler ---
+  const spotlightCards = document.querySelectorAll(
+    '.service-card, .team-card, .testimonial-card, .coverage-card, .credential-item, .founder-spotlight'
+  );
+  
+  spotlightCards.forEach(card => {
+    card.classList.add('spotlight-card');
+    let ticking = false;
+
+    card.addEventListener('mousemove', (e) => {
+      if (!ticking) {
+        requestAnimationFrame(() => {
+          const rect = card.getBoundingClientRect();
+          const x = e.clientX - rect.left;
+          const y = e.clientY - rect.top;
+          card.style.setProperty('--mouse-x', `${x}px`);
+          card.style.setProperty('--mouse-y', `${y}px`);
+          ticking = false;
+        });
+        ticking = true;
+      }
+    });
+  });
 });
 
 // ============================================================
