@@ -226,7 +226,7 @@
     text-decoration: none;
     
     .logo-img {
-      height: 68px;
+      height: 84px;
       width: auto;
       display: block;
       transition: var(--transition-smooth);
@@ -234,7 +234,7 @@
   }
   
   .global-header.scrolled .logo .logo-img {
-    height: 50px;
+    height: 62px;
   }
   
   .nav-menu {
