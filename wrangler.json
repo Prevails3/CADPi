@@ -1,13 +1,26 @@
 {
-  "name": "cad-holding-worker",
-  "main": "worker.js",
-  "compatibility_date": "2026-07-14",
-  "assets": {
-    "directory": "./"
-  },
-  "routes": [
-    { "pattern": "cadprivateinvestigations.com/*", "zone_name": "cadprivateinvestigations.com" },
-    { "pattern": "www.cadprivateinvestigations.com/*", "zone_name": "cadprivateinvestigations.com" }
-  ],
-  "workers_dev": false
+	"name": "cad-holding-worker",
+	"account_id": "461838a64c2ca924e08757883ff65886",
+	"main": "worker.js",
+	"compatibility_date": "2026-07-14",
+	"assets": {
+		"directory": "./"
+	},
+	"routes": [
+		{
+			"pattern": "cadprivateinvestigations.com/*",
+			"zone_name": "cadprivateinvestigations.com"
+		},
+		{
+			"pattern": "www.cadprivateinvestigations.com/*",
+			"zone_name": "cadprivateinvestigations.com"
+		}
+	],
+	"workers_dev": false,
+	"kv_namespaces": [
+		{
+			"binding": "BLOG_KV",
+			"id": "1263ef319e4b41ff9fe79bfbd3b690e7"
+		}
+	]
 }

@@ -1,0 +1,1067 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Admin Publishing Studio | Compitiello &amp; Donofrio PI</title>
+  <meta name="robots" content="noindex, nofollow">
+  
+  <!-- Favicons -->
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16x16.png">
+
+  <!-- Google Fonts: Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css?family=Inter:300,400,500,600,700&display=swap" rel="stylesheet">
+
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- Main Stylesheet -->
+  <link rel="stylesheet" href="index.css?v=1.2.0">
+
+  <style>
+    /* Admin Specific Dashboard Styles */
+    body.admin-body {
+      background-color: var(--bg-primary);
+      color: var(--text-primary);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .admin-header {
+      background: rgba(2, 30, 67, 0.9);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border-color);
+      padding: 1rem 2rem;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .admin-header-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .admin-brand {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      text-decoration: none;
+    }
+
+    .admin-brand img {
+      height: 44px;
+      width: auto;
+    }
+
+    .admin-badge-title {
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--accent-gold);
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      padding: 0.25rem 0.6rem;
+      background: rgba(212, 175, 55, 0.15);
+      border: 1px solid rgba(212, 175, 55, 0.3);
+      border-radius: 6px;
+    }
+
+    .admin-nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .admin-main {
+      flex: 1;
+      max-width: 1200px;
+      width: 100%;
+      margin: 2rem auto;
+      padding: 0 1.5rem;
+    }
+
+    /* Login Box */
+    .login-container {
+      max-width: 440px;
+      margin: 5rem auto;
+      padding: 2.5rem;
+      border-radius: 16px;
+      text-align: center;
+    }
+
+    .login-logo {
+      height: 52px;
+      margin: 0 auto 1.5rem auto;
+    }
+
+    .login-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-block-end: 0.5rem;
+      color: var(--text-primary);
+    }
+
+    .login-desc {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      margin-block-end: 2rem;
+    }
+
+    .login-form-group {
+      margin-block-end: 1.5rem;
+      text-align: left;
+    }
+
+    .password-input-wrapper {
+      position: relative;
+    }
+
+    .password-toggle-btn {
+      position: absolute;
+      right: 1rem;
+      top: 50%;
+      transform: translateY(-50%);
+      background: none;
+      border: none;
+      color: var(--text-muted);
+      cursor: pointer;
+    }
+
+    .login-error {
+      color: #EF4444;
+      font-size: 0.85rem;
+      margin-block-end: 1rem;
+      display: none;
+    }
+
+    /* Dashboard Tabs */
+    .admin-tabs {
+      display: flex;
+      gap: 1rem;
+      border-bottom: 1px solid var(--border-color);
+      margin-block-end: 2rem;
+    }
+
+    .admin-tab-btn {
+      padding: 0.75rem 1.25rem;
+      background: none;
+      border: none;
+      border-bottom: 2px solid transparent;
+      color: var(--text-secondary);
+      font-weight: 600;
+      font-size: 0.95rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: var(--transition-fast);
+    }
+
+    .admin-tab-btn:hover {
+      color: var(--accent-gold);
+    }
+
+    .admin-tab-btn.active {
+      color: var(--accent-gold);
+      border-bottom-color: var(--accent-gold);
+    }
+
+    /* Editor Layout */
+    .editor-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+
+    .form-panel {
+      padding: 2.25rem;
+      border-radius: 16px;
+    }
+
+    .form-row-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      margin-block-end: 1.25rem;
+    }
+
+    @media (max-width: 768px) {
+      .form-row-2 {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .field-label {
+      display: block;
+      font-size: 0.88rem;
+      font-weight: 600;
+      margin-block-end: 0.5rem;
+      color: var(--text-primary);
+    }
+
+    .field-hint {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      margin-block-start: 0.35rem;
+    }
+
+    .admin-input, .admin-select, .admin-textarea {
+      width: 100%;
+      padding: 0.85rem 1.1rem;
+      border-radius: 10px;
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      color: var(--text-primary);
+      font-size: 0.95rem;
+      transition: var(--transition-fast);
+    }
+
+    .admin-input:focus, .admin-select:focus, .admin-textarea:focus {
+      outline: none;
+      border-color: var(--accent-gold);
+      box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.2);
+    }
+
+    /* Formatting Toolbar */
+    .editor-toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      padding: 0.75rem 1rem;
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      border-bottom: none;
+      border-radius: 10px 10px 0 0;
+      align-items: center;
+    }
+
+    .tool-btn {
+      padding: 0.4rem 0.75rem;
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      color: var(--text-secondary);
+      border-radius: 6px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      transition: var(--transition-fast);
+    }
+
+    .tool-btn:hover {
+      border-color: var(--accent-gold);
+      color: var(--accent-gold);
+      transform: translateY(-1px);
+    }
+
+    .tool-sep {
+      width: 1px;
+      height: 20px;
+      background: var(--border-color);
+      margin: 0 0.25rem;
+    }
+
+    .editor-textarea-wrapper .admin-textarea {
+      border-radius: 0 0 10px 10px;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      font-size: 0.9rem;
+      line-height: 1.6;
+      resize: vertical;
+      min-height: 320px;
+    }
+
+    .editor-stats-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-block-start: 0.5rem;
+    }
+
+    .preview-mode-bar {
+      display: flex;
+      gap: 0.5rem;
+      margin-block-end: 1rem;
+    }
+
+    .preview-mode-btn {
+      padding: 0.4rem 0.85rem;
+      border-radius: 20px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      color: var(--text-secondary);
+      cursor: pointer;
+    }
+
+    .preview-mode-btn.active {
+      background: var(--accent-gold);
+      color: #020C1B;
+      border-color: var(--accent-gold);
+    }
+
+    /* Live Preview Box */
+    .preview-box {
+      border: 1px dashed var(--border-color);
+      border-radius: 14px;
+      padding: 2rem;
+      background: var(--bg-secondary);
+      margin-block-end: 1.5rem;
+    }
+
+    /* Post Management List */
+    .posts-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-block-start: 1rem;
+    }
+
+    .posts-table th, .posts-table td {
+      padding: 1rem 1.25rem;
+      text-align: left;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .posts-table th {
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .posts-table tr:hover td {
+      background: rgba(212, 175, 55, 0.04);
+    }
+
+    /* Toast */
+    .admin-toast {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      padding: 1rem 1.5rem;
+      background: #020C1B;
+      color: #FFFFFF;
+      border: 1px solid var(--accent-gold);
+      border-radius: 10px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      z-index: 9999;
+      transform: translateY(100px);
+      opacity: 0;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .admin-toast.visible {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  </style>
+</head>
+<body class="admin-body">
+
+  <!-- Admin Header -->
+  <header class="admin-header">
+    <div class="admin-header-container">
+      <a href="index.html#home" class="admin-brand">
+        <img src="assets/logo_horizontal_v7.png" alt="CAD Private Investigations Logo">
+        <span class="admin-badge-title">Editorial Studio</span>
+      </a>
+
+      <div class="admin-nav-actions">
+        <a href="blog.html" target="_blank" class="btn btn-outline btn-sm">
+          <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i> View Live Blog
+        </a>
+        <button type="button" id="admin-logout-btn" class="btn btn-sm" style="display: none; background: rgba(239, 68, 68, 0.15); color: #EF4444; border: 1px solid rgba(239, 68, 68, 0.3);">
+          <i class="fa-solid fa-right-from-bracket" aria-hidden="true"></i> Logout
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="admin-main">
+    <!-- View 1: Login Form -->
+    <div id="login-view" class="login-container glass-card">
+      <img src="assets/logo_full_fingerprint_emblem.png" alt="CAD PI Emblem" class="login-logo">
+      <h1 class="login-title">Editorial Studio Login</h1>
+      <p class="login-desc">Enter your administrator passphrase to access the dispatch creation studio.</p>
+
+      <div id="login-error-msg" class="login-error"></div>
+
+      <form id="admin-login-form">
+        <div class="login-form-group">
+          <label for="admin-password" class="field-label">Master Passphrase</label>
+          <div class="password-input-wrapper">
+            <input type="password" id="admin-password" class="admin-input" placeholder="Enter administrative passphrase..." required autocomplete="current-password">
+            <button type="button" id="toggle-pw-btn" class="password-toggle-btn" aria-label="Toggle password visibility">
+              <i class="fa-regular fa-eye" aria-hidden="true"></i>
+            </button>
+          </div>
+        </div>
+
+        <button type="submit" id="login-submit-btn" class="btn btn-gold" style="width: 100%; padding: 0.9rem;">
+          <i class="fa-solid fa-lock" aria-hidden="true"></i> Authenticate &amp; Open Studio
+        </button>
+      </form>
+    </div>
+
+    <!-- View 2: Dashboard (Visible when authenticated) -->
+    <div id="dashboard-view" style="display: none;">
+      <!-- Tab Navigation -->
+      <div class="admin-tabs">
+        <button type="button" class="admin-tab-btn active" data-tab="create">
+          <i class="fa-solid fa-pen-nib" aria-hidden="true"></i> Create New Dispatch
+        </button>
+        <button type="button" class="admin-tab-btn" data-tab="manage">
+          <i class="fa-solid fa-list-check" aria-hidden="true"></i> Manage Published Dispatches (<span id="custom-posts-count">0</span>)
+        </button>
+      </div>
+
+      <!-- Tab Content: Create Post -->
+      <div id="tab-create" class="tab-pane">
+        <div class="editor-grid">
+          <div class="form-panel glass-card">
+            <!-- Mode Switcher: Form vs Preview -->
+            <div class="preview-mode-bar">
+              <button type="button" class="preview-mode-btn active" id="mode-edit-btn">
+                <i class="fa-solid fa-pen-to-square"></i> Writing Editor
+              </button>
+              <button type="button" class="preview-mode-btn" id="mode-preview-btn">
+                <i class="fa-solid fa-eye"></i> Live Real-Time Preview
+              </button>
+            </div>
+
+            <!-- Form Edit Container -->
+            <div id="form-edit-container">
+              <div class="form-group" style="margin-bottom: 1.25rem;">
+                <label for="post-title" class="field-label">Dispatch Headline / Title *</label>
+                <input type="text" id="post-title" class="admin-input" placeholder="e.g. Uncovering Offshore Concealment in Commercial Fraud Litigation" required>
+              </div>
+
+              <div class="form-row-2">
+                <div>
+                  <label for="post-category" class="field-label">Category Specialty *</label>
+                  <select id="post-category" class="admin-select">
+                    <option value="Financial Forensics">Financial Forensics &amp; Asset Recovery</option>
+                    <option value="Surveillance &amp; Law">Surveillance &amp; Arizona Law</option>
+                    <option value="Corporate Vetting">Corporate Due Diligence &amp; M&amp;A</option>
+                    <option value="Digital Forensics">Cyber &amp; Digital Forensics</option>
+                    <option value="Litigation Support">Federal &amp; State Litigation Support</option>
+                    <option value="__custom__">+ Custom Category...</option>
+                  </select>
+                  <input type="text" id="custom-category-input" class="admin-input" placeholder="Type custom category name..." style="display: none; margin-top: 0.5rem;">
+                </div>
+
+                <div>
+                  <label for="post-author" class="field-label">Author Byline *</label>
+                  <select id="post-author" class="admin-select">
+                    <option value="Michael Compitiello" data-role="Founder &amp; Supervisory Special Agent (Ret.)">Michael Compitiello (Founder &amp; Supervisory Special Agent Ret.)</option>
+                    <option value="John Donofrio" data-role="Operations Manager &amp; Private Investigator">John Donofrio (Operations Manager &amp; PI)</option>
+                    <option value="Alex Nader &amp; Scott Unger" data-role="Computer Forensic Specialists, CAD PI">Alex Nader &amp; Scott Unger (Digital Forensic Specialists)</option>
+                    <option value="__custom__">+ Custom Author...</option>
+                  </select>
+                  <div id="custom-author-box" style="display: none; margin-top: 0.5rem;">
+                    <input type="text" id="custom-author-name" class="admin-input" placeholder="Author Name" style="margin-bottom: 0.35rem;">
+                    <input type="text" id="custom-author-role" class="admin-input" placeholder="Author Title / Credentials">
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-group" style="margin-bottom: 1.5rem;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.35rem;">
+                  <label for="post-excerpt" class="field-label" style="margin-bottom: 0;">Summary / Search Excerpt</label>
+                  <button type="button" id="auto-excerpt-btn" class="btn btn-sm btn-outline" style="font-size: 0.75rem; padding: 0.2rem 0.5rem;">
+                    <i class="fa-solid fa-wand-magic-sparkles"></i> Auto-Generate from First Paragraph
+                  </button>
+                </div>
+                <textarea id="post-excerpt" class="admin-input" rows="2" placeholder="Brief summary displayed on preview cards and search engines (1-2 sentences)..."></textarea>
+              </div>
+
+              <!-- Formatting Toolbar -->
+              <div class="form-group" style="margin-bottom: 2rem;">
+                <label class="field-label">Article Full Body Content *</label>
+                <div class="editor-toolbar">
+                  <button type="button" class="tool-btn" data-insert="h3">
+                    <i class="fa-solid fa-heading"></i> H3
+                  </button>
+                  <button type="button" class="tool-btn" data-insert="h4">
+                    <i class="fa-solid fa-heading" style="font-size: 0.7rem;"></i> H4
+                  </button>
+                  <button type="button" class="tool-btn" data-insert="p">
+                    <i class="fa-solid fa-paragraph"></i> Paragraph
+                  </button>
+                  <span class="tool-sep"></span>
+                  <button type="button" class="tool-btn" data-insert="bold">
+                    <i class="fa-solid fa-bold"></i> Bold
+                  </button>
+                  <button type="button" class="tool-btn" data-insert="italic">
+                    <i class="fa-solid fa-italic"></i> Italic
+                  </button>
+                  <span class="tool-sep"></span>
+                  <button type="button" class="tool-btn" data-insert="bullet">
+                    <i class="fa-solid fa-list-ul"></i> Bullets
+                  </button>
+                  <span class="tool-sep"></span>
+                  <button type="button" class="tool-btn" data-insert="quote">
+                    <i class="fa-solid fa-quote-left"></i> Investigator Quote
+                  </button>
+                  <button type="button" class="tool-btn" data-insert="takeaways">
+                    <i class="fa-solid fa-shield-halved"></i> Key Takeaways Box
+                  </button>
+                </div>
+
+                <div class="editor-textarea-wrapper">
+                  <textarea id="post-content" class="admin-textarea" placeholder="Draft your investigative intelligence briefing here... Use the toolbar above to structure headings, quotes, and takeaways."></textarea>
+                </div>
+
+                <div class="editor-stats-bar">
+                  <span id="word-count-stat">0 words • ~1 min read</span>
+                  <span>HTML formatting tags supported</span>
+                </div>
+              </div>
+
+              <div style="display: flex; gap: 1rem; align-items: center;">
+                <button type="button" id="publish-btn" class="btn btn-gold btn-large">
+                  <i class="fa-solid fa-cloud-arrow-up" aria-hidden="true"></i> Publish Dispatch to Website
+                </button>
+                <button type="button" id="clear-form-btn" class="btn btn-outline">
+                  Clear Form
+                </button>
+              </div>
+            </div>
+
+            <!-- Live Real-Time Preview Container -->
+            <div id="preview-container" style="display: none;">
+              <h3 style="font-size: 1.1rem; color: var(--accent-gold); margin-bottom: 1rem;">Card Grid Preview</h3>
+              <div class="preview-box" id="card-preview-target"></div>
+
+              <h3 style="font-size: 1.1rem; color: var(--accent-gold); margin-bottom: 1rem; margin-top: 2rem;">Full Article Reader Preview</h3>
+              <div class="preview-box" id="article-preview-target"></div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <!-- Tab Content: Manage Posts -->
+      <div id="tab-manage" class="tab-pane" style="display: none;">
+        <div class="form-panel glass-card">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+            <h2 style="font-size: 1.3rem;">Custom Published Dispatches</h2>
+            <button type="button" id="refresh-posts-btn" class="btn btn-outline btn-sm">
+              <i class="fa-solid fa-arrows-rotate"></i> Refresh
+            </button>
+          </div>
+
+          <div id="posts-list-container">
+            <p style="color: var(--text-muted); font-size: 0.95rem;">Loading published dispatches from Cloudflare KV...</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Notification Toast -->
+  <div id="admin-toast" class="admin-toast" role="status" aria-live="polite">
+    <i class="fa-solid fa-circle-check" style="color: var(--accent-gold); font-size: 1.25rem;"></i>
+    <span id="toast-message">Action successful</span>
+  </div>
+
+  <script>
+    (function initAdminApp() {
+      const loginView = document.getElementById('login-view');
+      const dashboardView = document.getElementById('dashboard-view');
+      const loginForm = document.getElementById('admin-login-form');
+      const passwordInput = document.getElementById('admin-password');
+      const togglePwBtn = document.getElementById('toggle-pw-btn');
+      const loginErrorMsg = document.getElementById('login-error-msg');
+      const logoutBtn = document.getElementById('admin-logout-btn');
+      const toast = document.getElementById('admin-toast');
+      const toastMessage = document.getElementById('toast-message');
+
+      // Form Elements
+      const postTitle = document.getElementById('post-title');
+      const postCategory = document.getElementById('post-category');
+      const customCategoryInput = document.getElementById('custom-category-input');
+      const postAuthor = document.getElementById('post-author');
+      const customAuthorBox = document.getElementById('custom-author-box');
+      const customAuthorName = document.getElementById('custom-author-name');
+      const customAuthorRole = document.getElementById('custom-author-role');
+      const postExcerpt = document.getElementById('post-excerpt');
+      const postContent = document.getElementById('post-content');
+      const wordCountStat = document.getElementById('word-count-stat');
+      const autoExcerptBtn = document.getElementById('auto-excerpt-btn');
+      const publishBtn = document.getElementById('publish-btn');
+      const clearFormBtn = document.getElementById('clear-form-btn');
+
+      // Tabs & Preview
+      const tabBtns = document.querySelectorAll('.admin-tab-btn');
+      const tabPanes = document.querySelectorAll('.tab-pane');
+      const modeEditBtn = document.getElementById('mode-edit-btn');
+      const modePreviewBtn = document.getElementById('mode-preview-btn');
+      const formEditContainer = document.getElementById('form-edit-container');
+      const previewContainer = document.getElementById('preview-container');
+      const cardPreviewTarget = document.getElementById('card-preview-target');
+      const articlePreviewTarget = document.getElementById('article-preview-target');
+      const customPostsCount = document.getElementById('custom-posts-count');
+      const postsListContainer = document.getElementById('posts-list-container');
+      const refreshPostsBtn = document.getElementById('refresh-posts-btn');
+
+      let authToken = localStorage.getItem('cadpi_admin_token') || '';
+
+      function showToast(msg) {
+        toastMessage.textContent = msg;
+        toast.classList.add('visible');
+        setTimeout(() => toast.classList.remove('visible'), 3200);
+      }
+
+      // Password toggle
+      togglePwBtn.addEventListener('click', () => {
+        const isPw = passwordInput.type === 'password';
+        passwordInput.type = isPw ? 'text' : 'password';
+        togglePwBtn.innerHTML = isPw ? '<i class="fa-regular fa-eye-slash"></i>' : '<i class="fa-regular fa-eye"></i>';
+      });
+
+      // Verify Auth Token on Load
+      async function checkAuth() {
+        if (!authToken) {
+          showLogin();
+          return;
+        }
+
+        try {
+          const res = await fetch('/api/admin/verify', {
+            headers: { 'Authorization': `Bearer ${authToken}` }
+          });
+          if (res.ok) {
+            showDashboard();
+          } else {
+            showLogin();
+          }
+        } catch (e) {
+          showLogin();
+        }
+      }
+
+      function showLogin() {
+        loginView.style.display = 'block';
+        dashboardView.style.display = 'none';
+        logoutBtn.style.display = 'none';
+        authToken = '';
+        localStorage.removeItem('cadpi_admin_token');
+      }
+
+      function showDashboard() {
+        loginView.style.display = 'none';
+        dashboardView.style.display = 'block';
+        logoutBtn.style.display = 'inline-flex';
+        loadPostsList();
+      }
+
+      // Login Form Submit
+      loginForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        loginErrorMsg.style.display = 'none';
+        const pw = passwordInput.value;
+
+        try {
+          const res = await fetch('/api/admin/login', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ password: pw })
+          });
+
+          const data = await res.json();
+          if (res.ok && data.token) {
+            authToken = data.token;
+            localStorage.setItem('cadpi_admin_token', authToken);
+            passwordInput.value = '';
+            showDashboard();
+            showToast('Authenticated successfully.');
+          } else {
+            loginErrorMsg.textContent = data.error || 'Authentication failed. Please verify password.';
+            loginErrorMsg.style.display = 'block';
+          }
+        } catch (err) {
+          loginErrorMsg.textContent = 'Server connection error. Please try again.';
+          loginErrorMsg.style.display = 'block';
+        }
+      });
+
+      // Logout
+      logoutBtn.addEventListener('click', () => {
+        showLogin();
+        showToast('Logged out of editorial studio.');
+      });
+
+      // Tabs Switching
+      tabBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          tabBtns.forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+          const tab = btn.getAttribute('data-tab');
+          tabPanes.forEach(p => p.style.display = 'none');
+          document.getElementById(`tab-${tab}`).style.display = 'block';
+          if (tab === 'manage') loadPostsList();
+        });
+      });
+
+      // Preview / Edit Switcher
+      modeEditBtn.addEventListener('click', () => {
+        modeEditBtn.classList.add('active');
+        modePreviewBtn.classList.remove('active');
+        formEditContainer.style.display = 'block';
+        previewContainer.style.display = 'none';
+      });
+
+      modePreviewBtn.addEventListener('click', () => {
+        modePreviewBtn.classList.add('active');
+        modeEditBtn.classList.remove('active');
+        formEditContainer.style.display = 'none';
+        previewContainer.style.display = 'block';
+        renderPreview();
+      });
+
+      // Dynamic Category & Author Toggles
+      postCategory.addEventListener('change', () => {
+        customCategoryInput.style.display = postCategory.value === '__custom__' ? 'block' : 'none';
+      });
+
+      postAuthor.addEventListener('change', () => {
+        customAuthorBox.style.display = postAuthor.value === '__custom__' ? 'block' : 'none';
+      });
+
+      // Stats Bar & Word Count
+      function updateStats() {
+        const text = postContent.value.replace(/<[^>]+>/g, ' ');
+        const words = text.split(/\s+/).filter(Boolean).length;
+        const readTime = Math.max(1, Math.ceil(words / 200));
+        wordCountStat.textContent = `${words} words • ~${readTime} min read`;
+      }
+      postContent.addEventListener('input', updateStats);
+
+      // Auto Excerpt
+      autoExcerptBtn.addEventListener('click', () => {
+        const raw = postContent.value;
+        const tempDiv = document.createElement('div');
+        tempDiv.innerHTML = raw;
+        const firstP = tempDiv.querySelector('p');
+        const text = firstP ? firstP.textContent.trim() : tempDiv.textContent.trim().slice(0, 180);
+        postExcerpt.value = text;
+        showToast('Excerpt generated from content.');
+      });
+
+      // Toolbar Insert Helpers
+      document.querySelectorAll('.tool-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const type = btn.getAttribute('data-insert');
+          insertFormatting(type);
+        });
+      });
+
+      function insertFormatting(type) {
+        const textarea = postContent;
+        const start = textarea.selectionStart;
+        const end = textarea.selectionEnd;
+        const selected = textarea.value.substring(start, end);
+        let replacement = '';
+
+        switch (type) {
+          case 'h3':
+            replacement = `<h3>${selected || 'Key Subsection Heading'}</h3>\n`;
+            break;
+          case 'h4':
+            replacement = `<h4>${selected || 'Detailed Heading'}</h4>\n`;
+            break;
+          case 'p':
+            replacement = `<p>${selected || 'Write paragraph text here...'}</p>\n`;
+            break;
+          case 'bold':
+            replacement = `<strong>${selected || 'bold text'}</strong>`;
+            break;
+          case 'italic':
+            replacement = `<em>${selected || 'italicized text'}</em>`;
+            break;
+          case 'bullet':
+            replacement = `<ul>\n  <li>${selected || 'First point'}</li>\n  <li>Second key evidentiary point</li>\n</ul>\n`;
+            break;
+          case 'quote':
+            replacement = `<div class="article-quote">\n  "${selected || 'Direct quote or case insight from lead supervisory investigator...'}"\n</div>\n`;
+            break;
+          case 'takeaways':
+            replacement = `<div class="article-takeaways">\n  <div class="takeaways-heading">\n    <i class="fa-solid fa-shield-halved"></i> Strategic Takeaways for Legal Counsel\n  </div>\n  <ul>\n    <li>${selected || 'First actionable legal/investigative takeaway.'}</li>\n    <li>Second critical statutory recommendation.</li>\n  </ul>\n</div>\n`;
+            break;
+        }
+
+        textarea.setRangeText(replacement, start, end, 'end');
+        textarea.focus();
+        updateStats();
+      }
+
+      // Render Live Preview
+      function renderPreview() {
+        const title = postTitle.value || 'Untitled Investigative Dispatch';
+        const category = postCategory.value === '__custom__' ? (customCategoryInput.value || 'Special Briefing') : postCategory.value;
+        const author = postAuthor.value === '__custom__' ? (customAuthorName.value || 'Investigator') : postAuthor.value;
+        const role = postAuthor.value === '__custom__' 
+          ? (customAuthorRole.value || 'Private Investigator') 
+          : (postAuthor.selectedOptions[0]?.getAttribute('data-role') || '');
+        const excerpt = postExcerpt.value || 'Preview excerpt will appear here once drafted...';
+        const words = postContent.value.replace(/<[^>]+>/g, ' ').split(/\s+/).filter(Boolean).length;
+        const readTime = `${Math.max(1, Math.ceil(words / 200))} min read`;
+        const date = new Date().toLocaleDateString('en-US', { month: 'short', year: 'numeric' });
+        const initials = author.split(' ').map(w => w[0]).join('').slice(0, 2).toUpperCase() || 'PI';
+
+        // 1. Card Preview
+        cardPreviewTarget.innerHTML = `
+          <div style="max-width: 400px; margin: 0 auto;">
+            <article class="blog-card glass-card spotlight-card">
+              <div class="blog-card-header">
+                <span class="blog-tag"><i class="fa-solid fa-file-shield"></i> ${category}</span>
+                <div class="blog-read-meta">
+                  <span class="blog-date"><i class="fa-regular fa-calendar"></i> ${date}</span>
+                  <span class="blog-read-time"><i class="fa-regular fa-clock"></i> ${readTime}</span>
+                </div>
+              </div>
+              <h3 class="blog-card-title"><a href="#">${title}</a></h3>
+              <p class="blog-card-excerpt">${excerpt}</p>
+              <div class="blog-card-footer">
+                <div class="blog-author-meta">
+                  <div class="author-avatar-sm">${initials}</div>
+                  <div class="author-info">
+                    <span class="author-name">${author}</span>
+                    <span class="author-role">${role}</span>
+                  </div>
+                </div>
+                <span class="btn-read-dispatch">Read Analysis &rarr;</span>
+              </div>
+            </article>
+          </div>
+        `;
+
+        // 2. Full Article Preview
+        articlePreviewTarget.innerHTML = `
+          <div class="article-modal-scroll" style="background: var(--bg-primary); border-radius: 12px; padding: 2rem;">
+            <div style="margin-bottom: 1rem;">
+              <span class="blog-tag">${category}</span> &bull; 
+              <span style="font-size: 0.85rem; color: var(--text-muted); margin-left: 0.5rem;">${readTime} &bull; ${date}</span>
+            </div>
+            <h1 class="article-full-title">${title}</h1>
+            <div class="article-author-card">
+              <div class="author-avatar-lg">${initials}</div>
+              <div class="author-details">
+                <div class="author-name-lg">${author}</div>
+                <div class="author-role-lg">${role}</div>
+              </div>
+            </div>
+            <div class="article-full-body">
+              ${postContent.value || '<p><em>No article content drafted yet. Use the writing editor to write your briefing.</em></p>'}
+            </div>
+          </div>
+        `;
+      }
+
+      // Publish Action
+      publishBtn.addEventListener('click', async () => {
+        const title = postTitle.value.trim();
+        const content = postContent.value.trim();
+
+        if (!title) {
+          alert('Please enter a headline / title for the dispatch.');
+          postTitle.focus();
+          return;
+        }
+
+        if (!content) {
+          alert('Please enter the article body content.');
+          postContent.focus();
+          return;
+        }
+
+        const category = postCategory.value === '__custom__' ? (customCategoryInput.value.trim() || 'Investigative Briefing') : postCategory.value;
+        const author = postAuthor.value === '__custom__' ? (customAuthorName.value.trim() || 'CAD Investigator') : postAuthor.value;
+        const authorRole = postAuthor.value === '__custom__' ? (customAuthorRole.value.trim() || 'Private Investigator') : (postAuthor.selectedOptions[0]?.getAttribute('data-role') || '');
+        const excerpt = postExcerpt.value.trim() || content.replace(/<[^>]+>/g, ' ').slice(0, 180).trim() + '...';
+
+        publishBtn.disabled = true;
+        publishBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Publishing to Cloudflare...';
+
+        try {
+          const res = await fetch('/api/admin/posts', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${authToken}`
+            },
+            body: JSON.stringify({
+              title,
+              category,
+              author,
+              authorRole,
+              excerpt,
+              bodyHtml: content
+            })
+          });
+
+          const data = await res.json();
+          if (res.ok && data.success) {
+            showToast('Dispatch published successfully to Cloudflare KV!');
+            // Clear form
+            postTitle.value = '';
+            postExcerpt.value = '';
+            postContent.value = '';
+            updateStats();
+
+            // Switch to manage tab
+            setTimeout(() => {
+              document.querySelector('.admin-tab-btn[data-tab="manage"]').click();
+            }, 800);
+          } else {
+            alert('Failed to publish: ' + (data.error || 'Unknown error'));
+          }
+        } catch (err) {
+          alert('Publishing error: ' + err.message);
+        } finally {
+          publishBtn.disabled = false;
+          publishBtn.innerHTML = '<i class="fa-solid fa-cloud-arrow-up"></i> Publish Dispatch to Website';
+        }
+      });
+
+      // Clear Form Action
+      clearFormBtn.addEventListener('click', () => {
+        if (confirm('Clear the current draft form?')) {
+          postTitle.value = '';
+          postExcerpt.value = '';
+          postContent.value = '';
+          updateStats();
+        }
+      });
+
+      // Load Published Posts List
+      async function loadPostsList() {
+        postsListContainer.innerHTML = '<p style="color: var(--text-muted); font-size: 0.95rem;">Querying Cloudflare KV for published dispatches...</p>';
+
+        try {
+          const res = await fetch('/api/posts');
+          const data = await res.json();
+
+          if (res.ok && data.posts) {
+            customPostsCount.textContent = data.posts.length;
+
+            if (data.posts.length === 0) {
+              postsListContainer.innerHTML = `
+                <div style="text-align: center; padding: 3rem 1rem;">
+                  <i class="fa-solid fa-folder-open" style="font-size: 2.5rem; color: var(--text-muted); margin-bottom: 1rem;"></i>
+                  <h3 style="font-size: 1.2rem; margin-bottom: 0.5rem;">No Custom Dispatches Yet</h3>
+                  <p style="color: var(--text-muted); font-size: 0.9rem; max-width: 450px; margin: 0 auto 1.5rem auto;">
+                    Use the "Create New Dispatch" tab to draft and publish your first custom investigative article directly to the live website.
+                  </p>
+                  <button type="button" class="btn btn-gold btn-sm" onclick="document.querySelector('.admin-tab-btn[data-tab=\\'create\\']').click();">
+                    + Draft First Dispatch
+                  </button>
+                </div>
+              `;
+              return;
+            }
+
+            let html = `
+              <table class="posts-table">
+                <thead>
+                  <tr>
+                    <th>Headline</th>
+                    <th>Category</th>
+                    <th>Author</th>
+                    <th>Published</th>
+                    <th style="text-align: right;">Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+            `;
+
+            data.posts.forEach(p => {
+              html += `
+                <tr>
+                  <td>
+                    <strong>${escapeHtml(p.title)}</strong><br>
+                    <small style="color: var(--text-muted);">${escapeHtml(p.slug)}</small>
+                  </td>
+                  <td><span class="blog-tag" style="font-size: 0.7rem;">${escapeHtml(p.category)}</span></td>
+                  <td>${escapeHtml(p.author)}</td>
+                  <td>${escapeHtml(p.date)}</td>
+                  <td style="text-align: right; white-space: nowrap;">
+                    <a href="blog.html#blog-${p.slug}" target="_blank" class="btn btn-outline btn-sm" style="margin-right: 0.5rem; font-size: 0.75rem;">
+                      <i class="fa-solid fa-eye"></i> View
+                    </a>
+                    <button type="button" class="btn btn-sm btn-delete-post" data-slug="${p.slug}" style="background: rgba(239, 68, 68, 0.15); color: #EF4444; border: 1px solid rgba(239, 68, 68, 0.3); font-size: 0.75rem;">
+                      <i class="fa-solid fa-trash"></i> Delete
+                    </button>
+                  </td>
+                </tr>
+              `;
+            });
+
+            html += `</tbody></table>`;
+            postsListContainer.innerHTML = html;
+
+            // Attach Delete Handlers
+            document.querySelectorAll('.btn-delete-post').forEach(b => {
+              b.addEventListener('click', async () => {
+                const slug = b.getAttribute('data-slug');
+                if (confirm(`Are you sure you want to permanently delete and unpublish "${slug}"?`)) {
+                  b.disabled = true;
+                  b.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i>';
+                  await deletePost(slug);
+                }
+              });
+            });
+          }
+        } catch (e) {
+          postsListContainer.innerHTML = '<p style="color: #EF4444;">Failed to load posts from KV.</p>';
+        }
+      }
+
+      async function deletePost(slug) {
+        try {
+          const res = await fetch(`/api/admin/posts/${slug}`, {
+            method: 'DELETE',
+            headers: { 'Authorization': `Bearer ${authToken}` }
+          });
+          if (res.ok) {
+            showToast(`Dispatch "${slug}" removed.`);
+            loadPostsList();
+          } else {
+            alert('Failed to delete post.');
+          }
+        } catch (e) {
+          alert('Error deleting post: ' + e.message);
+        }
+      }
+
+      if (refreshPostsBtn) refreshPostsBtn.addEventListener('click', loadPostsList);
+
+      function escapeHtml(str) {
+        return (str || '').replace(/[&<>"']/g, m => ({
+          '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
+        }[m]));
+      }
+
+      checkAuth();
+    })();
+  </script>
+</body>
+</html>
