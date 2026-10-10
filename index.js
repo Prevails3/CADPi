@@ -1245,6 +1245,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function closeBlogArticle() {
     if (!blogModal) return;
+
+    // Stop any playing video iframes on modal close
+    if (blogModalBody) {
+      const iframes = blogModalBody.querySelectorAll('iframe');
+      iframes.forEach(iframe => {
+        const src = iframe.src;
+        iframe.src = '';
+        iframe.src = src;
+      });
+    }
+
     blogModal.close();
     document.body.classList.remove('modal-open');
 

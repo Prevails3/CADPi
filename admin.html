@@ -371,6 +371,91 @@
       transform: translateY(0);
       opacity: 1;
     }
+
+    /* Modal Dialog for YouTube Embed */
+    dialog.admin-modal {
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      padding: 0;
+      background: var(--bg-card);
+      color: var(--text-primary);
+      max-width: 540px;
+      width: 90%;
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.7);
+    }
+
+    dialog.admin-modal::backdrop {
+      background: rgba(2, 12, 27, 0.82);
+      backdrop-filter: blur(6px);
+    }
+
+    .admin-modal-card {
+      padding: 2rem;
+    }
+
+    .admin-modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-block-end: 1.25rem;
+      border-bottom: 1px solid var(--border-color);
+      padding-block-end: 1rem;
+    }
+
+    .modal-close-icon {
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      color: var(--text-muted);
+      cursor: pointer;
+      line-height: 1;
+      padding: 0.25rem 0.5rem;
+      border-radius: 6px;
+      transition: var(--transition-fast);
+    }
+
+    .modal-close-icon:hover {
+      color: #FFFFFF;
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    /* Responsive Video Embeds in Articles & Preview */
+    .article-video-wrapper {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      margin: 1.5rem 0 0.5rem 0;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+      border: 1px solid var(--border-color);
+      background: #020C1B;
+    }
+
+    @supports not (aspect-ratio: 16 / 9) {
+      .article-video-wrapper {
+        height: 0;
+        padding-bottom: 56.25%;
+      }
+    }
+
+    .article-video-wrapper iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
+      display: block;
+    }
+
+    .video-caption {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      text-align: center;
+      margin-block-end: 1.5rem;
+      font-style: italic;
+    }
   </style>
 </head>
 <body class="admin-body">
@@ -523,6 +608,10 @@
                   <button type="button" class="tool-btn" data-insert="takeaways">
                     <i class="fa-solid fa-shield-halved"></i> Key Takeaways Box
                   </button>
+                  <span class="tool-sep"></span>
+                  <button type="button" class="tool-btn" data-insert="youtube" style="color: #FF4444;" title="Embed YouTube Video">
+                    <i class="fa-brands fa-youtube" style="color: #FF0000; font-size: 0.95rem;"></i> YouTube Video
+                  </button>
                 </div>
 
                 <div class="editor-textarea-wrapper">
@@ -575,6 +664,50 @@
       </div>
     </div>
   </main>
+
+  <!-- YouTube Embed Modal Dialog -->
+  <dialog id="youtube-modal" class="admin-modal">
+    <div class="admin-modal-card">
+      <div class="admin-modal-header">
+        <div style="display: flex; align-items: center; gap: 0.65rem;">
+          <i class="fa-brands fa-youtube" style="color: #FF0000; font-size: 1.5rem;" aria-hidden="true"></i>
+          <h3 style="margin: 0; font-size: 1.2rem; color: var(--text-primary); font-weight: 700;">Embed YouTube Video</h3>
+        </div>
+        <button type="button" id="youtube-modal-close" class="modal-close-icon" aria-label="Close dialog">&times;</button>
+      </div>
+      <div class="admin-modal-body">
+        <p style="font-size: 0.88rem; color: var(--text-secondary); margin-bottom: 1.25rem; line-height: 1.5;">
+          Paste a YouTube video link, share URL, Shorts link, or video ID. The video will be embedded responsively with privacy protection enabled.
+        </p>
+
+        <div class="form-group" style="margin-bottom: 1.2rem;">
+          <label for="yt-video-url" class="field-label">YouTube URL or Video ID *</label>
+          <input type="text" id="yt-video-url" class="admin-input" placeholder="e.g. https://www.youtube.com/watch?v=... or https://youtu.be/..." autofocus>
+          <div id="yt-url-feedback" style="font-size: 0.78rem; color: var(--text-muted); margin-top: 0.35rem;">
+            Supports standard YouTube URLs, Shorts, and youtu.be shortlinks.
+          </div>
+        </div>
+
+        <div class="form-group" style="margin-bottom: 1.25rem;">
+          <label for="yt-video-caption" class="field-label">Optional Video Caption / Evidentiary Note</label>
+          <input type="text" id="yt-video-caption" class="admin-input" placeholder="e.g. Surveillance briefing & evidentiary chain-of-custody footage">
+        </div>
+
+        <!-- Real-time Embed Preview in Modal -->
+        <div id="yt-preview-box" style="display: none; margin-bottom: 1.5rem;">
+          <div style="font-size: 0.8rem; color: var(--accent-gold); font-weight: 700; margin-bottom: 0.4rem; text-transform: uppercase; letter-spacing: 0.05em;">Video Preview</div>
+          <div id="yt-preview-frame"></div>
+        </div>
+
+        <div style="display: flex; justify-content: flex-end; gap: 0.75rem; align-items: center;">
+          <button type="button" id="yt-cancel-btn" class="btn btn-outline" style="padding: 0.6rem 1.2rem;">Cancel</button>
+          <button type="button" id="yt-insert-btn" class="btn btn-gold" style="padding: 0.6rem 1.4rem;">
+            <i class="fa-solid fa-plus" aria-hidden="true"></i> Insert Video into Article
+          </button>
+        </div>
+      </div>
+    </div>
+  </dialog>
 
   <!-- Notification Toast -->
   <div id="admin-toast" class="admin-toast" role="status" aria-live="polite">
@@ -766,11 +899,124 @@
         showToast('Excerpt generated from content.');
       });
 
+      // YouTube Modal Logic
+      const ytModal = document.getElementById('youtube-modal');
+      const ytUrlInput = document.getElementById('yt-video-url');
+      const ytCaptionInput = document.getElementById('yt-video-caption');
+      const ytPreviewBox = document.getElementById('yt-preview-box');
+      const ytPreviewFrame = document.getElementById('yt-preview-frame');
+      const ytInsertBtn = document.getElementById('yt-insert-btn');
+      const ytCancelBtn = document.getElementById('yt-cancel-btn');
+      const ytModalClose = document.getElementById('youtube-modal-close');
+      const ytUrlFeedback = document.getElementById('yt-url-feedback');
+
+      function extractYouTubeVideoId(input) {
+        if (!input) return null;
+        input = input.trim();
+
+        // 1. Direct iframe embed tag
+        const iframeMatch = input.match(/src=["'](?:https?:)?\/\/(?:www\.)?(?:youtube\.com|youtube-nocookie\.com)\/embed\/([a-zA-Z0-9_-]{11})/);
+        if (iframeMatch) return iframeMatch[1];
+
+        // 2. Standard URLs, Shorts, and youtu.be
+        const regExp = /(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?|shorts)\/|.*[?&]v=)|youtu\.be\/)([a-zA-Z0-9_-]{11})/;
+        const match = input.match(regExp);
+        if (match && match[1]) {
+          return match[1];
+        }
+
+        // 3. Raw 11-char ID
+        if (/^[a-zA-Z0-9_-]{11}$/.test(input)) {
+          return input;
+        }
+
+        return null;
+      }
+
+      function updateYtPreview() {
+        if (!ytUrlInput) return;
+        const val = ytUrlInput.value.trim();
+        const videoId = extractYouTubeVideoId(val);
+        if (videoId) {
+          ytPreviewBox.style.display = 'block';
+          ytPreviewFrame.innerHTML = `
+            <div class="article-video-wrapper" style="aspect-ratio: 16/9; max-width: 440px; margin: 0 auto;">
+              <iframe src="https://www.youtube-nocookie.com/embed/${videoId}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+          `;
+          ytUrlFeedback.textContent = `Valid Video ID detected: ${videoId}`;
+          ytUrlFeedback.style.color = 'var(--accent-gold)';
+        } else {
+          ytPreviewBox.style.display = 'none';
+          ytPreviewFrame.innerHTML = '';
+          if (val) {
+            ytUrlFeedback.textContent = 'Invalid YouTube URL or ID. Please check format.';
+            ytUrlFeedback.style.color = '#EF4444';
+          } else {
+            ytUrlFeedback.textContent = 'Supports standard YouTube URLs, Shorts, and youtu.be shortlinks.';
+            ytUrlFeedback.style.color = 'var(--text-muted)';
+          }
+        }
+      }
+
+      if (ytUrlInput) {
+        ytUrlInput.addEventListener('input', updateYtPreview);
+      }
+
+      function openYouTubeModal() {
+        if (!ytModal) return;
+        ytUrlInput.value = '';
+        ytCaptionInput.value = '';
+        ytPreviewBox.style.display = 'none';
+        ytPreviewFrame.innerHTML = '';
+        ytUrlFeedback.textContent = 'Supports standard YouTube URLs, Shorts, and youtu.be shortlinks.';
+        ytUrlFeedback.style.color = 'var(--text-muted)';
+        ytModal.showModal();
+        ytUrlInput.focus();
+      }
+
+      if (ytModalClose) ytModalClose.addEventListener('click', () => ytModal.close());
+      if (ytCancelBtn) ytCancelBtn.addEventListener('click', () => ytModal.close());
+
+      if (ytModal) {
+        ytModal.addEventListener('click', (e) => {
+          if (e.target === ytModal) ytModal.close();
+        });
+      }
+
+      if (ytInsertBtn) {
+        ytInsertBtn.addEventListener('click', () => {
+          const videoId = extractYouTubeVideoId(ytUrlInput.value);
+          if (!videoId) {
+            alert('Please enter a valid YouTube video URL or ID (e.g., https://youtu.be/... or https://youtube.com/watch?v=...)');
+            ytUrlInput.focus();
+            return;
+          }
+
+          const caption = ytCaptionInput.value.trim();
+          const cleanCaption = caption.replace(/"/g, '&quot;');
+          const replacement = `\n<div class="article-video-wrapper">\n  <iframe src="https://www.youtube-nocookie.com/embed/${videoId}" title="${cleanCaption || 'Investigative Video Briefing'}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe>\n</div>${cleanCaption ? `\n<p class="video-caption"><em>${cleanCaption}</em></p>` : ''}\n`;
+
+          const textarea = postContent;
+          const start = textarea.selectionStart;
+          const end = textarea.selectionEnd;
+          textarea.setRangeText(replacement, start, end, 'end');
+          textarea.focus();
+          updateStats();
+          ytModal.close();
+          showToast('YouTube video embedded into article!');
+        });
+      }
+
       // Toolbar Insert Helpers
       document.querySelectorAll('.tool-btn').forEach(btn => {
         btn.addEventListener('click', () => {
           const type = btn.getAttribute('data-insert');
-          insertFormatting(type);
+          if (type === 'youtube') {
+            openYouTubeModal();
+          } else {
+            insertFormatting(type);
+          }
         });
       });
 
