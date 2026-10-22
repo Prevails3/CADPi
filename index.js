@@ -85,11 +85,14 @@ document.addEventListener('DOMContentLoaded', () => {
     const nameInput = document.getElementById('full-name');
     const emailInput = document.getElementById('email-address');
     const phoneInput = document.getElementById('phone-number');
-    const smsCheckbox = document.getElementById('sms-opt-in');
+    const messageInput = document.getElementById('message');
+    const smsYes = document.getElementById('sms-consent-yes');
+    const smsNo = document.getElementById('sms-consent-no');
     
     const nameError = document.getElementById('name-error');
     const emailError = document.getElementById('email-error');
     const phoneError = document.getElementById('phone-error');
+    const messageError = document.getElementById('message-error');
     const smsError = document.getElementById('sms-error');
 
     // Phone pattern validation: standard US phones 10+ digits
@@ -132,12 +135,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function validatePhone() {
       const val = phoneInput.value.trim();
-      if (!val) {
-        phoneError.textContent = 'Phone number is required.';
+      if (smsYes && smsYes.checked && !val) {
+        phoneError.textContent = 'Please provide a phone number to receive text messages.';
         phoneInput.classList.add('invalid');
         phoneInput.setAttribute('aria-invalid', 'true');
         return false;
-      } else if (!phoneRegex.test(val)) {
+      }
+      if (val && !phoneRegex.test(val)) {
         phoneError.textContent = 'Please enter a valid phone number (minimum 10 digits).';
         phoneInput.classList.add('invalid');
         phoneInput.setAttribute('aria-invalid', 'true');
@@ -149,22 +153,66 @@ document.addEventListener('DOMContentLoaded', () => {
       return true;
     }
 
+    function validateMessage() {
+      if (messageInput && !messageInput.value.trim()) {
+        messageError.textContent = 'Message is required.';
+        messageInput.classList.add('invalid');
+        messageInput.setAttribute('aria-invalid', 'true');
+        return false;
+      }
+      if (messageError) messageError.textContent = '';
+      if (messageInput) {
+        messageInput.classList.remove('invalid');
+        messageInput.setAttribute('aria-invalid', 'false');
+      }
+      return true;
+    }
+
     function validateSMS() {
-      if (!smsCheckbox.checked) {
-        smsError.textContent = 'You must select one of the opt-in options to submit.';
-        smsCheckbox.setAttribute('aria-invalid', 'true');
+      if (smsYes && smsNo && !smsYes.checked && !smsNo.checked) {
+        smsError.textContent = 'Please select whether you agree or do not want to receive text messages.';
+        smsYes.setAttribute('aria-invalid', 'true');
+        smsNo.setAttribute('aria-invalid', 'true');
         return false;
       }
       smsError.textContent = '';
-      smsCheckbox.setAttribute('aria-invalid', 'false');
+      if (smsYes) smsYes.setAttribute('aria-invalid', 'false');
+      if (smsNo) smsNo.setAttribute('aria-invalid', 'false');
       return true;
     }
+
+    // Mutual exclusivity for SMS consent checkboxes
+    if (smsYes && smsNo) {
+      smsYes.addEventListener('change', () => {
+        if (smsYes.checked) {
+          smsNo.checked = false;
+        }
+        validateSMS();
+        validatePhone();
+      });
+
+      smsNo.addEventListener('change', () => {
+        if (smsNo.checked) {
+          smsYes.checked = false;
+        }
+        validateSMS();
+        validatePhone();
+      });
+    }
+
+    // Stop phone links inside labels from triggering checkbox state change
+    const smsPhoneLinks = form.querySelectorAll('.sms-consent-group a[href^="tel:"]');
+    smsPhoneLinks.forEach(link => {
+      link.addEventListener('click', (e) => {
+        e.stopPropagation();
+      });
+    });
 
     // Attach Validation on BLUR (when exiting field) to avoid premature warnings
     nameInput.addEventListener('blur', validateName);
     emailInput.addEventListener('blur', validateEmail);
     phoneInput.addEventListener('blur', validatePhone);
-    smsCheckbox.addEventListener('change', validateSMS);
+    if (messageInput) messageInput.addEventListener('blur', validateMessage);
 
     // Clear Errors on INPUT as soon as user types to correct
     nameInput.addEventListener('input', () => {
@@ -184,12 +232,27 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     phoneInput.addEventListener('input', () => {
-      if (phoneRegex.test(phoneInput.value.trim())) {
+      const val = phoneInput.value.trim();
+      if (!val && (!smsYes || !smsYes.checked)) {
+        phoneError.textContent = '';
+        phoneInput.classList.remove('invalid');
+        phoneInput.setAttribute('aria-invalid', 'false');
+      } else if (phoneRegex.test(val)) {
         phoneError.textContent = '';
         phoneInput.classList.remove('invalid');
         phoneInput.setAttribute('aria-invalid', 'false');
       }
     });
+
+    if (messageInput) {
+      messageInput.addEventListener('input', () => {
+        if (messageInput.value.trim()) {
+          messageError.textContent = '';
+          messageInput.classList.remove('invalid');
+          messageInput.setAttribute('aria-invalid', 'false');
+        }
+      });
+    }
 
     // Form Submission Handler
     form.addEventListener('submit', (e) => {
@@ -199,15 +262,16 @@ document.addEventListener('DOMContentLoaded', () => {
       const isNameValid = validateName();
       const isEmailValid = validateEmail();
       const isPhoneValid = validatePhone();
+      const isMessageValid = validateMessage();
       const isSMSValid = validateSMS();
 
-      if (isNameValid && isEmailValid && isPhoneValid && isSMSValid) {
+      if (isNameValid && isEmailValid && isPhoneValid && isMessageValid && isSMSValid) {
         // Disable submit button to prevent double submission
         const submitBtn = form.querySelector('button[type="submit"]');
         submitBtn.disabled = true;
         const btnText = submitBtn.querySelector('span');
         const origText = btnText.textContent;
-        btnText.textContent = 'Submitting Securing Request...';
+        btnText.textContent = 'Submitting Request...';
 
         // Submit form data to Web3Forms via AJAX POST
         const formData = new FormData(form);
@@ -227,7 +291,7 @@ document.addEventListener('DOMContentLoaded', () => {
         })
         .catch((error) => {
           console.error('Form submission error:', error);
-          alert('Unable to send message at this time. Please call (480) 630-2533.');
+          alert('Unable to send message at this time. Please call (877) 255-1919.');
         })
         .finally(() => {
           submitBtn.disabled = false;
@@ -241,6 +305,10 @@ document.addEventListener('DOMContentLoaded', () => {
           emailInput.focus();
         } else if (!isPhoneValid) {
           phoneInput.focus();
+        } else if (!isMessageValid && messageInput) {
+          messageInput.focus();
+        } else if (!isSMSValid && smsYes) {
+          smsYes.focus();
         }
       }
     });

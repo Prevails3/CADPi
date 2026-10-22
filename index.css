@@ -939,6 +939,19 @@
       color: var(--text-muted);
     }
   }
+
+  textarea.form-control {
+    min-height: 110px;
+    resize: vertical;
+    font-family: inherit;
+    line-height: 1.5;
+  }
+
+  .optional-label {
+    font-size: 0.82rem;
+    font-weight: 400;
+    color: var(--text-muted);
+  }
   
   /* Validation styling matching forms guide */
   .form-control:invalid:not(:placeholder-shown) {
@@ -963,22 +976,103 @@
   }
   
   .custom-checkbox {
-    margin-top: 4px;
+    margin-top: 3px;
     width: 18px;
     height: 18px;
     accent-color: var(--accent-gold);
     cursor: pointer;
+    flex-shrink: 0;
   }
   
   .checkbox-label {
     font-size: 0.85rem;
     color: var(--text-muted);
-    line-height: 1.4;
+    line-height: 1.45;
     cursor: pointer;
     
     .required-star {
       color: #F87171;
     }
+  }
+
+  .sms-consent-group {
+    border: none;
+    padding: 0;
+    margin: 0;
+    margin-block-end: 0.75rem;
+  }
+
+  .sms-legend {
+    font-size: 0.88rem;
+    line-height: 1.45;
+    color: var(--text-secondary);
+    font-weight: 500;
+    margin-block-end: 0.5rem;
+    padding: 0;
+  }
+
+  .sms-legend strong,
+  .sms-compliance-text strong,
+  .checkbox-label strong {
+    color: var(--text-primary);
+    font-weight: 600;
+  }
+
+  .sms-compliance-text {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    line-height: 1.45;
+    margin-top: 0;
+    margin-bottom: 0.75rem;
+    padding-inline-start: 0;
+  }
+
+  .sms-options {
+    display: flex;
+    flex-direction: column;
+    gap: 0.65rem;
+    margin-block-end: 0.65rem;
+  }
+
+  .sms-privacy-text {
+    font-size: 0.82rem;
+    color: var(--text-muted);
+    line-height: 1.45;
+    margin-top: 0.25rem;
+    margin-bottom: 0.25rem;
+  }
+
+  .sms-compliance-text a,
+  .sms-legend a,
+  .checkbox-label a,
+  .sms-privacy-text a {
+    color: #9A7B1C;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+    font-weight: 500;
+    transition: opacity var(--transition-fast);
+  }
+
+  :root.night-theme .sms-compliance-text a,
+  :root.night-theme .sms-legend a,
+  :root.night-theme .checkbox-label a,
+  :root.night-theme .sms-privacy-text a {
+    color: var(--accent-gold);
+  }
+
+  .sms-compliance-text a:hover,
+  .sms-legend a:hover,
+  .checkbox-label a:hover,
+  .sms-privacy-text a:hover {
+    color: #6B5208;
+    opacity: 0.9;
+  }
+
+  :root.night-theme .sms-compliance-text a:hover,
+  :root.night-theme .sms-legend a:hover,
+  :root.night-theme .checkbox-label a:hover,
+  :root.night-theme .sms-privacy-text a:hover {
+    color: #F1D486;
   }
   
   .contact-info-panel {
@@ -2092,18 +2186,26 @@ dialog.policy-dialog {
   left: 50% !important;
   transform: translate(-50%, -50%);
   margin: 0 !important;
-  border: 1px solid rgba(212, 175, 55, 0.25);
+  border: 1px solid rgba(212, 175, 55, 0.4);
   border-radius: 1rem;
-  background: rgba(8, 34, 69, 0.95);
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5),
-              inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  background: #FFFFFF;
+  box-shadow: 0 25px 60px rgba(2, 12, 27, 0.3),
+              0 0 0 1px rgba(212, 175, 55, 0.2);
   max-width: 750px;
   width: 90%;
   max-height: 80vh;
   padding: 0;
-  color: var(--text-primary);
+  color: #0F172A;
   font-family: var(--font-sans);
   overflow: hidden;
+}
+
+:root.night-theme dialog.policy-dialog {
+  background: #05162E;
+  border-color: rgba(212, 175, 55, 0.35);
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.75),
+              inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  color: #F8FAFC;
 }
 
 /* Modal Open Animation */
@@ -2113,9 +2215,9 @@ dialog.policy-dialog[open] {
 
 /* Backdrop Styling */
 dialog.policy-dialog::backdrop {
-  background: rgba(2, 12, 27, 0.8);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
+  background: rgba(2, 12, 27, 0.75);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
 }
 
 .policy-dialog-content {
@@ -2124,28 +2226,39 @@ dialog.policy-dialog::backdrop {
   height: 100%;
   max-height: 80vh;
   overflow: hidden;
+  background: inherit;
 }
 
 .policy-dialog-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-  padding: 2rem 2.5rem 1rem;
+  border-bottom: 1px solid rgba(15, 23, 42, 0.1);
+  padding: 1.75rem 2.25rem 1rem;
+  background: #FFFFFF;
+}
+
+:root.night-theme .policy-dialog-header {
+  border-bottom-color: rgba(255, 255, 255, 0.1);
+  background: #05162E;
 }
 
 .policy-dialog-title {
   font-size: 1.5rem;
-  font-weight: 600;
-  color: var(--accent-gold);
+  font-weight: 700;
+  color: #9A7B1C;
   margin: 0;
 }
 
+:root.night-theme .policy-dialog-title {
+  color: var(--accent-gold);
+}
+
 .policy-dialog-close {
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(15, 23, 42, 0.05);
+  border: 1px solid rgba(15, 23, 42, 0.12);
   border-radius: 50%;
-  color: var(--text-muted);
+  color: #475569;
   width: 2.25rem;
   height: 2.25rem;
   display: flex;
@@ -2156,20 +2269,39 @@ dialog.policy-dialog::backdrop {
 }
 
 .policy-dialog-close:hover {
-  background: rgba(212, 175, 55, 0.15);
-  border-color: rgba(212, 175, 55, 0.3);
-  color: var(--accent-gold);
+  background: rgba(212, 175, 55, 0.18);
+  border-color: rgba(212, 175, 55, 0.4);
+  color: #9A7B1C;
   transform: rotate(90deg);
 }
 
+:root.night-theme .policy-dialog-close {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(255, 255, 255, 0.12);
+  color: #94A3B8;
+}
+
+:root.night-theme .policy-dialog-close:hover {
+  background: rgba(212, 175, 55, 0.2);
+  border-color: rgba(212, 175, 55, 0.4);
+  color: var(--accent-gold);
+}
+
 .policy-dialog-body {
-  padding: 1.5rem 2.5rem 2.5rem;
+  padding: 1.5rem 2.25rem 2.25rem;
   overflow-y: auto;
   font-family: var(--font-sans);
-  color: var(--text-secondary);
+  color: #334155;
   font-size: 0.95rem;
   line-height: 1.7;
+  background: #FFFFFF;
   scrollbar-width: thin;
+  scrollbar-color: rgba(212, 175, 55, 0.4) rgba(15, 23, 42, 0.03);
+}
+
+:root.night-theme .policy-dialog-body {
+  background: #05162E;
+  color: #CBD5E1;
   scrollbar-color: rgba(212, 175, 55, 0.3) rgba(255, 255, 255, 0.02);
 }
 
@@ -2179,26 +2311,42 @@ dialog.policy-dialog::backdrop {
 }
 
 .policy-dialog-body::-webkit-scrollbar-track {
-  background: rgba(255, 255, 255, 0.02);
+  background: rgba(15, 23, 42, 0.03);
   border-radius: 0 0 1rem 0;
 }
 
+:root.night-theme .policy-dialog-body::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.02);
+}
+
 .policy-dialog-body::-webkit-scrollbar-thumb {
-  background: rgba(212, 175, 55, 0.3);
+  background: rgba(212, 175, 55, 0.4);
   border-radius: 3px;
 }
 
+:root.night-theme .policy-dialog-body::-webkit-scrollbar-thumb {
+  background: rgba(212, 175, 55, 0.3);
+}
+
 .policy-dialog-body::-webkit-scrollbar-thumb:hover {
+  background: #9A7B1C;
+}
+
+:root.night-theme .policy-dialog-body::-webkit-scrollbar-thumb:hover {
   background: var(--accent-gold);
 }
 
 /* Stylings inside modal content */
 .policy-dialog-body h3 {
-  color: var(--text-primary);
-  font-size: 1.1rem;
+  color: #0F172A;
+  font-size: 1.15rem;
   margin-top: 1.5rem;
   margin-bottom: 0.5rem;
-  font-weight: 500;
+  font-weight: 700;
+}
+
+:root.night-theme .policy-dialog-body h3 {
+  color: #F8FAFC;
 }
 
 .policy-dialog-body h3:first-of-type {
@@ -2206,7 +2354,12 @@ dialog.policy-dialog::backdrop {
 }
 
 .policy-dialog-body p {
+  color: #334155;
   margin-bottom: 1rem;
+}
+
+:root.night-theme .policy-dialog-body p {
+  color: #E2E8F0;
 }
 
 .policy-dialog-body p:last-child {
@@ -2214,14 +2367,73 @@ dialog.policy-dialog::backdrop {
 }
 
 .policy-dialog-body strong {
+  color: #9A7B1C;
+  font-weight: 600;
+}
+
+:root.night-theme .policy-dialog-body strong {
   color: var(--accent-gold);
+}
+
+.policy-dialog-body ul,
+.policy-dialog-body ol {
+  color: #334155;
+  margin-bottom: 1rem;
+  padding-left: 1.5rem;
+}
+
+:root.night-theme .policy-dialog-body ul,
+:root.night-theme .policy-dialog-body ol {
+  color: #CBD5E1;
+}
+
+.policy-dialog-body ol.numbered-list,
+.legal-card ol.numbered-list {
+  list-style: none;
+  padding-left: 0;
+}
+
+.policy-dialog-body ol.numbered-list li,
+.legal-card ol.numbered-list li {
+  margin-bottom: 0.85rem;
+  line-height: 1.6;
+}
+
+.policy-dialog-body li {
+  margin-bottom: 0.5rem;
+  line-height: 1.6;
+}
+
+.policy-dialog-body a {
+  color: #9A7B1C;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  font-weight: 500;
+  transition: opacity var(--transition-fast);
+}
+
+.policy-dialog-body a:hover {
+  color: #6B5208;
+  opacity: 0.9;
+}
+
+:root.night-theme .policy-dialog-body a {
+  color: var(--accent-gold);
+}
+
+:root.night-theme .policy-dialog-body a:hover {
+  color: #F1D486;
 }
 
 .policy-dialog-body .policy-date {
   font-size: 0.85rem;
-  color: var(--text-muted);
+  color: #64748B;
   margin-top: 2rem;
   font-style: italic;
+}
+
+:root.night-theme .policy-dialog-body .policy-date {
+  color: #94A3B8;
 }
 
 /* Prevent body scroll when modal is active */
@@ -3826,5 +4038,188 @@ footer,
     height: 52px !important;
   }
 }
+
+/* ============================================================
+   LEGAL / PRIVACY POLICY STANDALONE PAGE
+   ============================================================ */
+.legal-page-hero {
+  padding-block-start: calc(var(--header-height) + 3.5rem);
+  padding-block-end: 2.5rem;
+  background: radial-gradient(circle at 50% 20%, rgba(212, 175, 55, 0.08), transparent 70%),
+              linear-gradient(to bottom, var(--bg-secondary), var(--bg-primary));
+  text-align: center;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.legal-content-container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 3rem 1.5rem 5rem 1.5rem;
+}
+
+.legal-card {
+  padding: 2.5rem;
+  border-radius: var(--radius-lg);
+  line-height: 1.7;
+  color: #334155;
+  background: #FFFFFF;
+  border: 1px solid rgba(212, 175, 55, 0.25);
+  box-shadow: 0 10px 30px rgba(2, 12, 27, 0.06);
+}
+
+:root.night-theme .legal-card {
+  background: var(--bg-card);
+  border-color: var(--border-color);
+  color: var(--text-secondary);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+}
+
+.legal-card h2 {
+  font-size: 1.45rem;
+  color: #0F172A;
+  margin-top: 2.25rem;
+  margin-bottom: 0.75rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid rgba(15, 23, 42, 0.1);
+}
+
+:root.night-theme .legal-card h2 {
+  color: var(--text-primary);
+  border-bottom-color: var(--border-color);
+}
+
+.legal-card h2:first-of-type {
+  margin-top: 0;
+}
+
+.legal-card h3 {
+  font-size: 1.15rem;
+  color: #0F172A;
+  margin-top: 1.5rem;
+  margin-bottom: 0.5rem;
+  font-weight: 700;
+}
+
+:root.night-theme .legal-card h3 {
+  color: var(--text-primary);
+}
+
+.legal-card p {
+  color: #334155;
+  margin-bottom: 1.1rem;
+}
+
+:root.night-theme .legal-card p {
+  color: var(--text-secondary);
+}
+
+.legal-card ul,
+.legal-card ol {
+  color: #334155;
+  margin-bottom: 1.25rem;
+  padding-left: 1.75rem;
+}
+
+:root.night-theme .legal-card ul,
+:root.night-theme .legal-card ol {
+  color: var(--text-secondary);
+}
+
+.legal-card li {
+  margin-bottom: 0.5rem;
+  line-height: 1.6;
+}
+
+.legal-card strong {
+  color: #9A7B1C;
+  font-weight: 600;
+}
+
+:root.night-theme .legal-card strong {
+  color: var(--accent-gold);
+}
+
+.legal-card a {
+  color: #9A7B1C;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  transition: opacity var(--transition-fast);
+}
+
+.legal-card a:hover {
+  color: #6B5208;
+  opacity: 0.9;
+}
+
+:root.night-theme .legal-card a {
+  color: var(--accent-gold);
+}
+
+:root.night-theme .legal-card a:hover {
+  color: #F1D486;
+}
+
+.legal-nav-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+  margin-bottom: 2rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid rgba(15, 23, 42, 0.1);
+}
+
+:root.night-theme .legal-nav-bar {
+  border-bottom-color: var(--border-color);
+}
+
+.legal-nav-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.45rem 0.9rem;
+  background: rgba(15, 23, 42, 0.04);
+  border: 1px solid rgba(15, 23, 42, 0.12);
+  border-radius: var(--radius-sm);
+  color: #334155;
+  font-size: 0.85rem;
+  text-decoration: none;
+  font-weight: 500;
+  transition: all var(--transition-fast);
+}
+
+.legal-nav-link:hover {
+  background: rgba(212, 175, 55, 0.15);
+  border-color: #9A7B1C;
+  color: #9A7B1C;
+}
+
+:root.night-theme .legal-nav-link {
+  background: var(--surface-secondary, rgba(255, 255, 255, 0.04));
+  border-color: var(--border-color);
+  color: var(--text-secondary);
+}
+
+:root.night-theme .legal-nav-link:hover {
+  background: rgba(212, 175, 55, 0.12);
+  border-color: var(--accent-gold);
+  color: var(--accent-gold);
+}
+
+@media (max-width: 768px) {
+  .legal-card {
+    padding: 1.5rem;
+  }
+
+  .sms-compliance-text {
+    padding-inline-start: 0;
+  }
+}
+
+/* Unbreakable text tokens (e.g. I-9) */
+.no-break,
+.text-nowrap {
+  white-space: nowrap;
+}
+
 
 

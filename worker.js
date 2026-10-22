@@ -201,12 +201,14 @@ export default {
     // --- STATIC ASSET SERVING ---
     if (env.ASSETS) {
       let assetRequest = request;
-      if (url.pathname === '/blog' || url.pathname === '/blog/') {
-        const blogUrl = new URL('/blog.html', request.url);
-        assetRequest = new Request(blogUrl, request);
-      } else if (url.pathname === '/admin' || url.pathname === '/admin/') {
-        const adminUrl = new URL('/admin.html', request.url);
-        assetRequest = new Request(adminUrl, request);
+      if (
+        url.pathname === '/privacy-policy' || url.pathname === '/privacy-policy/' ||
+        url.pathname === '/privacy' || url.pathname === '/privacy/' ||
+        url.pathname === '/terms' || url.pathname === '/terms/' ||
+        url.pathname === '/terms-and-conditions' || url.pathname === '/terms-and-conditions/'
+      ) {
+        const privacyUrl = new URL('/privacy-policy', request.url);
+        assetRequest = new Request(privacyUrl, request);
       }
 
       const response = await env.ASSETS.fetch(assetRequest);

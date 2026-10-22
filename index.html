@@ -202,7 +202,7 @@
   <!-- FontAwesome Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <!-- Main Stylesheet -->
-  <link rel="stylesheet" href="index.css?v=1.2.0">
+  <link rel="stylesheet" href="index.css?v=1.2.2">
 </head>
 <body>
 
@@ -1175,20 +1175,48 @@
                 </div>
                 
                 <div class="form-group">
-                  <label for="phone-number" class="form-label">Phone *</label>
-                  <input type="tel" id="phone-number" name="phone" class="form-control" autocomplete="tel" required aria-required="true" aria-describedby="phone-error" placeholder="(480) 630-2533" inputmode="numeric">
+                  <label for="phone-number" class="form-label">Phone Number <span class="optional-label">(Optional)</span></label>
+                  <input type="tel" id="phone-number" name="phone" class="form-control" autocomplete="tel" aria-describedby="phone-error" placeholder="(877) 255-1919" inputmode="tel">
                   <span class="error-msg" id="phone-error" aria-live="polite"></span>
                 </div>
-                
-                <div class="form-group checkbox-group">
-                  <div class="checkbox-wrapper">
-                    <input type="checkbox" id="sms-opt-in" name="sms_opt_in" class="custom-checkbox" required aria-required="true" aria-describedby="sms-error">
-                    <label for="sms-opt-in" class="checkbox-label">
-                      I agree to opt-in to receive text messages regarding my inquiry. <span class="required-star">*</span>
-                    </label>
-                  </div>
-                  <span class="error-msg" id="sms-error" aria-live="polite"></span>
+
+                <div class="form-group">
+                  <label for="message" class="form-label">Message *</label>
+                  <textarea id="message" name="message" class="form-control" rows="4" required aria-required="true" aria-describedby="message-error" placeholder="How can our investigators assist you?"></textarea>
+                  <span class="error-msg" id="message-error" aria-live="polite"></span>
                 </div>
+                
+                <fieldset class="form-group sms-consent-group" aria-describedby="sms-disclosure sms-privacy-info sms-error">
+                  <legend class="sms-legend">
+                    Do you agree to receive text messages from <strong>CAD Private Investigations DBA <span class="no-break">I-9</span> Insights</strong> sent from <a href="tel:+18772551919">(877) 255-1919</a>?
+                  </legend>
+                  
+                  <p id="sms-disclosure" class="sms-compliance-text">
+                    Message frequency varies and may include <strong>informational messages</strong>. Message and data rates may apply. Reply STOP or CANCEL at any time to end or unsubscribe. For assistance, reply HELP or contact support at: <a href="tel:+18772551919">(877) 255-1919</a>.
+                  </p>
+
+                  <div class="sms-options">
+                    <div class="checkbox-wrapper">
+                      <input type="checkbox" id="sms-consent-yes" name="sms_consent" value="Yes, I agree to receive text messages from CAD Private Investigations DBA I-9 Insights sent from (877) 255-1919." class="custom-checkbox">
+                      <label for="sms-consent-yes" class="checkbox-label">
+                        Yes, I agree to receive text messages from <strong>CAD Private Investigations DBA <span class="no-break">I-9</span> Insights</strong> sent from <a href="tel:+18772551919">(877) 255-1919</a>.
+                      </label>
+                    </div>
+
+                    <div class="checkbox-wrapper">
+                      <input type="checkbox" id="sms-consent-no" name="sms_consent" value="No, I do not want to receive text messages from CAD Private Investigations DBA I-9 Insights." class="custom-checkbox">
+                      <label for="sms-consent-no" class="checkbox-label">
+                        No, I do not want to receive text messages from <strong>CAD Private Investigations DBA <span class="no-break">I-9</span> Insights</strong>.
+                      </label>
+                    </div>
+                  </div>
+
+                  <p id="sms-privacy-info" class="sms-privacy-text">
+                    See our <a href="privacy-policy.html" target="_blank" rel="noopener noreferrer">Privacy Policy</a> for details on how we handle your information.
+                  </p>
+                  
+                  <span class="error-msg" id="sms-error" aria-live="polite"></span>
+                </fieldset>
 
                 <button type="submit" class="btn btn-gold btn-full">
                   <span>Submit Confidential Request</span>
@@ -1433,21 +1461,47 @@
   <!-- Hidden SEO-Friendly Policy Templates -->
   <div style="display: none;">
     <div id="content-privacy-policy">
-      <h3>1. Information We Collect</h3>
-      <p>Compitiello &amp; Donofrio Private Investigations ("we," "our," or "the Agency") is committed to protecting your privacy. We collect personal information that you voluntarily provide to us when expressing an interest in obtaining information about our services, such as through our consultation form. This may include your name, email address, phone number, and a brief description of your inquiry.</p>
+      <h3>CAD Private Investigations DBA <span class="no-break">I-9</span> Insights Privacy Policy and Terms &amp; Conditions</h3>
+      <p>CAD Private Investigations DBA <span class="no-break">I-9</span> Insights respects your privacy. By opting into our SMS messaging service, you agree to the following terms regarding how we handle your data:</p>
       
-      <h3>2. How We Use Your Information</h3>
-      <p>We use the information we collect to provide and improve our services, contact you regarding consultations, and ensure the security of our communications. Every inquiry and case is treated with absolute integrity, surgical precision, and total privacy in line with supervisory federal law enforcement standards.</p>
+      <p><strong>Data Collection:</strong> We will collect your name, email address and mobile phone number when you agree to receive SMS. The information will be collected via our website form.</p>
       
-      <h3>3. Confidentiality &amp; Disclosure</h3>
-      <p>Confidentiality is the core foundation of our investigative work. We do not sell, lease, or rent client information to third parties. We will only disclose client or case-related information when strictly necessary to fulfill the investigation, with your explicit authorization, or when legally compelled to do so by a valid subpoena, court order, or federal mandate.</p>
+      <p><strong>Data Usage:</strong> We use your data solely to send informational messages.</p>
       
-      <h3>4. Data Security</h3>
-      <p>We implement robust, industry-standard administrative and technical security measures designed to protect the safety of your personal information from unauthorized access, alteration, disclosure, or destruction.</p>
+      <p><strong>Data Security:</strong> We protect your data with secure storage measures to prevent unauthorized access.</p>
       
-      <h3>5. Updates to This Policy</h3>
-      <p>We may update this Privacy Policy from time to time to reflect changes in our practices or for legal reasons. The "Last Updated" date at the bottom of this page will be updated accordingly.</p>
-      <p class="policy-date">Last Updated: July 2026</p>
+      <p><strong>Data Retention:</strong> We retain your information as long as you are subscribed to our SMS service. You may request deletion at any time.</p>
+      
+      <p><strong>MESSAGE AND DATA RATES MAY APPLY:</strong> Your mobile carrier may charge fees for sending or receiving text messages, especially if you do not have an unlimited texting or data plan. Messages are recurring, and message frequency varies.</p>
+      
+      <p>Contact CAD Private Investigations DBA <span class="no-break">I-9</span> Insights at <a href="tel:+18772551919">(877) 255-1919</a> or <a href="mailto:johnd@cadprivateinvestigations.com">johnd@cadprivateinvestigations.com</a> for HELP or to STOP receiving messages.</p>
+      
+      <p><strong>Opt-Out:</strong> You can opt out of the SMS list at any time by texting, emailing, or replying STOP or CANCEL to <a href="mailto:johnd@cadprivateinvestigations.com">johnd@cadprivateinvestigations.com</a> or <a href="tel:+18772551919">(877) 255-1919</a>. After unsubscribing, you will receive a final SMS to confirm you have unsubscribed, and we will remove your number from our list within 24 hours.</p>
+      <p>You can send HELP for additional assistance, and you will receive a text including our phone number, email, and our website or social media link to contact us. We are here to help you.</p>
+      
+      <p><strong>Non-Sharing Clause:</strong> No mobile information will be shared or collected with third parties/affiliates for marketing/promotional purposes. All other categories exclude text messaging originator opt-in data and consent; this information will not be shared with any third parties.</p>
+      
+      <h3>Data Sharing</h3>
+      <ul>
+        <li>Customer data is not shared with 3rd parties for promotional or marketing purposes.</li>
+        <li>Mobile opt-in and consent are never shared with anyone for any purpose. Any information sharing that may be mentioned elsewhere in this policy excludes mobile opt-in data.</li>
+      </ul>
+
+      <h3>Investigative Confidentiality &amp; Client Data Protection</h3>
+      <p>Compitiello &amp; Donofrio Private Investigations (CAD Private Investigations DBA <span class="no-break">I-9</span> Insights) operates under supervisory federal law enforcement standards. Every inquiry and case is treated with absolute integrity, surgical precision, and total privacy.</p>
+      <p>Confidentiality is the core foundation of our investigative work. We do not sell, lease, or rent client information to third parties. We will only disclose client or case-related information when strictly necessary to fulfill the investigation, with your explicit authorization, or when legally compelled to do so by a valid subpoena, court order, or federal mandate. As explicitly stated above, mobile opt-in data and consent will not be shared with any third parties under any circumstances.</p>
+
+      <h3>CAD Private Investigations DBA <span class="no-break">I-9</span> Insights Messaging Terms and Conditions</h3>
+      <ol class="numbered-list">
+        <li><strong>1.</strong> The messaging program consists of general conversational messaging to answer questions and provide support to customers.</li>
+        <li><strong>2.</strong> You can cancel the SMS service at any time. Just text 'STOP' to the phone number from which you received messages. After you send the SMS message 'STOP' to us, we will send you an SMS message to confirm that you have been unsubscribed. After this, you will no longer receive SMS messages from us. If you want to join again, just sign up as you did the first time and we will start sending SMS messages to you again.</li>
+        <li><strong>3.</strong> If you are experiencing issues with the messaging program you can reply with the keyword HELP for more assistance, or you can get help directly at <a href="mailto:johnd@cadprivateinvestigations.com">johnd@cadprivateinvestigations.com</a>.</li>
+        <li><strong>4.</strong> Carriers are not liable for delayed or undelivered messages.</li>
+        <li><strong>5.</strong> As always, message and data rates may apply for any messages sent to you from us and to us from you. Message frequency will vary based on communication needs. If you have any questions about your text plan or data plan, it is best to contact your wireless provider.</li>
+        <li><strong>6.</strong> If you have any questions regarding privacy, please read our privacy policy contained in the rest of this document/page.</li>
+      </ol>
+
+      <p class="policy-date">Last Updated: October 2026</p>
     </div>
 
     <div id="content-terms-and-conditions">
@@ -1458,14 +1512,25 @@
       <p>The information provided on this website is for general informational purposes only and does not constitute legal, financial, or formal investigative advice. While we strive to maintain accurate and up-to-date information, we make no representations or warranties of any kind regarding the completeness, accuracy, or reliability of the site's content.</p>
       
       <h3>3. Intellectual Property</h3>
-      <p>All content, branding, logos, layout, and images on this website are the intellectual property of Compitiello &amp; Donofrio Private Investigations and are protected by applicable copyright and trademark laws. You may not reproduce, distribute, or modify any materials without prior written consent.</p>
+      <p>All content, branding, logos, layout, and images on this website are the intellectual property of Compitiello &amp; Donofrio Private Investigations (CAD Private Investigations DBA <span class="no-break">I-9</span> Insights) and are protected by applicable copyright and trademark laws. You may not reproduce, distribute, or modify any materials without prior written consent.</p>
       
       <h3>4. Limitation of Liability</h3>
       <p>In no event shall the Agency, its partners, or its employees be liable for any direct, indirect, incidental, or consequential damages arising out of the use or inability to use this website or the information contained herein.</p>
       
       <h3>5. Governing Law</h3>
       <p>These terms shall be governed by and construed in accordance with the laws of the State of Arizona, without regard to its conflict of law principles. Any legal actions arising from the use of this website must be filed in the courts of Scottsdale/Maricopa County, Arizona.</p>
-      <p class="policy-date">Last Updated: July 2026</p>
+
+      <h3>6. CAD Private Investigations DBA <span class="no-break">I-9</span> Insights Messaging Terms and Conditions</h3>
+      <ol class="numbered-list">
+        <li><strong>1.</strong> The messaging program consists of general conversational messaging to answer questions and provide support to customers.</li>
+        <li><strong>2.</strong> You can cancel the SMS service at any time. Just text 'STOP' to the phone number from which you received messages. After you send the SMS message 'STOP' to us, we will send you an SMS message to confirm that you have been unsubscribed. After this, you will no longer receive SMS messages from us. If you want to join again, just sign up as you did the first time and we will start sending SMS messages to you again.</li>
+        <li><strong>3.</strong> If you are experiencing issues with the messaging program you can reply with the keyword HELP for more assistance, or you can get help directly at <a href="mailto:johnd@cadprivateinvestigations.com">johnd@cadprivateinvestigations.com</a>.</li>
+        <li><strong>4.</strong> Carriers are not liable for delayed or undelivered messages.</li>
+        <li><strong>5.</strong> As always, message and data rates may apply for any messages sent to you from us and to us from you. Message frequency will vary based on communication needs. If you have any questions about your text plan or data plan, it is best to contact your wireless provider.</li>
+        <li><strong>6.</strong> If you have any questions regarding privacy, please read our privacy policy contained in the rest of this document/page.</li>
+      </ol>
+
+      <p class="policy-date">Last Updated: October 2026</p>
     </div>
 
     <div id="content-cookie-policy">
