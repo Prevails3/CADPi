@@ -862,6 +862,23 @@
     font-size: 0.95rem;
     line-height: 1.5;
   }
+
+  .service-card-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    font-size: 0.88rem;
+    font-weight: 600;
+    color: var(--accent-gold);
+    margin-top: 1.15rem;
+    text-decoration: none;
+    transition: var(--transition-fast);
+  }
+
+  .service-card-link:hover {
+    color: var(--text-primary);
+    transform: translateX(4px);
+  }
   
   .services-footer {
     text-align: center;

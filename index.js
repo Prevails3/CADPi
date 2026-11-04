@@ -1122,7 +1122,7 @@ document.addEventListener('DOMContentLoaded', () => {
         </div>
       </div>
       <h3 class="blog-card-title">
-        <a href="#blog-${escapeHtml(post.slug)}" class="blog-card-link" data-open-slug="${escapeHtml(post.slug)}">
+        <a href="blog/${escapeHtml(post.slug)}.html" class="blog-card-link" data-open-slug="${escapeHtml(post.slug)}">
           ${escapeHtml(post.title)}
         </a>
       </h3>
@@ -1295,6 +1295,11 @@ document.addEventListener('DOMContentLoaded', () => {
     if (blogModalAvatar) blogModalAvatar.textContent = article.avatarInitials;
     if (blogModalBody) blogModalBody.innerHTML = article.bodyHtml;
 
+    const permalinkEl = document.getElementById('blog-modal-permalink');
+    if (permalinkEl) {
+      permalinkEl.href = `${window.location.origin}/blog/${slug}.html`;
+    }
+
     // Open native dialog
     blogModal.showModal();
     document.body.classList.add('modal-open');
@@ -1399,7 +1404,7 @@ document.addEventListener('DOMContentLoaded', () => {
       if (isCopying || !currentSlug) return;
       isCopying = true;
 
-      const permalink = `${window.location.origin}${window.location.pathname}#blog-${currentSlug}`;
+      const permalink = `${window.location.origin}/blog/${currentSlug}.html`;
 
       try {
         await navigator.clipboard.writeText(permalink);

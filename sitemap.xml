@@ -1,21 +1,78 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <!-- Homepage -->
   <url>
     <loc>https://cadprivateinvestigations.com/</loc>
-    <lastmod>2026-10-09</lastmod>
+    <lastmod>2026-11-03</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
+
+  <!-- Core Service Pillar Pages (Hubs) -->
+  <url>
+    <loc>https://cadprivateinvestigations.com/services/asset-tracing.html</loc>
+    <lastmod>2026-11-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.95</priority>
+  </url>
+  <url>
+    <loc>https://cadprivateinvestigations.com/services/surveillance.html</loc>
+    <lastmod>2026-11-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.95</priority>
+  </url>
+  <url>
+    <loc>https://cadprivateinvestigations.com/services/corporate-vetting.html</loc>
+    <lastmod>2026-11-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.95</priority>
+  </url>
+  <url>
+    <loc>https://cadprivateinvestigations.com/services/digital-forensics.html</loc>
+    <lastmod>2026-11-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.95</priority>
+  </url>
+
+  <!-- Blog & Dispatches Archive -->
   <url>
     <loc>https://cadprivateinvestigations.com/blog.html</loc>
-    <lastmod>2026-10-09</lastmod>
+    <lastmod>2026-11-03</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
+
+  <!-- Topic Cluster Pages (Spokes) -->
+  <url>
+    <loc>https://cadprivateinvestigations.com/blog/tracing-hidden-assets-offshore-structures.html</loc>
+    <lastmod>2026-10-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://cadprivateinvestigations.com/blog/arizona-surveillance-law-admissibility-standards.html</loc>
+    <lastmod>2026-09-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://cadprivateinvestigations.com/blog/corporate-mergers-due-diligence-red-flags.html</loc>
+    <lastmod>2026-08-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://cadprivateinvestigations.com/blog/digital-forensics-insider-threat-data-theft.html</loc>
+    <lastmod>2026-07-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+
+  <!-- Legal & Policies -->
   <url>
     <loc>https://cadprivateinvestigations.com/privacy-policy.html</loc>
     <lastmod>2026-10-22</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.7</priority>
   </url>
 </urlset>

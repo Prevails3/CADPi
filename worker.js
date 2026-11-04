@@ -198,20 +198,167 @@ export default {
       return jsonResponse({ error: 'Endpoint not found' }, 404);
     }
 
-    // --- STATIC ASSET SERVING ---
+    // --- STATIC ASSET SERVING & CLEAN URL ROUTING ---
     if (env.ASSETS) {
       let assetRequest = request;
+      const cleanPath = url.pathname.replace(/\/$/, '');
+
       if (
-        url.pathname === '/privacy-policy' || url.pathname === '/privacy-policy/' ||
-        url.pathname === '/privacy' || url.pathname === '/privacy/' ||
-        url.pathname === '/terms' || url.pathname === '/terms/' ||
-        url.pathname === '/terms-and-conditions' || url.pathname === '/terms-and-conditions/'
+        cleanPath === '/privacy-policy' || cleanPath === '/privacy' ||
+        cleanPath === '/terms' || cleanPath === '/terms-and-conditions'
       ) {
-        const privacyUrl = new URL('/privacy-policy', request.url);
-        assetRequest = new Request(privacyUrl, request);
+        assetRequest = new Request(new URL('/privacy-policy.html', request.url), request);
+      } else if (cleanPath === '/blog') {
+        assetRequest = new Request(new URL('/blog.html', request.url), request);
+      } else if (cleanPath.startsWith('/services/') && !cleanPath.endsWith('.html')) {
+        assetRequest = new Request(new URL(`${cleanPath}.html`, request.url), request);
+      } else if (cleanPath.startsWith('/blog/') && !cleanPath.endsWith('.html')) {
+        assetRequest = new Request(new URL(`${cleanPath}.html`, request.url), request);
       }
 
       const response = await env.ASSETS.fetch(assetRequest);
+
+      // If static file not found and it's a blog post request, check dynamic KV posts
+      if (response.status === 404 && cleanPath.startsWith('/blog/') && env.BLOG_KV) {
+        const slug = cleanPath.replace('/blog/', '').replace('.html', '').trim();
+        const postRaw = await env.BLOG_KV.get('post:' + slug);
+        if (postRaw) {
+          try {
+            const post = JSON.parse(postRaw);
+            const dynamicHtml = `<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>${post.title} | Compitiello &amp; Donofrio PI</title>
+  <meta name="description" content="${(post.excerpt || post.title).replace(/"/g, '&quot;')}">
+  <link rel="canonical" href="https://cadprivateinvestigations.com/blog/${post.slug}.html">
+  <link rel="icon" type="image/x-icon" href="../favicon.ico">
+  <link rel="apple-touch-icon" sizes="180x180" href="../assets/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="../assets/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="../assets/favicon-16x16.png">
+  <meta property="og:title" content="${post.title.replace(/"/g, '&quot;')}">
+  <meta property="og:description" content="${(post.excerpt || post.title).replace(/"/g, '&quot;')}">
+  <meta property="og:image" content="https://cadprivateinvestigations.com/assets/hero_background_desert.jpg">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://cadprivateinvestigations.com/blog/${post.slug}.html">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css?family=Inter:300,400,500,600,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="../index.css?v=1.2.2">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": "${post.title.replace(/"/g, '\\"')}",
+    "url": "https://cadprivateinvestigations.com/blog/${post.slug}.html",
+    "datePublished": "${post.date || ''}",
+    "author": {
+      "@type": "Person",
+      "name": "${(post.author || 'Michael Compitiello').replace(/"/g, '\\"')}"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Compitiello & Donofrio Private Investigations",
+      "logo": "https://cadprivateinvestigations.com/assets/logo_horizontal_v7.png"
+    }
+  }
+  </script>
+</head>
+<body>
+  <header class="global-header">
+    <div id="scroll-progress" class="scroll-progress-bar" aria-hidden="true"></div>
+    <div class="header-container">
+      <a href="../index.html#home" class="logo" aria-label="Compitiello &amp; Donofrio Private Investigations Home">
+        <img src="../assets/logo_horizontal_v7.png" alt="Compitiello &amp; Donofrio Private Investigations Logo" class="logo-img">
+      </a>
+      <nav id="main-navigation" class="nav-menu">
+        <ul class="nav-list">
+          <li><a href="../index.html#home" class="nav-link">Home</a></li>
+          <li><a href="../index.html#about" class="nav-link">Our Difference</a></li>
+          <li><a href="../index.html#services" class="nav-link">Our Services</a></li>
+          <li><a href="../index.html#testimonials" class="nav-link">Reviews</a></li>
+          <li><a href="../index.html#team" class="nav-link">Our Team</a></li>
+          <li><a href="../blog.html" class="nav-link active">Blog</a></li>
+          <li><a href="../index.html#contact" class="nav-link">Contact Us</a></li>
+        </ul>
+      </nav>
+      <div class="header-actions">
+        <a href="../index.html#contact" class="btn btn-gold btn-header">Schedule A Free Consultation</a>
+        <button type="button" id="theme-toggle" class="theme-toggle-btn" aria-label="Toggle between Day and Night mode">
+          <i class="fa-solid fa-sun sun-icon" aria-hidden="true"></i>
+          <i class="fa-solid fa-moon moon-icon" aria-hidden="true"></i>
+        </button>
+      </div>
+      <button class="mobile-toggle" aria-expanded="false" aria-controls="main-navigation" aria-label="Toggle navigation menu">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+      </button>
+    </div>
+  </header>
+  <main id="main-content">
+    <article class="section-container" style="padding-top: 2rem; padding-bottom: 4rem;">
+      <div style="max-width: 860px; margin: 0 auto;">
+        <nav class="blog-breadcrumb" aria-label="Breadcrumb navigation">
+          <a href="../index.html">Home</a>
+          <span aria-hidden="true">/</span>
+          <a href="../blog.html">Blog &amp; Dispatches</a>
+          <span aria-hidden="true">/</span>
+          <span aria-current="page">${post.title}</span>
+        </nav>
+        <div style="margin-bottom: 2rem;">
+          <div style="display: flex; gap: 1rem; align-items: center; flex-wrap: wrap; margin-bottom: 1rem;">
+            <span class="blog-tag"><i class="fa-solid fa-shield-halved" aria-hidden="true"></i> ${post.category || 'Briefing'}</span>
+            <span style="font-size: 0.85rem; color: var(--text-muted);"><i class="fa-regular fa-calendar" aria-hidden="true"></i> ${post.date || ''}</span>
+            <span style="font-size: 0.85rem; color: var(--text-muted);"><i class="fa-regular fa-clock" aria-hidden="true"></i> ${post.readTime || ''}</span>
+          </div>
+          <h1 class="article-full-title" style="font-size: clamp(1.85rem, 3.5vw, 2.75rem); line-height: 1.25; margin-bottom: 1.5rem;">
+            ${post.title}
+          </h1>
+          <div class="article-author-card" style="margin-bottom: 2.5rem;">
+            <div class="author-avatar-lg" aria-hidden="true">${post.avatarInitials || 'PI'}</div>
+            <div class="author-details">
+              <div class="author-name-lg">${post.author || 'Michael Compitiello'}</div>
+              <div class="author-role-lg">${post.authorRole || 'Investigator, CAD PI'}</div>
+            </div>
+          </div>
+        </div>
+        <div class="article-full-body glass-card legal-card" style="padding: 2.5rem;">
+          ${post.bodyHtml}
+          <div class="article-cta-box glass-card" style="margin-top: 3rem;">
+            <div class="cta-box-badge">CONFIDENTIAL CASE REVIEW</div>
+            <h3 class="cta-box-title">Require Expert Investigative Counsel?</h3>
+            <p class="cta-box-desc">
+              Whether preparing for complex civil litigation, corporate fraud investigation, or surveillance, CAD Private Investigations provides federal-grade precision.
+            </p>
+            <div class="cta-box-actions" style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+              <a href="../index.html#contact" class="btn btn-gold modal-contact-btn">Schedule A Confidential Consultation</a>
+              <a href="../index.html#services" class="btn btn-outline">Explore Our Services</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </article>
+  </main>
+  <footer class="global-footer">
+    <div class="footer-container">
+      <div class="footer-bottom">
+        <p class="copyright-text">&copy; 2026 Compitiello &amp; Donofrio Private Investigations | All Rights Reserved.</p>
+      </div>
+    </div>
+  </footer>
+  <script src="../index.js?v=1.2.0"></script>
+</body>
+</html>`;
+            const dynHeaders = new Headers({ 'Content-Type': 'text/html; charset=utf-8' });
+            applySecurityHeaders(dynHeaders);
+            return new Response(dynamicHtml, { status: 200, headers: dynHeaders });
+          } catch (e) {}
+        }
+      }
+
       const newHeaders = new Headers(response.headers);
       applySecurityHeaders(newHeaders);
 
