@@ -204,16 +204,10 @@ export default {
       const cleanPath = url.pathname.replace(/\/$/, '');
 
       if (
-        cleanPath === '/privacy-policy' || cleanPath === '/privacy' ||
+        cleanPath === '/privacy' ||
         cleanPath === '/terms' || cleanPath === '/terms-and-conditions'
       ) {
-        assetRequest = new Request(new URL('/privacy-policy.html', request.url), request);
-      } else if (cleanPath === '/blog') {
-        assetRequest = new Request(new URL('/blog.html', request.url), request);
-      } else if (cleanPath.startsWith('/services/') && !cleanPath.endsWith('.html')) {
-        assetRequest = new Request(new URL(`${cleanPath}.html`, request.url), request);
-      } else if (cleanPath.startsWith('/blog/') && !cleanPath.endsWith('.html')) {
-        assetRequest = new Request(new URL(`${cleanPath}.html`, request.url), request);
+        assetRequest = new Request(new URL('/privacy-policy', request.url), request);
       }
 
       const response = await env.ASSETS.fetch(assetRequest);
