@@ -1754,6 +1754,29 @@ document.addEventListener('DOMContentLoaded', () => {
   let currentSlug = null;
   let blogLastActiveElement = null;
 
+  function sanitizeArticleNodes(rawHtml) {
+    const doc = new DOMParser().parseFromString(String(rawHtml || ''), 'text/html');
+    doc.querySelectorAll('script, style, object, embed, applet, meta, link, base, form, input, button, textarea, select').forEach(el => el.remove());
+    doc.body.querySelectorAll('*').forEach(el => {
+      for (const attr of Array.from(el.attributes)) {
+        const name = attr.name.toLowerCase();
+        const val = attr.value.trim();
+        if (name.startsWith('on')) {
+          el.removeAttribute(attr.name);
+        } else if ((name === 'href' || name === 'src' || name === 'xlink:href') && /^(?:javascript|vbscript|data\s*:\s*text\/html)/i.test(val)) {
+          el.removeAttribute(attr.name);
+        }
+      }
+      if (el.tagName === 'IFRAME') {
+        const src = el.getAttribute('src') || '';
+        if (!/^https:\/\/(?:www\.)?youtube(?:-nocookie)?\.com\/embed\/[a-zA-Z0-9_-]{11}(?:\?.*)?$/i.test(src)) {
+          el.remove();
+        }
+      }
+    });
+    return doc.body.childNodes;
+  }
+
   function openBlogArticle(slug, updateUrlHash = true) {
     const article = BLOG_ARTICLES[slug];
     if (!article || !blogModal) return;
@@ -1761,19 +1784,19 @@ document.addEventListener('DOMContentLoaded', () => {
     currentSlug = slug;
     blogLastActiveElement = document.activeElement;
 
-    // Populate modal contents
+    // Populate modal contents safely
     if (blogModalCategory) blogModalCategory.textContent = article.category;
-    if (blogModalReadtime) blogModalReadtime.innerHTML = `<i class="fa-regular fa-clock" aria-hidden="true"></i> ${article.readTime}`;
-    if (blogModalDate) blogModalDate.innerHTML = `<i class="fa-regular fa-calendar" aria-hidden="true"></i> ${article.date}`;
+    if (blogModalReadtime) blogModalReadtime.innerHTML = `<i class="fa-regular fa-clock" aria-hidden="true"></i> ${escapeHtml(article.readTime)}`;
+    if (blogModalDate) blogModalDate.innerHTML = `<i class="fa-regular fa-calendar" aria-hidden="true"></i> ${escapeHtml(article.date)}`;
     if (blogModalTitle) blogModalTitle.textContent = article.title;
     if (blogModalAuthor) blogModalAuthor.textContent = article.author;
     if (blogModalRole) blogModalRole.textContent = article.authorRole;
     if (blogModalAvatar) blogModalAvatar.textContent = article.avatarInitials;
-    if (blogModalBody) blogModalBody.innerHTML = article.bodyHtml;
+    if (blogModalBody) blogModalBody.replaceChildren(...sanitizeArticleNodes(article.bodyHtml));
 
     const permalinkEl = document.getElementById('blog-modal-permalink');
     if (permalinkEl) {
-      permalinkEl.href = `${window.location.origin}/blog/${slug}.html`;
+      permalinkEl.href = `${window.location.origin}/blog/${encodeURIComponent(slug)}.html`;
     }
 
     // Open native dialog
@@ -1969,8 +1992,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
       const logoutBtn = document.getElementById('blog-admin-logout-btn');
       if (logoutBtn) {
-        logoutBtn.addEventListener('click', () => {
+        logoutBtn.addEventListener('click', async () => {
+          const tokenToRevoke = localStorage.getItem('cadpi_admin_token');
           localStorage.removeItem('cadpi_admin_token');
+          if (tokenToRevoke) {
+            try {
+              await fetch('/api/admin/logout', {
+                method: 'POST',
+                headers: { 'Authorization': `Bearer ${tokenToRevoke}` }
+              });
+            } catch (e) {}
+          }
           window.location.reload();
         });
       }

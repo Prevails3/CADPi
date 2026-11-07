@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Admin Publishing Studio | Compitiello &amp; Donofrio PI</title>
   <meta name="robots" content="noindex, nofollow">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
   
   <!-- Favicons -->
   <link rel="icon" type="image/x-icon" href="favicon.ico">
@@ -18,7 +19,7 @@
   <link href="https://fonts.googleapis.com/css?family=Inter:300,400,500,600,700&display=swap" rel="stylesheet">
 
   <!-- FontAwesome Icons -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer">
   <!-- Main Stylesheet -->
   <link rel="stylesheet" href="index.css?v=1.2.3">
 
@@ -860,9 +861,18 @@
         }
       });
 
-      // Logout
-      logoutBtn.addEventListener('click', () => {
+      // Logout (revoke server-side KV session + clear local token)
+      logoutBtn.addEventListener('click', async () => {
+        const tokenToRevoke = authToken;
         showLogin();
+        if (tokenToRevoke) {
+          try {
+            await fetch('/api/admin/logout', {
+              method: 'POST',
+              headers: { 'Authorization': `Bearer ${tokenToRevoke}` }
+            });
+          } catch (e) {}
+        }
         showToast('Logged out of editorial studio.');
       });
 
@@ -1083,19 +1093,45 @@
         updateStats();
       }
 
+      function sanitizePreviewNodes(rawHtml) {
+        const doc = new DOMParser().parseFromString(String(rawHtml || ''), 'text/html');
+        doc.querySelectorAll('script, style, object, embed, applet, meta, link, base, form, input, button, textarea, select').forEach(el => el.remove());
+        doc.body.querySelectorAll('*').forEach(el => {
+          for (const attr of Array.from(el.attributes)) {
+            const name = attr.name.toLowerCase();
+            const val = attr.value.trim();
+            if (name.startsWith('on')) {
+              el.removeAttribute(attr.name);
+            } else if ((name === 'href' || name === 'src' || name === 'xlink:href') && /^(?:javascript|vbscript|data\s*:\s*text\/html)/i.test(val)) {
+              el.removeAttribute(attr.name);
+            }
+          }
+          if (el.tagName === 'IFRAME') {
+            const src = el.getAttribute('src') || '';
+            if (!/^https:\/\/(?:www\.)?youtube(?:-nocookie)?\.com\/embed\/[a-zA-Z0-9_-]{11}(?:\?.*)?$/i.test(src)) {
+              el.remove();
+            }
+          }
+        });
+        return doc.body.childNodes;
+      }
+
       // Render Live Preview
       function renderPreview() {
-        const title = postTitle.value || 'Untitled Investigative Dispatch';
-        const category = postCategory.value === '__custom__' ? (customCategoryInput.value || 'Special Briefing') : postCategory.value;
-        const author = postAuthor.value === '__custom__' ? (customAuthorName.value || 'Investigator') : postAuthor.value;
-        const role = postAuthor.value === '__custom__' 
+        const title = escapeHtml(postTitle.value || 'Untitled Investigative Dispatch');
+        const rawCategory = postCategory.value === '__custom__' ? (customCategoryInput.value || 'Special Briefing') : postCategory.value;
+        const category = escapeHtml(rawCategory);
+        const rawAuthor = postAuthor.value === '__custom__' ? (customAuthorName.value || 'Investigator') : postAuthor.value;
+        const author = escapeHtml(rawAuthor);
+        const rawRole = postAuthor.value === '__custom__' 
           ? (customAuthorRole.value || 'Private Investigator') 
           : (postAuthor.selectedOptions[0]?.getAttribute('data-role') || '');
-        const excerpt = postExcerpt.value || 'Preview excerpt will appear here once drafted...';
+        const role = escapeHtml(rawRole);
+        const excerpt = escapeHtml(postExcerpt.value || 'Preview excerpt will appear here once drafted...');
         const words = postContent.value.replace(/<[^>]+>/g, ' ').split(/\s+/).filter(Boolean).length;
-        const readTime = `${Math.max(1, Math.ceil(words / 200))} min read`;
-        const date = new Date().toLocaleDateString('en-US', { month: 'short', year: 'numeric' });
-        const initials = author.split(' ').map(w => w[0]).join('').slice(0, 2).toUpperCase() || 'PI';
+        const readTime = escapeHtml(`${Math.max(1, Math.ceil(words / 200))} min read`);
+        const date = escapeHtml(new Date().toLocaleDateString('en-US', { month: 'short', year: 'numeric' }));
+        const initials = escapeHtml(rawAuthor.split(' ').map(w => w[0]).join('').slice(0, 2).toUpperCase() || 'PI');
 
         // 1. Card Preview
         cardPreviewTarget.innerHTML = `
@@ -1139,11 +1175,14 @@
                 <div class="author-role-lg">${role}</div>
               </div>
             </div>
-            <div class="article-full-body">
-              ${postContent.value || '<p><em>No article content drafted yet. Use the writing editor to write your briefing.</em></p>'}
-            </div>
+            <div class="article-full-body" id="article-preview-body-sink"></div>
           </div>
         `;
+        const bodySink = document.getElementById('article-preview-body-sink');
+        if (bodySink) {
+          const fallbackHtml = '<p><em>No article content drafted yet. Use the writing editor to write your briefing.</em></p>';
+          bodySink.replaceChildren(...sanitizePreviewNodes(postContent.value || fallbackHtml));
+        }
       }
 
       // Publish Action
@@ -1274,10 +1313,10 @@
                   <td>${escapeHtml(p.author)}</td>
                   <td>${escapeHtml(p.date)}</td>
                   <td style="text-align: right; white-space: nowrap;">
-                    <a href="/blog/${p.slug}.html" target="_blank" class="btn btn-outline btn-sm" style="margin-right: 0.5rem; font-size: 0.75rem;">
+                    <a href="/blog/${encodeURIComponent(p.slug)}.html" target="_blank" class="btn btn-outline btn-sm" style="margin-right: 0.5rem; font-size: 0.75rem;">
                       <i class="fa-solid fa-arrow-up-right-from-square"></i> Live Page
                     </a>
-                    <button type="button" class="btn btn-sm btn-delete-post" data-slug="${p.slug}" style="background: rgba(239, 68, 68, 0.15); color: #EF4444; border: 1px solid rgba(239, 68, 68, 0.3); font-size: 0.75rem;">
+                    <button type="button" class="btn btn-sm btn-delete-post" data-slug="${escapeHtml(p.slug)}" style="background: rgba(239, 68, 68, 0.15); color: #EF4444; border: 1px solid rgba(239, 68, 68, 0.3); font-size: 0.75rem;">
                       <i class="fa-solid fa-trash"></i> Delete
                     </button>
                   </td>
