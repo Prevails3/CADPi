@@ -40,7 +40,6 @@
     "image": "https://cadprivateinvestigations.com/assets/logo_horizontal_v7.png",
     "url": "https://cadprivateinvestigations.com",
     "telephone": "+14806302533",
-    "email": "johnd@cadprivateinvestigations.com",
     "description": "Professional, trustworthy, and discreet private investigation services. While our daily field operations focus on Maricopa County, our extensive federal networks enable us to coordinate and execute complex investigations statewide across Arizona and nationally.",
     "address": {
       "@type": "PostalAddress",
@@ -202,7 +201,7 @@
   <!-- FontAwesome Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <!-- Main Stylesheet -->
-  <link rel="stylesheet" href="index.css?v=1.2.2">
+  <link rel="stylesheet" href="index.css?v=1.2.3">
 </head>
 <body>
 
@@ -1161,33 +1160,41 @@
               <p class="form-subtitle">Fill out the secure form below. All initial evaluations are strictly confidential.</p>
               
               <!-- Lead Form -->
-              <form id="consultation-form" action="https://api.web3forms.com/submit" method="POST" class="secure-form" novalidate>
-                <!-- Web3Forms Access Key -->
-                <input type="hidden" name="access_key" value="eef28036-66cd-4a4a-95a1-2b526fb3eef5">
+              <form id="consultation-form" class="secure-form" novalidate data-form-context="home">
                 <input type="hidden" name="subject" value="New Confidential Inquiry - CAD Private Investigations">
                 <input type="hidden" name="from_name" value="CAD Private Investigations Website">
+
+                <!-- Multi-Field Anti-Spam Honeypot Decoys (Visually Hidden) -->
+                <div class="visually-hidden" aria-hidden="true">
+                  <label for="hp-botcheck">Do not check this box if you are human</label>
+                  <input type="checkbox" id="hp-botcheck" name="botcheck" class="visually-hidden" tabindex="-1" aria-hidden="true" autocomplete="off">
+                  <label for="hp-website-url">Website URL</label>
+                  <input type="text" id="hp-website-url" name="website_url" class="visually-hidden" tabindex="-1" aria-hidden="true" autocomplete="off" value="">
+                  <label for="hp-company-fax">Company Fax</label>
+                  <input type="text" id="hp-company-fax" name="company_fax" class="visually-hidden" tabindex="-1" aria-hidden="true" autocomplete="off" value="">
+                </div>
                 
                 <div class="form-group">
                   <label for="full-name" class="form-label">Name *</label>
-                  <input type="text" id="full-name" name="name" class="form-control" autocomplete="name" required aria-required="true" aria-describedby="name-error" placeholder="John Doe">
+                  <input type="text" id="full-name" name="name" class="form-control" autocomplete="name" required aria-required="true" aria-describedby="name-error" aria-errormessage="name-error" placeholder="John Doe">
                   <span class="error-msg" id="name-error" aria-live="polite"></span>
                 </div>
                 
                 <div class="form-group">
                   <label for="email-address" class="form-label">Email *</label>
-                  <input type="email" id="email-address" name="email" class="form-control" autocomplete="email" required aria-required="true" aria-describedby="email-error" placeholder="john@example.com">
+                  <input type="email" id="email-address" name="email" class="form-control" autocomplete="email" autocorrect="off" autocapitalize="off" spellcheck="false" required aria-required="true" aria-describedby="email-error" aria-errormessage="email-error" placeholder="Enter your email address">
                   <span class="error-msg" id="email-error" aria-live="polite"></span>
                 </div>
                 
                 <div class="form-group">
                   <label for="phone-number" class="form-label">Phone Number <span class="optional-label">(Optional)</span></label>
-                  <input type="tel" id="phone-number" name="phone" class="form-control" autocomplete="tel" aria-describedby="phone-error" placeholder="(877) 255-1919" inputmode="tel">
+                  <input type="tel" id="phone-number" name="phone" class="form-control" autocomplete="tel" aria-describedby="phone-error" aria-errormessage="phone-error" placeholder="(877) 255-1919" inputmode="tel">
                   <span class="error-msg" id="phone-error" aria-live="polite"></span>
                 </div>
 
                 <div class="form-group">
                   <label for="message" class="form-label">Message *</label>
-                  <textarea id="message" name="message" class="form-control" rows="4" required aria-required="true" aria-describedby="message-error" placeholder="How can our investigators assist you?"></textarea>
+                  <textarea id="message" name="message" class="form-control" rows="4" required aria-required="true" aria-describedby="message-error" aria-errormessage="message-error" placeholder="How can our investigators assist you?"></textarea>
                   <span class="error-msg" id="message-error" aria-live="polite"></span>
                 </div>
                 
@@ -1222,6 +1229,53 @@
                   
                   <span class="error-msg" id="sms-error" aria-live="polite"></span>
                 </fieldset>
+
+                <!-- Human Verification (hCaptcha with Automatic Math Fallback) -->
+                <div class="form-group human-verification-group" id="human-verification-group">
+                  <div class="verification-header">
+                    <span class="form-label">Human Verification *</span>
+                    <span class="verification-badge"><i class="fa-solid fa-shield-halved" aria-hidden="true"></i> Anti-Spam Protected</span>
+                  </div>
+
+                  <div id="hcaptcha-wrapper" class="hcaptcha-wrapper">
+                    <div id="hcaptcha-container" class="h-captcha" data-sitekey="50b2fe65-b00b-4b9e-ad62-3ba471098be2" data-theme="dark"></div>
+                    <button type="button" id="switch-to-math-btn" class="verification-mode-toggle">
+                      Having trouble with CAPTCHA? Use quick math check
+                    </button>
+                  </div>
+
+                  <div id="math-captcha-fallback" class="math-captcha-fallback" hidden>
+                    <div class="math-challenge-row">
+                      <label for="math-captcha-input" id="math-captcha-question" class="math-question-label">
+                        Security Check: What is 4 + 3? *
+                      </label>
+                      <div class="math-input-controls">
+                        <input
+                          type="text"
+                          id="math-captcha-input"
+                          name="math_captcha_answer"
+                          class="form-control math-captcha-input"
+                          inputmode="numeric"
+                          autocomplete="off"
+                          autocorrect="off"
+                          autocapitalize="off"
+                          spellcheck="false"
+                          placeholder="Answer"
+                          aria-describedby="captcha-error"
+                          aria-errormessage="captcha-error"
+                        >
+                        <button type="button" id="refresh-math-captcha" class="btn-math-refresh" aria-label="Generate a new math question" title="New question">
+                          <i class="fa-solid fa-arrows-rotate" aria-hidden="true"></i>
+                        </button>
+                      </div>
+                    </div>
+                    <span class="math-fallback-note">Quick math check active for human verification.</span>
+                  </div>
+
+                  <span class="error-msg" id="captcha-error" aria-live="polite"></span>
+                </div>
+
+                <div id="form-security-status" class="form-security-status" role="status" aria-live="polite" hidden></div>
 
                 <button type="submit" class="btn btn-gold btn-full">
                   <span>Submit Confidential Request</span>
@@ -1263,7 +1317,7 @@
                 </div>
                 <div class="info-text">
                   <span class="info-label">Confidential Email</span>
-                  <a href="mailto:johnd@cadprivateinvestigations.com" class="info-value hover-link">johnd@cadprivateinvestigations.com</a>
+                  <protected-email data-variant="contact" data-email-user="johnd" data-email-domain="cadprivateinvestigations.com" data-label="Click to Reveal Confidential Email"></protected-email>
                 </div>
               </div>
 
@@ -1479,9 +1533,9 @@
       
       <p><strong>MESSAGE AND DATA RATES MAY APPLY:</strong> Your mobile carrier may charge fees for sending or receiving text messages, especially if you do not have an unlimited texting or data plan. Messages are recurring, and message frequency varies.</p>
       
-      <p>Contact CAD Private Investigations DBA <span class="no-break">I-9</span> Insights at <a href="tel:+18772551919">(877) 255-1919</a> or <a href="mailto:johnd@cadprivateinvestigations.com">johnd@cadprivateinvestigations.com</a> for HELP or to STOP receiving messages.</p>
+      <p>Contact CAD Private Investigations DBA <span class="no-break">I-9</span> Insights at <a href="tel:+18772551919">(877) 255-1919</a> or <protected-email data-variant="inline" data-email-user="johnd" data-email-domain="cadprivateinvestigations.com" data-label="Click to Reveal Email"></protected-email> for HELP or to STOP receiving messages.</p>
       
-      <p><strong>Opt-Out:</strong> You can opt out of the SMS list at any time by texting, emailing, or replying STOP or CANCEL to <a href="mailto:johnd@cadprivateinvestigations.com">johnd@cadprivateinvestigations.com</a> or <a href="tel:+18772551919">(877) 255-1919</a>. After unsubscribing, you will receive a final SMS to confirm you have unsubscribed, and we will remove your number from our list within 24 hours.</p>
+      <p><strong>Opt-Out:</strong> You can opt out of the SMS list at any time by texting, emailing, or replying STOP or CANCEL to <protected-email data-variant="inline" data-email-user="johnd" data-email-domain="cadprivateinvestigations.com" data-label="Click to Reveal Email"></protected-email> or <a href="tel:+18772551919">(877) 255-1919</a>. After unsubscribing, you will receive a final SMS to confirm you have unsubscribed, and we will remove your number from our list within 24 hours.</p>
       <p>You can send HELP for additional assistance, and you will receive a text including our phone number, email, and our website or social media link to contact us. We are here to help you.</p>
       
       <p><strong>Non-Sharing Clause:</strong> No mobile information will be shared or collected with third parties/affiliates for marketing/promotional purposes. All other categories exclude text messaging originator opt-in data and consent; this information will not be shared with any third parties.</p>
@@ -1500,7 +1554,7 @@
       <ol class="numbered-list">
         <li><strong>1.</strong> The messaging program consists of general conversational messaging to answer questions and provide support to customers.</li>
         <li><strong>2.</strong> You can cancel the SMS service at any time. Just text 'STOP' to the phone number from which you received messages. After you send the SMS message 'STOP' to us, we will send you an SMS message to confirm that you have been unsubscribed. After this, you will no longer receive SMS messages from us. If you want to join again, just sign up as you did the first time and we will start sending SMS messages to you again.</li>
-        <li><strong>3.</strong> If you are experiencing issues with the messaging program you can reply with the keyword HELP for more assistance, or you can get help directly at <a href="mailto:johnd@cadprivateinvestigations.com">johnd@cadprivateinvestigations.com</a>.</li>
+        <li><strong>3.</strong> If you are experiencing issues with the messaging program you can reply with the keyword HELP for more assistance, or you can get help directly at <protected-email data-variant="inline" data-email-user="johnd" data-email-domain="cadprivateinvestigations.com" data-label="Click to Reveal Email"></protected-email>.</li>
         <li><strong>4.</strong> Carriers are not liable for delayed or undelivered messages.</li>
         <li><strong>5.</strong> As always, message and data rates may apply for any messages sent to you from us and to us from you. Message frequency will vary based on communication needs. If you have any questions about your text plan or data plan, it is best to contact your wireless provider.</li>
         <li><strong>6.</strong> If you have any questions regarding privacy, please read our privacy policy contained in the rest of this document/page.</li>
@@ -1529,7 +1583,7 @@
       <ol class="numbered-list">
         <li><strong>1.</strong> The messaging program consists of general conversational messaging to answer questions and provide support to customers.</li>
         <li><strong>2.</strong> You can cancel the SMS service at any time. Just text 'STOP' to the phone number from which you received messages. After you send the SMS message 'STOP' to us, we will send you an SMS message to confirm that you have been unsubscribed. After this, you will no longer receive SMS messages from us. If you want to join again, just sign up as you did the first time and we will start sending SMS messages to you again.</li>
-        <li><strong>3.</strong> If you are experiencing issues with the messaging program you can reply with the keyword HELP for more assistance, or you can get help directly at <a href="mailto:johnd@cadprivateinvestigations.com">johnd@cadprivateinvestigations.com</a>.</li>
+        <li><strong>3.</strong> If you are experiencing issues with the messaging program you can reply with the keyword HELP for more assistance, or you can get help directly at <protected-email data-variant="inline" data-email-user="johnd" data-email-domain="cadprivateinvestigations.com" data-label="Click to Reveal Email"></protected-email>.</li>
         <li><strong>4.</strong> Carriers are not liable for delayed or undelivered messages.</li>
         <li><strong>5.</strong> As always, message and data rates may apply for any messages sent to you from us and to us from you. Message frequency will vary based on communication needs. If you have any questions about your text plan or data plan, it is best to contact your wireless provider.</li>
         <li><strong>6.</strong> If you have any questions regarding privacy, please read our privacy policy contained in the rest of this document/page.</li>
@@ -1592,15 +1646,7 @@
         <!-- Payment Info Fields -->
         <div class="zelle-info-group">
           <div class="zelle-info-label">Registered Zelle® Email</div>
-          <div class="zelle-copy-wrapper">
-            <span class="zelle-info-val" id="zelle-email-text">johnd@cadprivateinvestigations.com</span>
-            <button type="button" class="zelle-copy-btn" id="copy-zelle-email-btn" aria-label="Copy email address">
-              <span class="copy-btn-text">Copy</span>
-              <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor">
-                <path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/>
-              </svg>
-            </button>
-          </div>
+          <protected-email data-variant="zelle" data-email-user="johnd" data-email-domain="cadprivateinvestigations.com" data-label="Click to Reveal Registered Zelle® Email"></protected-email>
         </div>
 
         <div class="zelle-info-group">

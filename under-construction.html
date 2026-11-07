@@ -407,8 +407,8 @@
         <span class="contact-value">+1 (480) 630-2533</span>
       </a>
 
-      <!-- Send Email -->
-      <a href="mailto:johnd@cadprivateinvestigations.com" class="contact-card" title="Send us an email">
+      <!-- Send Email (Protected against scrapers) -->
+      <div class="contact-card" id="protected-email-card" role="button" tabindex="0" aria-label="Click to reveal confidential email address">
         <div class="contact-icon">
           <!-- Envelope SVG -->
           <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
@@ -416,8 +416,8 @@
           </svg>
         </div>
         <span class="contact-label">Email Us</span>
-        <span class="contact-value">johnd@cadprivateinvestigations.com</span>
-      </a>
+        <span class="contact-value" id="protected-email-slot" data-email-user="johnd" data-email-domain="cadprivateinvestigations.com">Click to Reveal Email</span>
+      </div>
 
     </div>
 
@@ -454,5 +454,29 @@
     &copy; 2026 Compitiello &amp; Donofrio. All rights reserved.
   </div>
 
+  <script>
+    (function() {
+      const card = document.getElementById('protected-email-card');
+      const slot = document.getElementById('protected-email-slot');
+      if (!card || !slot) return;
+      let revealed = false;
+      function reveal(e) {
+        if (!e || !e.isTrusted || revealed) return;
+        revealed = true;
+        const emailUser = slot.getAttribute('data-email-user') || 'johnd';
+        const emailDomain = slot.getAttribute('data-email-domain') || 'cadprivateinvestigations.com';
+        const addr = [emailUser, emailDomain].join(String.fromCharCode(64));
+        const href = ['mai', 'lto:', addr].join('');
+        slot.innerHTML = '<a href="' + href + '" style="color:inherit;text-decoration:underline;">' + addr + '</a>';
+      }
+      card.addEventListener('click', reveal);
+      card.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          reveal(e);
+        }
+      });
+    })();
+  </script>
 </body>
 </html>

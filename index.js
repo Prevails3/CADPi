@@ -1,5 +1,145 @@
+// ============================================================
+// EMAIL SCRAPER OBFUSCATION & <ProtectedEmail /> COMPONENT
+// ============================================================
+const PROTECTED_EMAIL_CONFIG = {
+  emailUser: 'johnd',
+  emailDomain: 'cadprivateinvestigations.com'
+};
+
+function renderProtectedEmailElement(el) {
+  if (!el || el.dataset.emailInitialized === 'true') return;
+  el.dataset.emailInitialized = 'true';
+
+  const variant = el.getAttribute('data-variant') || 'default';
+  const customLabel = el.getAttribute('data-label') || 'Click to Reveal Email';
+  const emailUser = el.getAttribute('data-email-user') || PROTECTED_EMAIL_CONFIG.emailUser;
+  const emailDomain = el.getAttribute('data-email-domain') || PROTECTED_EMAIL_CONFIG.emailDomain;
+
+  el.classList.add('protected-email-host', `protected-email-host--${variant}`);
+
+  const triggerBtn = document.createElement('button');
+  triggerBtn.type = 'button';
+  triggerBtn.className = `protected-email-trigger protected-email-trigger--${variant}`;
+  triggerBtn.setAttribute('aria-expanded', 'false');
+  triggerBtn.setAttribute('aria-label', `${customLabel} (requires human click)`);
+
+  const iconSpan = document.createElement('span');
+  iconSpan.className = 'protected-email-icon';
+  iconSpan.setAttribute('aria-hidden', 'true');
+  iconSpan.innerHTML = '<i class="fa-solid fa-envelope-circle-check"></i>';
+
+  const textSpan = document.createElement('span');
+  textSpan.className = 'protected-email-label';
+  textSpan.textContent = customLabel;
+
+  triggerBtn.appendChild(iconSpan);
+  triggerBtn.appendChild(textSpan);
+
+  if (variant !== 'inline') {
+    const badgeSpan = document.createElement('span');
+    badgeSpan.className = 'protected-email-shield';
+    badgeSpan.setAttribute('aria-hidden', 'true');
+    badgeSpan.textContent = 'Protected';
+    triggerBtn.appendChild(badgeSpan);
+  }
+
+  el.innerHTML = '';
+  el.appendChild(triggerBtn);
+
+  triggerBtn.addEventListener('click', (e) => {
+    // Strictly require a trusted human click event to defeat headless DOM auto-clickers
+    if (!e || !e.isTrusted) return;
+    e.preventDefault();
+    e.stopPropagation();
+
+    const atChar = String.fromCharCode(64);
+    const assembledEmail = [emailUser, emailDomain].join(atChar);
+    const mailtoHref = ['mai', 'lto:', assembledEmail].join('');
+
+    const revealedWrap = document.createElement('span');
+    revealedWrap.className = `protected-email-revealed protected-email-revealed--${variant}`;
+
+    const mailLink = document.createElement('a');
+    mailLink.href = mailtoHref;
+    mailLink.className = variant === 'zelle'
+      ? 'zelle-info-val protected-email-link'
+      : 'protected-email-link hover-link';
+    mailLink.textContent = assembledEmail;
+
+    const copyBtn = document.createElement('button');
+    copyBtn.type = 'button';
+    copyBtn.className = variant === 'zelle'
+      ? 'zelle-copy-btn protected-email-copy-btn'
+      : 'protected-email-copy-btn';
+    copyBtn.setAttribute('aria-label', 'Copy email address to clipboard');
+    copyBtn.setAttribute('title', 'Copy email address');
+    copyBtn.innerHTML = `
+      <span class="copy-btn-text">Copy</span>
+      <svg viewBox="0 0 24 24" width="13" height="13" fill="currentColor" aria-hidden="true">
+        <path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/>
+      </svg>
+    `;
+
+    let isCopying = false;
+    copyBtn.addEventListener('click', async (copyEvent) => {
+      if (!copyEvent || !copyEvent.isTrusted || isCopying) return;
+      copyEvent.preventDefault();
+      copyEvent.stopPropagation();
+      isCopying = true;
+
+      const copyTextEl = copyBtn.querySelector('.copy-btn-text');
+      try {
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          await navigator.clipboard.writeText(assembledEmail);
+        } else {
+          const tempInput = document.createElement('textarea');
+          tempInput.value = assembledEmail;
+          tempInput.setAttribute('readonly', '');
+          tempInput.className = 'visually-hidden';
+          document.body.appendChild(tempInput);
+          tempInput.select();
+          document.execCommand('copy');
+          tempInput.remove();
+        }
+        copyBtn.classList.add('copied');
+        if (copyTextEl) copyTextEl.textContent = 'Copied!';
+      } catch (err) {
+        console.error('Clipboard copy failed:', err);
+      } finally {
+        setTimeout(() => {
+          copyBtn.classList.remove('copied');
+          if (copyTextEl) copyTextEl.textContent = 'Copy';
+          isCopying = false;
+        }, 2000);
+      }
+    });
+
+    revealedWrap.appendChild(mailLink);
+    revealedWrap.appendChild(copyBtn);
+
+    el.innerHTML = '';
+    el.appendChild(revealedWrap);
+  });
+}
+
+if (typeof window !== 'undefined' && 'customElements' in window && !customElements.get('protected-email')) {
+  class ProtectedEmail extends HTMLElement {
+    connectedCallback() {
+      renderProtectedEmailElement(this);
+    }
+  }
+  customElements.define('protected-email', ProtectedEmail);
+}
+
+function initProtectedEmails(root = document) {
+  const nodes = root.querySelectorAll('protected-email, [data-protected-email]');
+  nodes.forEach(node => renderProtectedEmailElement(node));
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   let lastActiveElement = null;
+  initProtectedEmails(document);
+
   // --- Header Scroll Effect & Reading Progress Bar ---
   const header = document.querySelector('.global-header');
   const scrollProgress = document.getElementById('scroll-progress');
@@ -79,7 +219,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  // --- Secure Consultation Form Validation ---
+  // --- Multi-Layered Secure Consultation Form Validation & Anti-Spam Lockdown ---
   const form = document.getElementById('consultation-form');
   if (form) {
     const nameInput = document.getElementById('full-name');
@@ -88,84 +228,325 @@ document.addEventListener('DOMContentLoaded', () => {
     const messageInput = document.getElementById('message');
     const smsYes = document.getElementById('sms-consent-yes');
     const smsNo = document.getElementById('sms-consent-no');
-    
+
+    // Honeypot decoys (visually hidden from humans)
+    const botcheckInput = document.getElementById('hp-botcheck');
+    const websiteUrlInput = document.getElementById('hp-website-url');
+    const companyFaxInput = document.getElementById('hp-company-fax');
+
+    // Human verification elements (hCaptcha + Math Fallback)
+    const hcaptchaWrapper = document.getElementById('hcaptcha-wrapper');
+    const hcaptchaWidgetEl = document.getElementById('hcaptcha-widget');
+    const switchToMathBtn = document.getElementById('switch-to-math-btn');
+    const mathFallbackEl = document.getElementById('math-captcha-fallback');
+    const mathQuestionEl = document.getElementById('math-captcha-question');
+    const mathAnswerInput = document.getElementById('math-captcha-answer');
+    const refreshMathBtn = document.getElementById('refresh-math-captcha');
+    const captchaError = document.getElementById('captcha-error');
+    const securityStatusEl = document.getElementById('form-security-status');
+
     const nameError = document.getElementById('name-error');
     const emailError = document.getElementById('email-error');
     const phoneError = document.getElementById('phone-error');
     const messageError = document.getElementById('message-error');
     const smsError = document.getElementById('sms-error');
 
+    // 1. Dynamic Runtime Assembly of Form Endpoint & Access Key (no plain-text key in HTML)
+    const W3F_KEY_SEGMENTS = ['eef28036', '66cd', '4a4a', '95a1', '2b526fb3eef5'];
+    function assembleFormApiKey() {
+      return W3F_KEY_SEGMENTS.join('-');
+    }
+    function assembleFormEndpoint() {
+      return ['https://api', 'web3forms', 'com/submit'].join('.');
+    }
+
+    // 2. Time-to-Fill & Trusted Human Interaction Trap
+    let formLoadedAt = Date.now();
+    let hasTrustedInteraction = false;
+    const MIN_SUBMIT_TIME_MS = 3500;
+
+    const recordTrustedInteraction = (e) => {
+      if (e && e.isTrusted === true) {
+        hasTrustedInteraction = true;
+      }
+    };
+    ['keydown', 'pointerdown', 'mousedown', 'touchstart'].forEach((evtName) => {
+      form.addEventListener(evtName, recordTrustedInteraction, { passive: true });
+    });
+
+    // 3. Client-Side Rate Limiting (localStorage: max 2 submissions per 15 minutes)
+    const RATE_LIMIT_STORAGE_KEY = 'cadpi_contact_submissions';
+    const RATE_LIMIT_WINDOW_MS = 15 * 60 * 1000;
+    const RATE_LIMIT_MAX_SUBMISSIONS = 2;
+
+    function getRecentSubmissionTimestamps() {
+      try {
+        const raw = localStorage.getItem(RATE_LIMIT_STORAGE_KEY);
+        if (!raw) return [];
+        const parsed = JSON.parse(raw);
+        if (!Array.isArray(parsed)) return [];
+        const now = Date.now();
+        return parsed.filter((ts) => typeof ts === 'number' && (now - ts) < RATE_LIMIT_WINDOW_MS);
+      } catch {
+        return [];
+      }
+    }
+
+    function isRateLimited() {
+      return getRecentSubmissionTimestamps().length >= RATE_LIMIT_MAX_SUBMISSIONS;
+    }
+
+    function recordSubmissionTimestamp() {
+      try {
+        const recent = getRecentSubmissionTimestamps();
+        recent.push(Date.now());
+        localStorage.setItem(RATE_LIMIT_STORAGE_KEY, JSON.stringify(recent));
+      } catch {
+        // Ignore storage quota / private mode errors
+      }
+    }
+
+    // 4. Content & Input Spam Filtering Rules
+    const URL_SPAM_REGEX = /(https?:\/\/|www\.|[a-z0-9-]+\.(com|net|org|io|ru|cn|xyz|top|info|biz|link|click)\/)/i;
+    const CYRILLIC_REGEX = /[\u0400-\u04FF\u0500-\u052F]/;
+    const SPAM_PHRASES_REGEX = /\b(seo\s+services|guest\s+post|backlinks|link\s+building|domain\s+authority|google\s+ranking|first\s+page\s+of\s+google|crypto\s+recovery|bitcoin\s+investment|usdt\s+recovery|forex\s+signals|casino\s+bonus|telegram\s+channel|whatsapp\s+group|adult\s+dating|viagra|cialis|onlyfans|passive\s+income|web\s+traffic|lead\s+generation\s+agency|virtual\s+assistant\s+services|offshore\s+developers)\b/i;
+
+    const DISPOSABLE_EMAIL_DOMAINS = new Set([
+      'mailinator.com', 'guerrillamail.com', 'guerrillamailblock.com', '10minutemail.com',
+      'tempmail.com', 'temp-mail.org', 'yopmail.com', 'throwawaymail.com', 'trashmail.com',
+      'maildrop.cc', 'getnada.com', 'sharklasers.com', 'grr.la', 'pokemail.net',
+      'dispostable.com', 'fakeinbox.com', 'mailnesia.com', 'mohmal.com', 'burnermail.io',
+      'tempmailo.com', 'emailondeck.com', 'mintemail.com', 'mytemp.email', 'spamgourmet.com'
+    ]);
+
     // Phone pattern validation: standard US phones 10+ digits
-    const phoneRegex = /^[\d\-\*\+\(\)\s]{10,}$/;
+    const phoneRegex = /^[\d\-\*\+\(\)\s\.]{10,20}$/;
     // Basic email format check
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+
+    function isBogusPhoneNumber(rawPhone) {
+      const digits = rawPhone.replace(/\D/g, '');
+      if (digits.length < 10 || digits.length > 15) return true;
+      // Reject all identical digits (e.g., 0000000000, 1111111111, 9999999999)
+      if (/^(\d)\1+$/.test(digits)) return true;
+      // Reject 7+ repeating consecutive digits
+      if (/(\d)\1{6,}/.test(digits)) return true;
+      // Reject sequential test strings
+      if (digits.includes('1234567890') || digits.includes('0123456789') || digits.includes('9876543210')) {
+        return true;
+      }
+      // Check 10-digit US number (or 11-digit starting with 1)
+      const national = (digits.length === 11 && digits.startsWith('1')) ? digits.slice(1) : digits;
+      if (national.length === 10) {
+        const areaCode = national.slice(0, 3);
+        const exchange = national.slice(3, 6);
+        // US area codes and central office exchanges cannot start with 0 or 1, and 555-01xx is fictional
+        if (areaCode.startsWith('0') || areaCode.startsWith('1')) return true;
+        if (exchange.startsWith('0') || exchange.startsWith('1') || exchange === '555') return true;
+      }
+      return false;
+    }
+
+    // 5. Human Verification (hCaptcha with Automatic Math Challenge Fallback)
+    let usingMathFallback = false;
+    let hcaptchaWidgetId = null;
+    let hcaptchaVerifiedToken = '';
+    let mathExpectedAnswer = null;
+
+    function generateMathChallenge() {
+      const a = Math.floor(Math.random() * 8) + 2; // 2..9
+      const b = Math.floor(Math.random() * 8) + 2; // 2..9
+      mathExpectedAnswer = a + b;
+      if (mathQuestionEl) {
+        mathQuestionEl.textContent = `What is ${a} + ${b}?`;
+      }
+      if (mathAnswerInput) {
+        mathAnswerInput.value = '';
+        mathAnswerInput.classList.remove('invalid');
+        mathAnswerInput.setAttribute('aria-invalid', 'false');
+      }
+    }
+
+    function activateMathFallback() {
+      usingMathFallback = true;
+      if (hcaptchaWrapper) {
+        hcaptchaWrapper.hidden = true;
+      }
+      if (mathFallbackEl) {
+        mathFallbackEl.hidden = false;
+      }
+      if (mathExpectedAnswer === null) {
+        generateMathChallenge();
+      }
+    }
+
+    generateMathChallenge();
+
+    if (switchToMathBtn) {
+      switchToMathBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        if (!e.isTrusted) return;
+        activateMathFallback();
+        if (captchaError) captchaError.textContent = '';
+        if (mathAnswerInput) mathAnswerInput.focus();
+      });
+    }
+
+    if (refreshMathBtn) {
+      refreshMathBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        if (!e.isTrusted) return;
+        generateMathChallenge();
+        if (captchaError) captchaError.textContent = '';
+        if (mathAnswerInput) mathAnswerInput.focus();
+      });
+    }
+
+    if (mathAnswerInput) {
+      mathAnswerInput.addEventListener('input', () => {
+        if (mathAnswerInput.value.trim() !== '') {
+          if (captchaError) captchaError.textContent = '';
+          mathAnswerInput.classList.remove('invalid');
+          mathAnswerInput.setAttribute('aria-invalid', 'false');
+        }
+      });
+    }
+
+    // Attempt to load hCaptcha script asynchronously; fall back to math challenge if blocked
+    if (hcaptchaWidgetEl) {
+      const sitekey = hcaptchaWidgetEl.getAttribute('data-sitekey') || '50b2fe65-b00b-4b9e-ad62-3ba471098be2';
+      let hcaptchaLoaded = false;
+
+      const fallbackTimer = setTimeout(() => {
+        if (!hcaptchaLoaded && (!window.hcaptcha || hcaptchaWidgetId === null)) {
+          activateMathFallback();
+        }
+      }, 3000);
+
+      window.__cadpiHCaptchaOnLoad = function () {
+        if (!window.hcaptcha || !hcaptchaWidgetEl) {
+          activateMathFallback();
+          return;
+        }
+        try {
+          hcaptchaLoaded = true;
+          clearTimeout(fallbackTimer);
+          hcaptchaWidgetId = window.hcaptcha.render(hcaptchaWidgetEl, {
+            sitekey,
+            theme: document.documentElement.classList.contains('night-theme') ? 'dark' : 'light',
+            callback: (token) => {
+              hcaptchaVerifiedToken = token || '';
+              if (captchaError) captchaError.textContent = '';
+            },
+            'expired-callback': () => {
+              hcaptchaVerifiedToken = '';
+            },
+            'error-callback': () => {
+              hcaptchaVerifiedToken = '';
+              activateMathFallback();
+            }
+          });
+        } catch {
+          activateMathFallback();
+        }
+      };
+
+      const hcScript = document.createElement('script');
+      hcScript.src = 'https://js.hcaptcha.com/1/api.js?render=explicit&onload=__cadpiHCaptchaOnLoad';
+      hcScript.async = true;
+      hcScript.defer = true;
+      hcScript.onerror = () => {
+        clearTimeout(fallbackTimer);
+        activateMathFallback();
+      };
+      document.head.appendChild(hcScript);
+    } else {
+      activateMathFallback();
+    }
 
     // Field validation logic
-    function validateName() {
-      if (!nameInput.value.trim()) {
-        nameError.textContent = 'Name is required.';
-        nameInput.classList.add('invalid');
-        nameInput.setAttribute('aria-invalid', 'true');
-        return false;
+    function setFieldError(inputEl, errorEl, message) {
+      if (errorEl) errorEl.textContent = message;
+      if (inputEl) {
+        inputEl.classList.add('invalid');
+        inputEl.setAttribute('aria-invalid', 'true');
       }
-      nameError.textContent = '';
-      nameInput.classList.remove('invalid');
-      nameInput.setAttribute('aria-invalid', 'false');
+      return false;
+    }
+
+    function clearFieldError(inputEl, errorEl) {
+      if (errorEl) errorEl.textContent = '';
+      if (inputEl) {
+        inputEl.classList.remove('invalid');
+        inputEl.setAttribute('aria-invalid', 'false');
+      }
       return true;
     }
 
-    function validateEmail() {
-      const val = emailInput.value.trim();
+    function validateName() {
+      const val = nameInput.value.trim();
       if (!val) {
-        emailError.textContent = 'Email is required.';
-        emailInput.classList.add('invalid');
-        emailInput.setAttribute('aria-invalid', 'true');
-        return false;
-      } else if (!emailRegex.test(val)) {
-        emailError.textContent = 'Please enter a valid email address.';
-        emailInput.classList.add('invalid');
-        emailInput.setAttribute('aria-invalid', 'true');
-        return false;
+        return setFieldError(nameInput, nameError, 'Name is required.');
       }
-      emailError.textContent = '';
-      emailInput.classList.remove('invalid');
-      emailInput.setAttribute('aria-invalid', 'false');
-      return true;
+      if (val.length < 2) {
+        return setFieldError(nameInput, nameError, 'Please enter your full name.');
+      }
+      if (URL_SPAM_REGEX.test(val) || /<[^>]+>/.test(val)) {
+        return setFieldError(nameInput, nameError, 'Links or URLs are not permitted in the name field.');
+      }
+      if (CYRILLIC_REGEX.test(val)) {
+        return setFieldError(nameInput, nameError, 'Please use standard Latin characters for your name.');
+      }
+      if (SPAM_PHRASES_REGEX.test(val)) {
+        return setFieldError(nameInput, nameError, 'Solicitation or promotional text is not permitted.');
+      }
+      return clearFieldError(nameInput, nameError);
+    }
+
+    function validateEmail() {
+      const val = emailInput.value.trim().toLowerCase();
+      if (!val) {
+        return setFieldError(emailInput, emailError, 'Email is required.');
+      }
+      if (!emailRegex.test(val) || CYRILLIC_REGEX.test(val)) {
+        return setFieldError(emailInput, emailError, 'Please enter a valid email address.');
+      }
+      const domain = val.split('@')[1] || '';
+      if (DISPOSABLE_EMAIL_DOMAINS.has(domain)) {
+        return setFieldError(emailInput, emailError, 'Disposable or temporary email addresses are not accepted.');
+      }
+      return clearFieldError(emailInput, emailError);
     }
 
     function validatePhone() {
       const val = phoneInput.value.trim();
       if (smsYes && smsYes.checked && !val) {
-        phoneError.textContent = 'Please provide a phone number to receive text messages.';
-        phoneInput.classList.add('invalid');
-        phoneInput.setAttribute('aria-invalid', 'true');
-        return false;
+        return setFieldError(phoneInput, phoneError, 'Please provide a phone number to receive text messages.');
       }
-      if (val && !phoneRegex.test(val)) {
-        phoneError.textContent = 'Please enter a valid phone number (minimum 10 digits).';
-        phoneInput.classList.add('invalid');
-        phoneInput.setAttribute('aria-invalid', 'true');
-        return false;
+      if (val) {
+        if (!phoneRegex.test(val) || isBogusPhoneNumber(val)) {
+          return setFieldError(phoneInput, phoneError, 'Please enter a valid 10-digit phone number.');
+        }
       }
-      phoneError.textContent = '';
-      phoneInput.classList.remove('invalid');
-      phoneInput.setAttribute('aria-invalid', 'false');
-      return true;
+      return clearFieldError(phoneInput, phoneError);
     }
 
     function validateMessage() {
-      if (messageInput && !messageInput.value.trim()) {
-        messageError.textContent = 'Message is required.';
-        messageInput.classList.add('invalid');
-        messageInput.setAttribute('aria-invalid', 'true');
-        return false;
+      if (!messageInput) return true;
+      const val = messageInput.value.trim();
+      if (!val) {
+        return setFieldError(messageInput, messageError, 'Message is required.');
       }
-      if (messageError) messageError.textContent = '';
-      if (messageInput) {
-        messageInput.classList.remove('invalid');
-        messageInput.setAttribute('aria-invalid', 'false');
+      if (URL_SPAM_REGEX.test(val) || /<a\s+href/i.test(val)) {
+        return setFieldError(messageInput, messageError, 'For security reasons, URLs and web links are not permitted in messages.');
       }
-      return true;
+      if (CYRILLIC_REGEX.test(val)) {
+        return setFieldError(messageInput, messageError, 'Submissions in Cyrillic script are blocked by our spam filter.');
+      }
+      if (SPAM_PHRASES_REGEX.test(val)) {
+        return setFieldError(messageInput, messageError, 'Commercial solicitation, SEO, or crypto promotions are blocked.');
+      }
+      return clearFieldError(messageInput, messageError);
     }
 
     function validateSMS() {
@@ -179,6 +560,78 @@ document.addEventListener('DOMContentLoaded', () => {
       if (smsYes) smsYes.setAttribute('aria-invalid', 'false');
       if (smsNo) smsNo.setAttribute('aria-invalid', 'false');
       return true;
+    }
+
+    function validateVerification() {
+      if (!usingMathFallback && window.hcaptcha && hcaptchaWidgetId !== null) {
+        const responseToken = hcaptchaVerifiedToken || window.hcaptcha.getResponse(hcaptchaWidgetId);
+        if (!responseToken) {
+          if (captchaError) {
+            captchaError.textContent = 'Please complete the human verification check (or switch to the math challenge).';
+          }
+          return false;
+        }
+        if (captchaError) captchaError.textContent = '';
+        return true;
+      }
+
+      // Math challenge fallback verification
+      activateMathFallback();
+      const rawAns = mathAnswerInput ? mathAnswerInput.value.trim() : '';
+      const parsedAns = Number.parseInt(rawAns, 10);
+      if (!rawAns || Number.isNaN(parsedAns) || parsedAns !== mathExpectedAnswer) {
+        if (captchaError) {
+          captchaError.textContent = 'Please enter the correct sum for the security math check.';
+        }
+        if (mathAnswerInput) {
+          mathAnswerInput.classList.add('invalid');
+          mathAnswerInput.setAttribute('aria-invalid', 'true');
+        }
+        return false;
+      }
+      if (captchaError) captchaError.textContent = '';
+      if (mathAnswerInput) {
+        mathAnswerInput.classList.remove('invalid');
+        mathAnswerInput.setAttribute('aria-invalid', 'false');
+      }
+      return true;
+    }
+
+    function isHoneypotTripped() {
+      if (botcheckInput && botcheckInput.checked) return true;
+      if (websiteUrlInput && websiteUrlInput.value.trim() !== '') return true;
+      if (companyFaxInput && companyFaxInput.value.trim() !== '') return true;
+      return false;
+    }
+
+    function setSecurityStatus(message, type = 'error') {
+      if (!securityStatusEl) return;
+      if (!message) {
+        securityStatusEl.textContent = '';
+        securityStatusEl.className = 'form-security-status';
+        return;
+      }
+      securityStatusEl.textContent = message;
+      securityStatusEl.className = `form-security-status visible status-${type}`;
+    }
+
+    // Silently fake success screen for bots that trip honeypots or speed traps
+    function fakeSilentSuccess(submitBtn, btnText, origText) {
+      if (submitBtn && btnText) {
+        submitBtn.disabled = true;
+        btnText.textContent = 'Submitting Request...';
+      }
+      setTimeout(() => {
+        showToast();
+        setSecurityStatus('Consultation request received. A Lead Investigator will review your inquiry.', 'success');
+        form.reset();
+        generateMathChallenge();
+        formLoadedAt = Date.now();
+        if (submitBtn && btnText) {
+          submitBtn.disabled = false;
+          btnText.textContent = origText;
+        }
+      }, 650);
     }
 
     // Mutual exclusivity for SMS consent checkboxes
@@ -216,40 +669,27 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Clear Errors on INPUT as soon as user types to correct
     nameInput.addEventListener('input', () => {
-      if (nameInput.value.trim()) {
-        nameError.textContent = '';
-        nameInput.classList.remove('invalid');
-        nameInput.setAttribute('aria-invalid', 'false');
+      if (nameInput.classList.contains('invalid')) {
+        validateName();
       }
     });
-    
+
     emailInput.addEventListener('input', () => {
-      if (emailRegex.test(emailInput.value.trim())) {
-        emailError.textContent = '';
-        emailInput.classList.remove('invalid');
-        emailInput.setAttribute('aria-invalid', 'false');
+      if (emailInput.classList.contains('invalid')) {
+        validateEmail();
       }
     });
 
     phoneInput.addEventListener('input', () => {
-      const val = phoneInput.value.trim();
-      if (!val && (!smsYes || !smsYes.checked)) {
-        phoneError.textContent = '';
-        phoneInput.classList.remove('invalid');
-        phoneInput.setAttribute('aria-invalid', 'false');
-      } else if (phoneRegex.test(val)) {
-        phoneError.textContent = '';
-        phoneInput.classList.remove('invalid');
-        phoneInput.setAttribute('aria-invalid', 'false');
+      if (phoneInput.classList.contains('invalid')) {
+        validatePhone();
       }
     });
 
     if (messageInput) {
       messageInput.addEventListener('input', () => {
-        if (messageInput.value.trim()) {
-          messageError.textContent = '';
-          messageInput.classList.remove('invalid');
-          messageInput.setAttribute('aria-invalid', 'false');
+        if (messageInput.classList.contains('invalid')) {
+          validateMessage();
         }
       });
     }
@@ -257,45 +697,92 @@ document.addEventListener('DOMContentLoaded', () => {
     // Form Submission Handler
     form.addEventListener('submit', (e) => {
       e.preventDefault();
+      setSecurityStatus('');
 
-      // Trigger all validations
+      const submitBtn = form.querySelector('button[type="submit"]');
+      const btnText = submitBtn ? submitBtn.querySelector('span') : null;
+      const origText = btnText ? btnText.textContent : 'Request Confidential Consultation';
+
+      // Layer A: Honeypot Decoys (botcheck, website_url, company_fax)
+      if (isHoneypotTripped()) {
+        fakeSilentSuccess(submitBtn, btnText, origText);
+        return;
+      }
+
+      // Layer B: Trusted Event & Minimum Time-to-Fill (3.5s) Trap
+      const elapsedMs = Date.now() - formLoadedAt;
+      if (!e.isTrusted || !hasTrustedInteraction || elapsedMs < MIN_SUBMIT_TIME_MS) {
+        fakeSilentSuccess(submitBtn, btnText, origText);
+        return;
+      }
+
+      // Layer C: Client-Side Rate Limiting (max 2 submissions per 15 minutes)
+      if (isRateLimited()) {
+        setSecurityStatus(
+          'Rate limit reached: Maximum 2 submissions allowed per 15 minutes. For urgent matters, please call (877) 255-1919.',
+          'error'
+        );
+        return;
+      }
+
+      // Layer D: Field, Content & Human Verification Checks
       const isNameValid = validateName();
       const isEmailValid = validateEmail();
       const isPhoneValid = validatePhone();
       const isMessageValid = validateMessage();
       const isSMSValid = validateSMS();
+      const isCaptchaValid = validateVerification();
 
-      if (isNameValid && isEmailValid && isPhoneValid && isMessageValid && isSMSValid) {
-        // Disable submit button to prevent double submission
-        const submitBtn = form.querySelector('button[type="submit"]');
-        submitBtn.disabled = true;
-        const btnText = submitBtn.querySelector('span');
-        const origText = btnText.textContent;
-        btnText.textContent = 'Submitting Request...';
+      if (isNameValid && isEmailValid && isPhoneValid && isMessageValid && isSMSValid && isCaptchaValid) {
+        if (submitBtn) submitBtn.disabled = true;
+        if (btnText) btnText.textContent = 'Submitting Request...';
 
-        // Submit form data to Web3Forms via AJAX POST
+        // Build clean payload & dynamically inject runtime-assembled access key
         const formData = new FormData(form);
+        formData.set('access_key', assembleFormApiKey());
+        formData.delete('website_url');
+        formData.delete('company_fax');
+        formData.delete('botcheck');
+        formData.delete('math_captcha_answer');
 
-        fetch('https://api.web3forms.com/submit', {
+        // Remove empty captcha response fields when math fallback is active so Web3Forms does not reject empty tokens
+        if (usingMathFallback) {
+          formData.delete('h-captcha-response');
+          formData.delete('g-recaptcha-response');
+        }
+
+        fetch(assembleFormEndpoint(), {
           method: 'POST',
           body: formData
         })
         .then(async (response) => {
           const json = await response.json();
           if (response.status === 200 && json.success) {
+            recordSubmissionTimestamp();
             showToast();
+            setSecurityStatus('Consultation request received. A Lead Investigator will contact you shortly.', 'success');
             form.reset();
+            generateMathChallenge();
+            formLoadedAt = Date.now();
+            if (!usingMathFallback && window.hcaptcha && hcaptchaWidgetId !== null) {
+              try {
+                window.hcaptcha.reset(hcaptchaWidgetId);
+                hcaptchaVerifiedToken = '';
+              } catch {
+                // Ignore reset error
+              }
+            }
           } else {
-            alert(json.message || 'Something went wrong. Please try again or call us directly.');
+            setSecurityStatus(json.message || 'Something went wrong. Please try again or call (877) 255-1919.', 'error');
           }
         })
         .catch((error) => {
           console.error('Form submission error:', error);
-          alert('Unable to send message at this time. Please call (877) 255-1919.');
+          setSecurityStatus('Unable to send message at this time. Please call (877) 255-1919.', 'error');
         })
         .finally(() => {
-          submitBtn.disabled = false;
-          btnText.textContent = origText;
+          if (submitBtn) submitBtn.disabled = false;
+          if (btnText) btnText.textContent = origText;
         });
       } else {
         // Focus on the first invalid field
@@ -309,6 +796,8 @@ document.addEventListener('DOMContentLoaded', () => {
           messageInput.focus();
         } else if (!isSMSValid && smsYes) {
           smsYes.focus();
+        } else if (!isCaptchaValid && usingMathFallback && mathAnswerInput) {
+          mathAnswerInput.focus();
         }
       }
     });
@@ -316,17 +805,31 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // --- Success Toast Notification Manager ---
   function showToast() {
-    const toast = document.getElementById('toast-notification');
-    if (toast) {
-      toast.classList.add('show');
-      toast.setAttribute('aria-hidden', 'false');
-      
-      // Auto-hide toast after 5 seconds
-      setTimeout(() => {
-        toast.classList.remove('show');
-        toast.setAttribute('aria-hidden', 'true');
-      }, 5000);
+    let toast = document.getElementById('toast-notification');
+    if (!toast) {
+      toast = document.createElement('div');
+      toast.id = 'toast-notification';
+      toast.className = 'toast-notification';
+      toast.setAttribute('role', 'status');
+      toast.setAttribute('aria-live', 'polite');
+      toast.setAttribute('aria-hidden', 'true');
+      toast.innerHTML = `
+        <div class="toast-icon"><i class="fa-solid fa-circle-check"></i></div>
+        <div class="toast-content">
+          <h4 class="toast-title">Consultation Request Received</h4>
+          <p class="toast-desc">Thank you. A Lead Investigator will review your case and contact you shortly.</p>
+        </div>
+      `;
+      document.body.appendChild(toast);
     }
+    toast.classList.add('show');
+    toast.setAttribute('aria-hidden', 'false');
+
+    // Auto-hide toast after 5 seconds
+    setTimeout(() => {
+      toast.classList.remove('show');
+      toast.setAttribute('aria-hidden', 'true');
+    }, 5000);
   }
 
   // --- Dynamic Copyright Year ---
@@ -391,6 +894,7 @@ document.addEventListener('DOMContentLoaded', () => {
       lastActiveElement = document.activeElement;
       modalTitle.textContent = policyTitles[policyKey];
       modalBody.innerHTML = template.innerHTML;
+      initProtectedEmails(modalBody);
       policyModal.showModal();
       document.body.classList.add('modal-open');
       if (closeBtn) closeBtn.focus();
@@ -743,14 +1247,14 @@ document.addEventListener('DOMContentLoaded', () => {
   const triggerBtn = document.getElementById('zelle-trigger-btn');
   const modal = document.getElementById('zelle-modal');
   const closeBtn = document.getElementById('close-zelle-btn');
-  const copyBtn = document.getElementById('copy-zelle-email-btn');
-  const emailTextEl = document.getElementById('zelle-email-text');
+  let zelleLastActiveElement = null;
 
   if (!triggerBtn || !modal || !closeBtn) return;
 
   // Open Modal
   triggerBtn.addEventListener('click', () => {
-    lastActiveElement = document.activeElement;
+    zelleLastActiveElement = document.activeElement;
+    initProtectedEmails(modal);
     modal.showModal();
     document.body.classList.add('modal-open');
     if (closeBtn) closeBtn.focus();
@@ -760,9 +1264,9 @@ document.addEventListener('DOMContentLoaded', () => {
   const closeModal = () => {
     modal.close();
     document.body.classList.remove('modal-open');
-    if (lastActiveElement) {
-      lastActiveElement.focus();
-      lastActiveElement = null;
+    if (zelleLastActiveElement) {
+      zelleLastActiveElement.focus();
+      zelleLastActiveElement = null;
     }
   };
 
@@ -771,39 +1275,11 @@ document.addEventListener('DOMContentLoaded', () => {
   // Close when native dialog fires 'close' event (e.g. via Esc key)
   modal.addEventListener('close', () => {
     document.body.classList.remove('modal-open');
-    if (lastActiveElement) {
-      lastActiveElement.focus();
-      lastActiveElement = null;
+    if (zelleLastActiveElement) {
+      zelleLastActiveElement.focus();
+      zelleLastActiveElement = null;
     }
   });
-
-  // Copy Email to Clipboard with micro-animation
-  if (copyBtn && emailTextEl) {
-    const copyText = copyBtn.querySelector('.copy-btn-text');
-    let isCopying = false;
-
-    copyBtn.addEventListener('click', async () => {
-      if (isCopying) return;
-      isCopying = true;
-
-      const emailAddress = emailTextEl.textContent.trim();
-
-      try {
-        await navigator.clipboard.writeText(emailAddress);
-        copyBtn.classList.add('copied');
-        if (copyText) copyText.textContent = 'Copied!';
-
-        setTimeout(() => {
-          copyBtn.classList.remove('copied');
-          if (copyText) copyText.textContent = 'Copy';
-          isCopying = false;
-        }, 2000);
-      } catch (err) {
-        console.error('Failed to copy text: ', err);
-        isCopying = false;
-      }
-    });
-  }
 
   // Fallback for light-dismiss (clicking outside the dialog content box)
   // for browsers that do not support native `closedby` attribute yet (like Safari)
@@ -1362,16 +1838,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Light-dismiss click outside fallback
     if (!('closedBy' in HTMLDialogElement.prototype)) {
-      blogModal.addEventListener('click', (event) => {
-        if (event.target !== blogModal) return;
-        const rect = blogModal.getBoundingClientRect();
-        const isInside = (
-          rect.top <= event.clientY &&
-          event.clientY <= rect.top + rect.height &&
-          rect.left <= event.clientX &&
-          event.clientX <= rect.left + rect.width
-        );
-        if (!isInside) {
+      const outside = (e, dialog) => {
+        const r = dialog.getBoundingClientRect();
+        return e.clientX < r.left || e.clientX > r.right || e.clientY < r.top || e.clientY > r.bottom;
+      };
+      let pressedOutside = false;
+      blogModal.addEventListener('pointerdown', (e) => {
+        pressedOutside = outside(e, blogModal);
+      });
+      blogModal.addEventListener('pointerup', (e) => {
+        if (pressedOutside && outside(e, blogModal)) {
           closeBlogArticle();
         }
       });

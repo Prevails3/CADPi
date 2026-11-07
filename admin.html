@@ -20,7 +20,7 @@
   <!-- FontAwesome Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <!-- Main Stylesheet -->
-  <link rel="stylesheet" href="index.css?v=1.2.0">
+  <link rel="stylesheet" href="index.css?v=1.2.3">
 
   <style>
     /* Admin Specific Dashboard Styles */
@@ -374,14 +374,38 @@
 
     /* Modal Dialog for YouTube Embed */
     dialog.admin-modal {
+      position: fixed;
+      inset: 0;
+      margin: auto;
       border: 1px solid var(--border-color);
       border-radius: 16px;
       padding: 0;
       background: var(--bg-card);
       color: var(--text-primary);
       max-width: 540px;
-      width: 90%;
+      width: 92%;
       box-shadow: 0 25px 60px rgba(0, 0, 0, 0.7);
+    }
+
+    @media (max-width: 640px) {
+      .admin-header {
+        padding: 0.75rem 1rem;
+      }
+      .admin-header-container {
+        flex-wrap: wrap;
+      }
+      .admin-tabs {
+        overflow-x: auto;
+      }
+      .form-panel {
+        padding: 1.25rem;
+      }
+      .preview-box {
+        padding: 1rem;
+      }
+      .admin-modal-card {
+        padding: 1.25rem;
+      }
     }
 
     dialog.admin-modal::backdrop {

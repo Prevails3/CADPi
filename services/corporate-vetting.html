@@ -90,7 +90,7 @@
   <!-- FontAwesome Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <!-- Main Stylesheet -->
-  <link rel="stylesheet" href="../index.css?v=1.2.2">
+  <link rel="stylesheet" href="../index.css?v=1.2.3">
 </head>
 <body>
 
@@ -269,34 +269,90 @@
           <h2 class="form-title" style="margin-top: 0.5rem;">Schedule A Confidential Corporate Due Diligence Review</h2>
           <p class="form-subtitle">Discuss potential acquisitions, executive candidates, or partnership vetting directly with our senior investigators.</p>
 
-          <form id="consultation-form" action="https://api.web3forms.com/submit" method="POST" class="secure-form" novalidate style="margin-top: 1.5rem;">
-            <input type="hidden" name="access_key" value="eef28036-66cd-4a4a-95a1-2b526fb3eef5">
+          <form id="consultation-form" class="secure-form" novalidate style="margin-top: 1.5rem;" data-form-context="corporate-vetting">
             <input type="hidden" name="subject" value="New Corporate Vetting Inquiry - CAD Private Investigations">
             <input type="hidden" name="from_name" value="CAD PI Corporate Vetting Page">
+
+            <!-- Multi-Field Anti-Spam Honeypot Decoys (Visually Hidden) -->
+            <div class="visually-hidden" aria-hidden="true">
+              <label for="hp-botcheck">Do not check this box if you are human</label>
+              <input type="checkbox" id="hp-botcheck" name="botcheck" class="visually-hidden" tabindex="-1" aria-hidden="true" autocomplete="off">
+              <label for="hp-website-url">Website URL</label>
+              <input type="text" id="hp-website-url" name="website_url" class="visually-hidden" tabindex="-1" aria-hidden="true" autocomplete="off" value="">
+              <label for="hp-company-fax">Company Fax</label>
+              <input type="text" id="hp-company-fax" name="company_fax" class="visually-hidden" tabindex="-1" aria-hidden="true" autocomplete="off" value="">
+            </div>
             
             <div class="form-group">
               <label for="full-name" class="form-label">Full Name *</label>
-              <input type="text" id="full-name" name="name" class="form-control" autocomplete="name" required aria-required="true" placeholder="Corporate Counsel / Executive">
+              <input type="text" id="full-name" name="name" class="form-control" autocomplete="name" required aria-required="true" aria-describedby="name-error" aria-errormessage="name-error" placeholder="Corporate Counsel / Executive">
               <span class="error-msg" id="name-error" aria-live="polite"></span>
             </div>
             
             <div class="form-group">
               <label for="email-address" class="form-label">Corporate Email *</label>
-              <input type="email" id="email-address" name="email" class="form-control" autocomplete="email" required aria-required="true" placeholder="executive@company.com">
+              <input type="email" id="email-address" name="email" class="form-control" autocomplete="email" autocorrect="off" autocapitalize="off" spellcheck="false" required aria-required="true" aria-describedby="email-error" aria-errormessage="email-error" placeholder="Enter your email address">
               <span class="error-msg" id="email-error" aria-live="polite"></span>
             </div>
             
             <div class="form-group">
               <label for="phone-number" class="form-label">Phone Number <span class="optional-label">(Optional)</span></label>
-              <input type="tel" id="phone-number" name="phone" class="form-control" autocomplete="tel" placeholder="(480) 630-2533" inputmode="tel">
+              <input type="tel" id="phone-number" name="phone" class="form-control" autocomplete="tel" aria-describedby="phone-error" aria-errormessage="phone-error" placeholder="(480) 630-2533" inputmode="tel">
               <span class="error-msg" id="phone-error" aria-live="polite"></span>
             </div>
 
             <div class="form-group">
               <label for="message" class="form-label">Inquiry Scope *</label>
-              <textarea id="message" name="message" class="form-control" rows="4" required aria-required="true" placeholder="Please provide details regarding the target entity, transaction type, or background vetting objectives."></textarea>
+              <textarea id="message" name="message" class="form-control" rows="4" required aria-required="true" aria-describedby="message-error" aria-errormessage="message-error" placeholder="Please provide details regarding the target entity, transaction type, or background vetting objectives."></textarea>
               <span class="error-msg" id="message-error" aria-live="polite"></span>
             </div>
+
+            <!-- Human Verification (hCaptcha with Automatic Math Fallback) -->
+            <div class="form-group human-verification-group" id="human-verification-group">
+              <div class="verification-header">
+                <span class="form-label">Human Verification *</span>
+                <span class="verification-badge"><i class="fa-solid fa-shield-halved" aria-hidden="true"></i> Anti-Spam Protected</span>
+              </div>
+
+              <div id="hcaptcha-wrapper" class="hcaptcha-wrapper">
+                <div id="hcaptcha-container" class="h-captcha" data-sitekey="50b2fe65-b00b-4b9e-ad62-3ba471098be2" data-theme="dark"></div>
+                <button type="button" id="switch-to-math-btn" class="verification-mode-toggle">
+                  Having trouble with CAPTCHA? Use quick math check
+                </button>
+              </div>
+
+              <div id="math-captcha-fallback" class="math-captcha-fallback" hidden>
+                <div class="math-challenge-row">
+                  <label for="math-captcha-input" id="math-captcha-question" class="math-question-label">
+                    Security Check: What is 4 + 3? *
+                  </label>
+                  <div class="math-input-controls">
+                    <input
+                      type="text"
+                      id="math-captcha-input"
+                      name="math_captcha_answer"
+                      class="form-control math-captcha-input"
+                      inputmode="numeric"
+                      autocomplete="off"
+                      autocorrect="off"
+                      autocapitalize="off"
+                      spellcheck="false"
+                      placeholder="Answer"
+                      aria-describedby="captcha-error"
+                      aria-errormessage="captcha-error"
+                    >
+                    <button type="button" id="refresh-math-captcha" class="btn-math-refresh" aria-label="Generate a new math question" title="New question">
+                      <i class="fa-solid fa-arrows-rotate" aria-hidden="true"></i>
+                    </button>
+                  </div>
+                </div>
+                <span class="math-fallback-note">Quick math check active for human verification.</span>
+              </div>
+
+              <span class="error-msg" id="captcha-error" aria-live="polite"></span>
+            </div>
+
+            <div id="form-security-status" class="form-security-status" role="status" aria-live="polite" hidden></div>
             
             <button type="submit" class="btn btn-gold btn-full">
               <span>Submit Confidential Due Diligence Request</span>

@@ -240,7 +240,7 @@ export default {
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css?family=Inter:300,400,500,600,700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <link rel="stylesheet" href="../index.css?v=1.2.2">
+  <link rel="stylesheet" href="../index.css?v=1.2.3">
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -293,7 +293,7 @@ export default {
     </div>
   </header>
   <main id="main-content">
-    <article class="section-container" style="padding-top: 2rem; padding-bottom: 4rem;">
+    <article class="section-container" style="padding-top: calc(var(--header-height) + 2.5rem); padding-bottom: 4rem;">
       <div style="max-width: 860px; margin: 0 auto;">
         <nav class="blog-breadcrumb" aria-label="Breadcrumb navigation">
           <a href="../index.html">Home</a>
@@ -319,7 +319,7 @@ export default {
             </div>
           </div>
         </div>
-        <div class="article-full-body glass-card legal-card" style="padding: 2.5rem;">
+        <div class="article-full-body glass-card legal-card">
           ${post.bodyHtml}
           <div class="article-cta-box glass-card" style="margin-top: 3rem;">
             <div class="cta-box-badge">CONFIDENTIAL CASE REVIEW</div>
