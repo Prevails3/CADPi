@@ -51,7 +51,83 @@ export default {
         const safeTitle = escapeHtml(titleMatch ? titleMatch[1] : 'Investigative Video Briefing');
         return `<iframe src="https://www.youtube-nocookie.com/embed/${videoId}" title="${safeTitle}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen loading="lazy"></iframe>`;
       });
+      // Restrict <img> tags to safe HTTPS or first-party media/asset paths
+      html = html.replace(/<img\b([^>]*)>/gi, (full, attrs) => {
+        const srcMatch = attrs.match(/\bsrc\s*=\s*["']([^"']+)["']/i);
+        if (!srcMatch) return '';
+        const rawSrc = srcMatch[1].trim();
+        if (!/^(?:\/api\/media\/img_[a-zA-Z0-9_.-]+|(?:\.\.\/|\/)?assets\/[a-zA-Z0-9_./-]+|https:\/\/[^\s"'<>]+)$/i.test(rawSrc)) {
+          return '';
+        }
+        const altMatch = attrs.match(/\balt\s*=\s*["']([^"']*)["']/i);
+        const widthMatch = attrs.match(/\bwidth\s*=\s*["']?(\d{1,5})["']?/i);
+        const heightMatch = attrs.match(/\bheight\s*=\s*["']?(\d{1,5})["']?/i);
+        const safeSrc = escapeHtml(rawSrc);
+        const safeAlt = escapeHtml(altMatch ? altMatch[1] : '');
+        const widthAttr = widthMatch ? ` width="${widthMatch[1]}"` : '';
+        const heightAttr = heightMatch ? ` height="${heightMatch[1]}"` : '';
+        return `<img src="${safeSrc}" alt="${safeAlt}"${widthAttr}${heightAttr} loading="lazy">`;
+      });
       return html.trim();
+    }
+
+    function detectImageMimeFromBytes(bytes) {
+      if (!bytes || bytes.length < 12) return null;
+      // JPEG: FF D8 FF
+      if (bytes[0] === 0xff && bytes[1] === 0xd8 && bytes[2] === 0xff) {
+        return { mime: 'image/jpeg', ext: 'jpg' };
+      }
+      // PNG: 89 50 4E 47 0D 0A 1A 0A
+      if (
+        bytes[0] === 0x89 &&
+        bytes[1] === 0x50 &&
+        bytes[2] === 0x4e &&
+        bytes[3] === 0x47 &&
+        bytes[4] === 0x0d &&
+        bytes[5] === 0x0a &&
+        bytes[6] === 0x1a &&
+        bytes[7] === 0x0a
+      ) {
+        return { mime: 'image/png', ext: 'png' };
+      }
+      // GIF: GIF87a or GIF89a
+      if (
+        bytes[0] === 0x47 &&
+        bytes[1] === 0x49 &&
+        bytes[2] === 0x46 &&
+        bytes[3] === 0x38 &&
+        (bytes[4] === 0x37 || bytes[4] === 0x39) &&
+        bytes[5] === 0x61
+      ) {
+        return { mime: 'image/gif', ext: 'gif' };
+      }
+      // WebP: RIFF....WEBP
+      if (
+        bytes[0] === 0x52 &&
+        bytes[1] === 0x49 &&
+        bytes[2] === 0x46 &&
+        bytes[3] === 0x46 &&
+        bytes[8] === 0x57 &&
+        bytes[9] === 0x45 &&
+        bytes[10] === 0x42 &&
+        bytes[11] === 0x50
+      ) {
+        return { mime: 'image/webp', ext: 'webp' };
+      }
+      // AVIF: ....ftypavif or ....ftypavis
+      if (
+        bytes[4] === 0x66 &&
+        bytes[5] === 0x74 &&
+        bytes[6] === 0x79 &&
+        bytes[7] === 0x70 &&
+        bytes[8] === 0x61 &&
+        bytes[9] === 0x76 &&
+        bytes[10] === 0x69 &&
+        (bytes[11] === 0x66 || bytes[11] === 0x73)
+      ) {
+        return { mime: 'image/avif', ext: 'avif' };
+      }
+      return null;
     }
 
     async function timingSafePasswordCompare(inputPassword, expectedPassword) {
@@ -235,6 +311,138 @@ export default {
           return jsonResponse({ success: false, error: 'Unauthorized' }, 401);
         }
         return jsonResponse({ success: true, authenticated: true });
+      }
+
+      // 4b. GET /api/media/:id - Serve uploaded blog images from KV
+      if ((request.method === 'GET' || request.method === 'HEAD') && url.pathname.startsWith('/api/media/')) {
+        if (!env.BLOG_KV) {
+          return new Response('Not Found', { status: 404 });
+        }
+        const mediaId = decodeURIComponent(url.pathname.replace('/api/media/', '').trim());
+        if (!/^img_[a-z0-9]+_[a-f0-9]+\.(jpg|jpeg|png|webp|gif|avif)$/i.test(mediaId)) {
+          return new Response('Not Found', { status: 404 });
+        }
+        const { value, metadata } = await env.BLOG_KV.getWithMetadata('media:' + mediaId, {
+          type: 'arrayBuffer',
+        });
+        if (!value) {
+          return new Response('Not Found', { status: 404 });
+        }
+        const allowedMimes = new Set([
+          'image/jpeg',
+          'image/png',
+          'image/webp',
+          'image/gif',
+          'image/avif',
+        ]);
+        const contentType =
+          metadata?.contentType && allowedMimes.has(metadata.contentType)
+            ? metadata.contentType
+            : 'image/jpeg';
+
+        const imgHeaders = new Headers({
+          'Content-Type': contentType,
+          'Cache-Control': 'public, max-age=31536000, immutable',
+          'Content-Disposition': 'inline',
+          'Cross-Origin-Resource-Policy': 'same-origin',
+        });
+        applySecurityHeaders(imgHeaders);
+        return new Response(value, { status: 200, headers: imgHeaders });
+      }
+
+      // 4c. POST /api/admin/media - Upload image to Cloudflare KV
+      if (request.method === 'POST' && url.pathname === '/api/admin/media') {
+        const isAuthed = await verifyAdminAuth(request);
+        if (!isAuthed) {
+          return jsonResponse({ success: false, error: 'Unauthorized' }, 401);
+        }
+        if (!env.BLOG_KV) {
+          return jsonResponse({ success: false, error: 'KV storage not configured' }, 500);
+        }
+
+        try {
+          const MAX_IMAGE_BYTES = 8 * 1024 * 1024; // 8 MB max
+          const reqContentType = request.headers.get('Content-Type') || '';
+          let arrayBuffer = null;
+          let originalName = 'image';
+          let width = null;
+          let height = null;
+
+          if (reqContentType.includes('multipart/form-data')) {
+            const formData = await request.formData();
+            const file = formData.get('file');
+            if (!file || typeof file.arrayBuffer !== 'function') {
+              return jsonResponse({ success: false, error: 'No image file provided' }, 400);
+            }
+            originalName = String(file.name || 'image').slice(0, 120);
+            width = parseInt(formData.get('width'), 10) || null;
+            height = parseInt(formData.get('height'), 10) || null;
+            arrayBuffer = await file.arrayBuffer();
+          } else {
+            const body = await request.json();
+            if (!body || typeof body.dataBase64 !== 'string') {
+              return jsonResponse({ success: false, error: 'Invalid image upload payload' }, 400);
+            }
+            originalName = String(body.filename || 'image').slice(0, 120);
+            width = parseInt(body.width, 10) || null;
+            height = parseInt(body.height, 10) || null;
+            const cleanBase64 = body.dataBase64.replace(/^data:[^;]+;base64,/, '');
+            const binaryStr = atob(cleanBase64);
+            const bytes = new Uint8Array(binaryStr.length);
+            for (let i = 0; i < binaryStr.length; i++) {
+              bytes[i] = binaryStr.charCodeAt(i);
+            }
+            arrayBuffer = bytes.buffer;
+          }
+
+          if (!arrayBuffer || arrayBuffer.byteLength === 0) {
+            return jsonResponse({ success: false, error: 'Empty image file' }, 400);
+          }
+          if (arrayBuffer.byteLength > MAX_IMAGE_BYTES) {
+            return jsonResponse(
+              { success: false, error: 'Image exceeds maximum size limit (8 MB)' },
+              413
+            );
+          }
+
+          const byteView = new Uint8Array(arrayBuffer);
+          const detected = detectImageMimeFromBytes(byteView);
+          if (!detected) {
+            return jsonResponse(
+              {
+                success: false,
+                error:
+                  'Unsupported or invalid image format. Allowed formats: JPG, PNG, WebP, GIF, AVIF.',
+              },
+              400
+            );
+          }
+
+          const mediaId = `img_${Date.now().toString(36)}_${crypto.randomUUID().replace(/-/g, '').slice(0, 10)}.${detected.ext}`;
+          await env.BLOG_KV.put('media:' + mediaId, arrayBuffer, {
+            metadata: {
+              contentType: detected.mime,
+              filename: originalName,
+              size: arrayBuffer.byteLength,
+              width,
+              height,
+              createdAt: Date.now(),
+            },
+          });
+
+          const urlPath = `/api/media/${mediaId}`;
+          return jsonResponse({
+            success: true,
+            id: mediaId,
+            url: urlPath,
+            contentType: detected.mime,
+            size: arrayBuffer.byteLength,
+            width,
+            height,
+          });
+        } catch (err) {
+          return jsonResponse({ success: false, error: 'Failed to process image upload' }, 500);
+        }
       }
 
       // 5. POST /api/admin/posts

@@ -481,6 +481,74 @@
       margin-block-end: 1.5rem;
       font-style: italic;
     }
+
+    /* Responsive Article Images & Upload Dropzone */
+    .article-figure,
+    .article-image-wrapper {
+      margin: 1.5rem 0 1.25rem 0;
+      text-align: center;
+    }
+
+    .article-figure img,
+    .article-image-wrapper img {
+      display: block;
+      max-width: 100%;
+      height: auto;
+      margin-inline: auto;
+      border-radius: 12px;
+      border: 1px solid var(--border-color);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+      background: #020C1B;
+    }
+
+    .article-figcaption {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      text-align: center;
+      margin-block-start: 0.55rem;
+      font-style: italic;
+    }
+
+    .visually-hidden {
+      position: absolute;
+      clip-path: inset(50%);
+      overflow: hidden;
+      width: 1px;
+      height: 1px;
+      margin: -1px;
+      padding: 0;
+      border: 0;
+      white-space: nowrap;
+    }
+
+    .image-dropzone {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      padding: 1.5rem 1.25rem;
+      border: 2px dashed rgba(212, 175, 55, 0.4);
+      border-radius: 12px;
+      background: rgba(2, 12, 27, 0.55);
+      color: var(--text-secondary);
+      cursor: pointer;
+      text-align: center;
+      transition: var(--transition-fast);
+    }
+
+    .image-dropzone:hover,
+    .image-dropzone.drag-over,
+    #img-file-input:focus-visible + .image-dropzone {
+      border-color: var(--accent-gold);
+      background: rgba(212, 175, 55, 0.08);
+      color: var(--text-primary);
+    }
+
+    #img-file-input:focus-visible + .image-dropzone {
+      outline: 3px solid var(--accent-gold);
+      outline-offset: 2px;
+    }
   </style>
 </head>
 <body class="admin-body">
@@ -634,8 +702,11 @@
                     <i class="fa-solid fa-shield-halved"></i> Key Takeaways Box
                   </button>
                   <span class="tool-sep"></span>
+                  <button type="button" class="tool-btn" data-insert="image" style="color: var(--accent-gold);" title="Upload or Embed Image">
+                    <i class="fa-regular fa-image" style="color: var(--accent-gold); font-size: 0.95rem;" aria-hidden="true"></i> Image
+                  </button>
                   <button type="button" class="tool-btn" data-insert="youtube" style="color: #FF4444;" title="Embed YouTube Video">
-                    <i class="fa-brands fa-youtube" style="color: #FF0000; font-size: 0.95rem;"></i> YouTube Video
+                    <i class="fa-brands fa-youtube" style="color: #FF0000; font-size: 0.95rem;" aria-hidden="true"></i> YouTube Video
                   </button>
                 </div>
 
@@ -689,6 +760,65 @@
       </div>
     </div>
   </main>
+
+  <!-- Image Upload & Embed Modal Dialog -->
+  <dialog id="image-modal" class="admin-modal" closedby="any">
+    <div class="admin-modal-card">
+      <div class="admin-modal-header">
+        <div style="display: flex; align-items: center; gap: 0.65rem;">
+          <i class="fa-regular fa-image" style="color: var(--accent-gold); font-size: 1.4rem;" aria-hidden="true"></i>
+          <h3 style="margin: 0; font-size: 1.2rem; color: var(--text-primary); font-weight: 700;">Upload &amp; Embed Image</h3>
+        </div>
+        <button type="button" id="image-modal-close" class="modal-close-icon" aria-label="Close dialog">&times;</button>
+      </div>
+      <div class="admin-modal-body">
+        <p style="font-size: 0.88rem; color: var(--text-secondary); margin-block-end: 1.1rem; line-height: 1.5;">
+          Upload a photograph, exhibit, or diagram from your computer (auto-optimized for fast loading), or paste an existing image URL.
+        </p>
+
+        <div class="form-group" style="margin-block-end: 1.15rem;">
+          <span class="field-label">Upload Image File (JPG, PNG, WebP, GIF, AVIF)</span>
+          <input type="file" id="img-file-input" name="image_file" accept="image/jpeg,image/png,image/webp,image/gif,image/avif" class="visually-hidden">
+          <label for="img-file-input" id="img-dropzone" class="image-dropzone">
+            <i class="fa-solid fa-cloud-arrow-up" style="font-size: 1.75rem; color: var(--accent-gold);" aria-hidden="true"></i>
+            <span id="img-dropzone-title" style="font-weight: 600; font-size: 0.92rem; color: var(--text-primary);">Click to choose an image or drag &amp; drop here</span>
+            <span id="img-dropzone-meta" style="font-size: 0.78rem; color: var(--text-muted);">High-resolution photos are automatically optimized up to 1600px wide</span>
+          </label>
+        </div>
+
+        <div class="form-group" style="margin-block-end: 1.15rem;">
+          <label for="img-url-input" class="field-label">Or Direct Image URL (optional if uploading a file)</label>
+          <input type="url" id="img-url-input" name="image_url" class="admin-input" placeholder="e.g. https://... or /assets/..." autocorrect="off" autocapitalize="off" spellcheck="false">
+        </div>
+
+        <div class="form-row-2" style="margin-block-end: 1.15rem;">
+          <div>
+            <label for="img-alt-input" class="field-label">Alt Text (Accessibility &amp; SEO)</label>
+            <input type="text" id="img-alt-input" name="image_alt" class="admin-input" placeholder="e.g. Forensic chain-of-custody log">
+          </div>
+          <div>
+            <label for="img-caption-input" class="field-label">Optional Caption / Exhibit Note</label>
+            <input type="text" id="img-caption-input" name="image_caption" class="admin-input" placeholder="e.g. Exhibit A: Field surveillance photo">
+          </div>
+        </div>
+
+        <div id="img-modal-feedback" role="status" aria-live="polite" style="font-size: 0.8rem; color: var(--text-muted); margin-block-end: 1rem;"></div>
+
+        <!-- Live Image Preview inside Modal -->
+        <div id="img-preview-box" style="display: none; margin-block-end: 1.35rem;">
+          <div style="font-size: 0.8rem; color: var(--accent-gold); font-weight: 700; margin-block-end: 0.4rem; text-transform: uppercase; letter-spacing: 0.05em;">Image Preview</div>
+          <div id="img-preview-frame" style="max-height: 220px; overflow: hidden; border-radius: 10px; border: 1px solid var(--border-color); background: #020C1B; display: flex; align-items: center; justify-content: center; padding: 0.5rem;"></div>
+        </div>
+
+        <div style="display: flex; justify-content: flex-end; gap: 0.75rem; align-items: center;">
+          <button type="button" id="img-cancel-btn" class="btn btn-outline" style="padding: 0.6rem 1.2rem;">Cancel</button>
+          <button type="button" id="img-insert-btn" class="btn btn-gold" style="padding: 0.6rem 1.4rem;">
+            <i class="fa-solid fa-plus" aria-hidden="true"></i> Upload &amp; Insert Image
+          </button>
+        </div>
+      </div>
+    </div>
+  </dialog>
 
   <!-- YouTube Embed Modal Dialog -->
   <dialog id="youtube-modal" class="admin-modal">
@@ -1042,12 +1172,323 @@
         });
       }
 
+      // Image Upload & Embed Modal Logic
+      const imgModal = document.getElementById('image-modal');
+      const imgModalClose = document.getElementById('image-modal-close');
+      const imgCancelBtn = document.getElementById('img-cancel-btn');
+      const imgInsertBtn = document.getElementById('img-insert-btn');
+      const imgFileInput = document.getElementById('img-file-input');
+      const imgDropzone = document.getElementById('img-dropzone');
+      const imgDropzoneTitle = document.getElementById('img-dropzone-title');
+      const imgDropzoneMeta = document.getElementById('img-dropzone-meta');
+      const imgUrlInput = document.getElementById('img-url-input');
+      const imgAltInput = document.getElementById('img-alt-input');
+      const imgCaptionInput = document.getElementById('img-caption-input');
+      const imgModalFeedback = document.getElementById('img-modal-feedback');
+      const imgPreviewBox = document.getElementById('img-preview-box');
+      const imgPreviewFrame = document.getElementById('img-preview-frame');
+
+      let preparedImageBlob = null;
+      let preparedImageFilename = '';
+      let preparedImageWidth = null;
+      let preparedImageHeight = null;
+      let currentPreviewObjectUrl = null;
+
+      function revokePreviewUrl() {
+        if (currentPreviewObjectUrl) {
+          URL.revokeObjectURL(currentPreviewObjectUrl);
+          currentPreviewObjectUrl = null;
+        }
+      }
+
+      function resetImageModal() {
+        revokePreviewUrl();
+        preparedImageBlob = null;
+        preparedImageFilename = '';
+        preparedImageWidth = null;
+        preparedImageHeight = null;
+        if (imgFileInput) imgFileInput.value = '';
+        if (imgUrlInput) imgUrlInput.value = '';
+        if (imgAltInput) imgAltInput.value = '';
+        if (imgCaptionInput) imgCaptionInput.value = '';
+        if (imgDropzoneTitle) imgDropzoneTitle.textContent = 'Click to choose an image or drag & drop here';
+        if (imgDropzoneMeta) imgDropzoneMeta.textContent = 'High-resolution photos are automatically optimized up to 1600px wide';
+        if (imgModalFeedback) {
+          imgModalFeedback.textContent = '';
+          imgModalFeedback.style.color = 'var(--text-muted)';
+        }
+        if (imgPreviewBox) imgPreviewBox.style.display = 'none';
+        if (imgPreviewFrame) imgPreviewFrame.replaceChildren();
+      }
+
+      function renderModalImagePreview(srcUrl) {
+        if (!imgPreviewBox || !imgPreviewFrame) return;
+        const previewImg = document.createElement('img');
+        previewImg.src = srcUrl;
+        previewImg.alt = 'Selected image preview';
+        previewImg.style.maxHeight = '200px';
+        previewImg.style.maxWidth = '100%';
+        previewImg.style.objectFit = 'contain';
+        previewImg.style.borderRadius = '6px';
+        imgPreviewFrame.replaceChildren(previewImg);
+        imgPreviewBox.style.display = 'block';
+      }
+
+      async function prepareSelectedImageFile(file) {
+        if (!file) return;
+        const allowedTypes = ['image/jpeg', 'image/png', 'image/webp', 'image/gif', 'image/avif'];
+        if (!allowedTypes.includes(file.type)) {
+          imgModalFeedback.textContent = 'Unsupported file format. Please choose a JPG, PNG, WebP, GIF, or AVIF image.';
+          imgModalFeedback.style.color = '#EF4444';
+          return;
+        }
+
+        imgModalFeedback.textContent = 'Preparing image preview...';
+        imgModalFeedback.style.color = 'var(--text-muted)';
+
+        revokePreviewUrl();
+        const objectUrl = URL.createObjectURL(file);
+        currentPreviewObjectUrl = objectUrl;
+
+        try {
+          const dims = await new Promise((resolve, reject) => {
+            const tempImg = new Image();
+            tempImg.onload = () => resolve({ img: tempImg, w: tempImg.naturalWidth, h: tempImg.naturalHeight });
+            tempImg.onerror = () => reject(new Error('Could not decode image file'));
+            tempImg.src = objectUrl;
+          });
+
+          const MAX_DIMENSION = 1600;
+          let targetW = dims.w;
+          let targetH = dims.h;
+
+          // Keep animated GIFs untouched; resize oversized photos or convert large files on canvas
+          if (file.type !== 'image/gif' && (dims.w > MAX_DIMENSION || dims.h > MAX_DIMENSION || file.size > 1500000)) {
+            if (dims.w > MAX_DIMENSION || dims.h > MAX_DIMENSION) {
+              if (dims.w >= dims.h) {
+                targetW = MAX_DIMENSION;
+                targetH = Math.round((dims.h / dims.w) * MAX_DIMENSION);
+              } else {
+                targetH = MAX_DIMENSION;
+                targetW = Math.round((dims.w / dims.h) * MAX_DIMENSION);
+              }
+            }
+            const canvas = document.createElement('canvas');
+            canvas.width = targetW;
+            canvas.height = targetH;
+            const ctx = canvas.getContext('2d');
+            ctx.drawImage(dims.img, 0, 0, targetW, targetH);
+
+            const outputMime = file.type === 'image/png' ? 'image/webp' : 'image/jpeg';
+            const optimizedBlob = await new Promise(res => canvas.toBlob(res, outputMime, 0.86));
+            if (optimizedBlob && optimizedBlob.size < file.size) {
+              preparedImageBlob = optimizedBlob;
+              const ext = outputMime === 'image/webp' ? 'webp' : 'jpg';
+              preparedImageFilename = file.name.replace(/\.[^.]+$/, '') + '.' + ext;
+            } else {
+              preparedImageBlob = file;
+              preparedImageFilename = file.name;
+            }
+          } else {
+            preparedImageBlob = file;
+            preparedImageFilename = file.name;
+          }
+
+          preparedImageWidth = targetW;
+          preparedImageHeight = targetH;
+          if (imgUrlInput) imgUrlInput.value = '';
+
+          const sizeKb = Math.max(1, Math.round(preparedImageBlob.size / 1024));
+          imgDropzoneTitle.textContent = preparedImageFilename;
+          imgDropzoneMeta.textContent = `${targetW} × ${targetH}px • ${sizeKb} KB ready to upload`;
+          imgModalFeedback.textContent = `Image ready (${targetW}×${targetH}px, ${sizeKb} KB).`;
+          imgModalFeedback.style.color = 'var(--accent-gold)';
+
+          if (!imgAltInput.value) {
+            const readableName = file.name.replace(/\.[^.]+$/, '').replace(/[-_]+/g, ' ').trim();
+            if (readableName) imgAltInput.value = readableName;
+          }
+
+          renderModalImagePreview(objectUrl);
+        } catch (err) {
+          imgModalFeedback.textContent = 'Could not read that image file. Please try another image.';
+          imgModalFeedback.style.color = '#EF4444';
+        }
+      }
+
+      function openImageModal(preloadedFile = null) {
+        if (!imgModal) return;
+        resetImageModal();
+        imgModal.showModal();
+        if (preloadedFile) {
+          prepareSelectedImageFile(preloadedFile);
+        }
+      }
+
+      if (imgModalClose) imgModalClose.addEventListener('click', () => imgModal.close());
+      if (imgCancelBtn) imgCancelBtn.addEventListener('click', () => imgModal.close());
+      if (imgModal) {
+        imgModal.addEventListener('close', revokePreviewUrl);
+        imgModal.addEventListener('click', (e) => {
+          if (e.target === imgModal) imgModal.close();
+        });
+      }
+
+      if (imgFileInput) {
+        imgFileInput.addEventListener('change', () => {
+          const file = imgFileInput.files && imgFileInput.files[0];
+          if (file) prepareSelectedImageFile(file);
+        });
+      }
+
+      if (imgDropzone) {
+        ['dragenter', 'dragover'].forEach(evt => {
+          imgDropzone.addEventListener(evt, (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            imgDropzone.classList.add('drag-over');
+          });
+        });
+        ['dragleave', 'drop'].forEach(evt => {
+          imgDropzone.addEventListener(evt, (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            imgDropzone.classList.remove('drag-over');
+          });
+        });
+        imgDropzone.addEventListener('drop', (e) => {
+          const file = e.dataTransfer?.files?.[0];
+          if (file) prepareSelectedImageFile(file);
+        });
+      }
+
+      if (imgUrlInput) {
+        imgUrlInput.addEventListener('input', () => {
+          const val = imgUrlInput.value.trim();
+          if (!val) {
+            if (!preparedImageBlob && imgPreviewBox) imgPreviewBox.style.display = 'none';
+            return;
+          }
+          if (/^(?:\/api\/media\/img_[a-zA-Z0-9_.-]+|(?:\.\.\/|\/)?assets\/[a-zA-Z0-9_./-]+|https:\/\/[^\s"'<>]+)$/i.test(val)) {
+            preparedImageBlob = null;
+            preparedImageWidth = null;
+            preparedImageHeight = null;
+            renderModalImagePreview(val);
+            imgModalFeedback.textContent = 'Direct image URL detected.';
+            imgModalFeedback.style.color = 'var(--accent-gold)';
+          } else {
+            imgModalFeedback.textContent = 'URL must start with https:// or /assets/';
+            imgModalFeedback.style.color = '#EF4444';
+          }
+        });
+      }
+
+      // Support dropping or pasting an image directly onto the article editor textarea
+      if (postContent) {
+        postContent.addEventListener('drop', (e) => {
+          const file = e.dataTransfer?.files?.[0];
+          if (file && file.type.startsWith('image/')) {
+            e.preventDefault();
+            openImageModal(file);
+          }
+        });
+        postContent.addEventListener('paste', (e) => {
+          const items = e.clipboardData?.items;
+          if (!items) return;
+          for (const item of items) {
+            if (item.type.startsWith('image/')) {
+              const file = item.getAsFile();
+              if (file) {
+                e.preventDefault();
+                openImageModal(file);
+                break;
+              }
+            }
+          }
+        });
+      }
+
+      if (imgInsertBtn) {
+        imgInsertBtn.addEventListener('click', async () => {
+          let finalImageUrl = '';
+          let widthAttr = '';
+          let heightAttr = '';
+
+          if (preparedImageBlob) {
+            imgInsertBtn.disabled = true;
+            imgInsertBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin" aria-hidden="true"></i> Uploading Image...';
+            try {
+              const formData = new FormData();
+              formData.append('file', preparedImageBlob, preparedImageFilename || 'image.jpg');
+              if (preparedImageWidth) formData.append('width', String(preparedImageWidth));
+              if (preparedImageHeight) formData.append('height', String(preparedImageHeight));
+
+              const res = await fetch('/api/admin/media', {
+                method: 'POST',
+                headers: {
+                  'Authorization': `Bearer ${authToken}`
+                },
+                body: formData
+              });
+              const data = await res.json();
+              if (!res.ok || !data.success || !data.url) {
+                throw new Error(data.error || 'Image upload failed');
+              }
+              finalImageUrl = data.url;
+              if (preparedImageWidth && preparedImageHeight) {
+                widthAttr = ` width="${preparedImageWidth}"`;
+                heightAttr = ` height="${preparedImageHeight}"`;
+              }
+            } catch (err) {
+              imgModalFeedback.textContent = err.message || 'Failed to upload image.';
+              imgModalFeedback.style.color = '#EF4444';
+              imgInsertBtn.disabled = false;
+              imgInsertBtn.innerHTML = '<i class="fa-solid fa-plus" aria-hidden="true"></i> Upload & Insert Image';
+              return;
+            } finally {
+              imgInsertBtn.disabled = false;
+              imgInsertBtn.innerHTML = '<i class="fa-solid fa-plus" aria-hidden="true"></i> Upload & Insert Image';
+            }
+          } else {
+            const manualUrl = (imgUrlInput?.value || '').trim();
+            if (!manualUrl || !/^(?:\/api\/media\/img_[a-zA-Z0-9_.-]+|(?:\.\.\/|\/)?assets\/[a-zA-Z0-9_./-]+|https:\/\/[^\s"'<>]+)$/i.test(manualUrl)) {
+              imgModalFeedback.textContent = 'Please select an image file to upload or enter a valid https:// or /assets/ image URL.';
+              imgModalFeedback.style.color = '#EF4444';
+              return;
+            }
+            finalImageUrl = manualUrl;
+          }
+
+          const rawCaption = (imgCaptionInput?.value || '').trim();
+          const rawAlt = (imgAltInput?.value || rawCaption || postTitle?.value || 'Investigative briefing image').trim();
+          const safeSrc = escapeHtml(finalImageUrl);
+          const safeAlt = escapeHtml(rawAlt);
+          const safeCaption = escapeHtml(rawCaption);
+
+          const imgTag = `<img src="${safeSrc}" alt="${safeAlt}"${widthAttr}${heightAttr} loading="lazy">`;
+          const replacement = safeCaption
+            ? `\n<figure class="article-figure">\n  ${imgTag}\n  <figcaption class="article-figcaption">${safeCaption}</figcaption>\n</figure>\n`
+            : `\n<div class="article-image-wrapper">\n  ${imgTag}\n</div>\n`;
+
+          const textarea = postContent;
+          const start = textarea.selectionStart;
+          const end = textarea.selectionEnd;
+          textarea.setRangeText(replacement, start, end, 'end');
+          textarea.focus();
+          updateStats();
+          imgModal.close();
+          showToast('Image embedded into article!');
+        });
+      }
+
       // Toolbar Insert Helpers
       document.querySelectorAll('.tool-btn').forEach(btn => {
         btn.addEventListener('click', () => {
           const type = btn.getAttribute('data-insert');
           if (type === 'youtube') {
             openYouTubeModal();
+          } else if (type === 'image') {
+            openImageModal();
           } else {
             insertFormatting(type);
           }
@@ -1110,6 +1551,14 @@
             const src = el.getAttribute('src') || '';
             if (!/^https:\/\/(?:www\.)?youtube(?:-nocookie)?\.com\/embed\/[a-zA-Z0-9_-]{11}(?:\?.*)?$/i.test(src)) {
               el.remove();
+            }
+          }
+          if (el.tagName === 'IMG') {
+            const src = (el.getAttribute('src') || '').trim();
+            if (!/^(?:\/api\/media\/img_[a-zA-Z0-9_.-]+|(?:\.\.\/|\/)?assets\/[a-zA-Z0-9_./-]+|https:\/\/[^\s"'<>]+)$/i.test(src)) {
+              el.remove();
+            } else {
+              el.setAttribute('loading', 'lazy');
             }
           }
         });

@@ -1773,6 +1773,14 @@ document.addEventListener('DOMContentLoaded', () => {
           el.remove();
         }
       }
+      if (el.tagName === 'IMG') {
+        const src = (el.getAttribute('src') || '').trim();
+        if (!/^(?:\/api\/media\/img_[a-zA-Z0-9_.-]+|(?:\.\.\/|\/)?assets\/[a-zA-Z0-9_./-]+|https:\/\/[^\s"'<>]+)$/i.test(src)) {
+          el.remove();
+        } else {
+          el.setAttribute('loading', 'lazy');
+        }
+      }
     });
     return doc.body.childNodes;
   }
