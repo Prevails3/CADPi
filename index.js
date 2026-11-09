@@ -1583,12 +1583,17 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     const adminActionsHtml = isAdmin ? `
-      <a href="admin.html?edit=${encodeURIComponent(post.slug)}" class="btn-card-edit" aria-label="Edit dispatch ${escapeHtml(post.title)}">
-        <i class="fa-solid fa-pen-to-square" aria-hidden="true"></i>
-      </a>
-      <button type="button" class="btn-card-delete" data-delete-slug="${escapeHtml(post.slug)}" aria-label="Delete dispatch ${escapeHtml(post.title)}">
-        <i class="fa-solid fa-trash-can" aria-hidden="true"></i>
-      </button>
+      <div class="blog-card-admin-strip">
+        <span class="card-admin-tag"><i class="fa-solid fa-shield-halved" aria-hidden="true"></i> Dispatch Controls</span>
+        <div class="card-admin-actions">
+          <a href="admin.html?edit=${encodeURIComponent(post.slug)}" class="btn-card-edit" aria-label="Edit dispatch ${escapeHtml(post.title)}">
+            <i class="fa-solid fa-pen-to-square" aria-hidden="true"></i> Edit
+          </a>
+          <button type="button" class="btn-card-delete" data-delete-slug="${escapeHtml(post.slug)}" aria-label="Delete dispatch ${escapeHtml(post.title)}">
+            <i class="fa-solid fa-trash-can" aria-hidden="true"></i> Delete
+          </button>
+        </div>
+      </div>
     ` : '';
 
     article.innerHTML = `
