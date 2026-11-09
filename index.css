@@ -3550,6 +3550,31 @@ button.payment-badge:hover {
   color: var(--accent-gold);
 }
 
+.btn-card-edit {
+  position: absolute;
+  top: 1rem;
+  right: 3.35rem;
+  background: rgba(212, 175, 55, 0.14);
+  border: 1px solid rgba(212, 175, 55, 0.45);
+  color: var(--accent-gold);
+  border-radius: 6px;
+  padding: 0.35rem 0.65rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition-fast);
+  z-index: 10;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  text-decoration: none;
+}
+
+.btn-card-edit:hover {
+  background: var(--accent-gold);
+  color: #020C1B;
+}
+
 .btn-card-delete {
   position: absolute;
   top: 1rem;

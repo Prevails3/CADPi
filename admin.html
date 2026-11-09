@@ -21,7 +21,7 @@
   <!-- FontAwesome Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer">
   <!-- Main Stylesheet -->
-  <link rel="stylesheet" href="index.css?v=1.2.3">
+  <link rel="stylesheet" href="index.css?v=1.2.4">
 
   <style>
     /* Admin Specific Dashboard Styles */
@@ -348,6 +348,32 @@
       background: rgba(212, 175, 55, 0.04);
     }
 
+    /* Editing Banner */
+    .edit-mode-banner {
+      display: none;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+      padding: 0.9rem 1.25rem;
+      margin-block-end: 1.5rem;
+      border-radius: 10px;
+      background: rgba(212, 175, 55, 0.12);
+      border: 1px solid rgba(212, 175, 55, 0.4);
+      color: var(--text-primary);
+    }
+
+    .edit-mode-banner.visible {
+      display: flex;
+    }
+
+    .edit-mode-banner-info {
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+      font-size: 0.9rem;
+    }
+
     /* Toast */
     .admin-toast {
       position: fixed;
@@ -626,6 +652,20 @@
 
             <!-- Form Edit Container -->
             <div id="form-edit-container">
+              <!-- Active Edit Mode Banner -->
+              <div id="edit-mode-banner" class="edit-mode-banner" role="status" aria-live="polite">
+                <div class="edit-mode-banner-info">
+                  <i class="fa-solid fa-pen-to-square" style="color: var(--accent-gold); font-size: 1.1rem;" aria-hidden="true"></i>
+                  <div>
+                    <strong>Editing Published Dispatch:</strong> <span id="edit-mode-title"></span>
+                    <span id="edit-mode-slug" style="color: var(--text-muted); font-size: 0.8rem; margin-left: 0.35rem;"></span>
+                  </div>
+                </div>
+                <button type="button" id="cancel-edit-banner-btn" class="btn btn-outline btn-sm" style="font-size: 0.78rem; padding: 0.35rem 0.75rem;">
+                  <i class="fa-solid fa-xmark" aria-hidden="true"></i> Cancel Edit
+                </button>
+              </div>
+
               <div class="form-group" style="margin-bottom: 1.25rem;">
                 <label for="post-title" class="field-label">Dispatch Headline / Title *</label>
                 <input type="text" id="post-title" class="admin-input" placeholder="e.g. Uncovering Offshore Concealment in Commercial Fraud Litigation" required>
@@ -642,7 +682,7 @@
                     <option value="Litigation Support">Federal &amp; State Litigation Support</option>
                     <option value="__custom__">+ Custom Category...</option>
                   </select>
-                  <input type="text" id="custom-category-input" class="admin-input" placeholder="Type custom category name..." style="display: none; margin-top: 0.5rem;">
+                  <input type="text" id="custom-category-input" class="admin-input" aria-label="Custom category name" placeholder="Type custom category name..." style="display: none; margin-top: 0.5rem;">
                 </div>
 
                 <div>
@@ -654,8 +694,8 @@
                     <option value="__custom__">+ Custom Author...</option>
                   </select>
                   <div id="custom-author-box" style="display: none; margin-top: 0.5rem;">
-                    <input type="text" id="custom-author-name" class="admin-input" placeholder="Author Name" style="margin-bottom: 0.35rem;">
-                    <input type="text" id="custom-author-role" class="admin-input" placeholder="Author Title / Credentials">
+                    <input type="text" id="custom-author-name" class="admin-input" aria-label="Custom author name" placeholder="Author Name" style="margin-bottom: 0.35rem;">
+                    <input type="text" id="custom-author-role" class="admin-input" aria-label="Custom author title or credentials" placeholder="Author Title / Credentials">
                   </div>
                 </div>
               </div>
@@ -672,7 +712,7 @@
 
               <!-- Formatting Toolbar -->
               <div class="form-group" style="margin-bottom: 2rem;">
-                <label class="field-label">Article Full Body Content *</label>
+                <label for="post-content" class="field-label">Article Full Body Content *</label>
                 <div class="editor-toolbar">
                   <button type="button" class="tool-btn" data-insert="h3">
                     <i class="fa-solid fa-heading"></i> H3
@@ -747,7 +787,7 @@
       <div id="tab-manage" class="tab-pane" style="display: none;">
         <div class="form-panel glass-card">
           <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
-            <h2 style="font-size: 1.3rem;">Custom Published Dispatches</h2>
+            <h2 style="font-size: 1.3rem;">Published Dispatches</h2>
             <button type="button" id="refresh-posts-btn" class="btn btn-outline btn-sm">
               <i class="fa-solid fa-arrows-rotate"></i> Refresh
             </button>
@@ -1579,7 +1619,7 @@
         const excerpt = escapeHtml(postExcerpt.value || 'Preview excerpt will appear here once drafted...');
         const words = postContent.value.replace(/<[^>]+>/g, ' ').split(/\s+/).filter(Boolean).length;
         const readTime = escapeHtml(`${Math.max(1, Math.ceil(words / 200))} min read`);
-        const date = escapeHtml(new Date().toLocaleDateString('en-US', { month: 'short', year: 'numeric' }));
+        const date = escapeHtml((editingPost && editingPost.date) || new Date().toLocaleDateString('en-US', { month: 'short', year: 'numeric' }));
         const initials = escapeHtml(rawAuthor.split(' ').map(w => w[0]).join('').slice(0, 2).toUpperCase() || 'PI');
 
         // 1. Card Preview
@@ -1634,7 +1674,117 @@
         }
       }
 
-      // Publish Action
+      // Publish / Save Changes Action
+      const editModeBanner = document.getElementById('edit-mode-banner');
+      const editModeTitle = document.getElementById('edit-mode-title');
+      const editModeSlug = document.getElementById('edit-mode-slug');
+      const cancelEditBannerBtn = document.getElementById('cancel-edit-banner-btn');
+      const createTabBtn = document.querySelector('.admin-tab-btn[data-tab="create"]');
+
+      let loadedPosts = [];
+      let editingPost = null;
+      let initialEditSlugHandled = false;
+
+      function startEditingPost(post) {
+        if (!post) return;
+        editingPost = post;
+
+        // Populate Title
+        postTitle.value = post.title || '';
+
+        // Populate Category (preset or custom)
+        const categoryOptions = Array.from(postCategory.options).map(o => o.value);
+        if (post.category && categoryOptions.includes(post.category) && post.category !== '__custom__') {
+          postCategory.value = post.category;
+          customCategoryInput.style.display = 'none';
+          customCategoryInput.value = '';
+        } else {
+          postCategory.value = '__custom__';
+          customCategoryInput.style.display = 'block';
+          customCategoryInput.value = post.category || '';
+        }
+
+        // Populate Author (preset or custom)
+        const matchingAuthorOption = Array.from(postAuthor.options).find(
+          o => o.value !== '__custom__' && o.value === post.author
+        );
+        if (matchingAuthorOption && (!post.authorRole || matchingAuthorOption.getAttribute('data-role') === post.authorRole)) {
+          postAuthor.value = matchingAuthorOption.value;
+          customAuthorBox.style.display = 'none';
+          customAuthorName.value = '';
+          customAuthorRole.value = '';
+        } else {
+          postAuthor.value = '__custom__';
+          customAuthorBox.style.display = 'block';
+          customAuthorName.value = post.author || '';
+          customAuthorRole.value = post.authorRole || '';
+        }
+
+        // Populate Excerpt & Content
+        postExcerpt.value = post.excerpt || '';
+        postContent.value = post.bodyHtml || '';
+        updateStats();
+
+        // Update UI Banners & Actionable Labels
+        if (editModeBanner) {
+          editModeTitle.textContent = `"${post.title}"`;
+          editModeSlug.textContent = `(/blog/${post.slug}.html)`;
+          editModeBanner.classList.add('visible');
+        }
+        if (createTabBtn) {
+          createTabBtn.innerHTML = '<i class="fa-solid fa-pen-to-square" aria-hidden="true"></i> Edit Dispatch';
+        }
+        publishBtn.innerHTML = '<i class="fa-solid fa-floppy-disk" aria-hidden="true"></i> Save Changes to Dispatch';
+        clearFormBtn.textContent = 'Cancel Edit';
+
+        // Switch to editor tab and Writing Editor view
+        if (createTabBtn) createTabBtn.click();
+        modeEditBtn.click();
+        postTitle.focus();
+      }
+
+      function exitEditMode(clearFields = true) {
+        editingPost = null;
+        if (editModeBanner) {
+          editModeBanner.classList.remove('visible');
+          editModeTitle.textContent = '';
+          editModeSlug.textContent = '';
+        }
+        if (createTabBtn) {
+          createTabBtn.innerHTML = '<i class="fa-solid fa-pen-nib" aria-hidden="true"></i> Create New Dispatch';
+        }
+        publishBtn.innerHTML = '<i class="fa-solid fa-cloud-arrow-up" aria-hidden="true"></i> Publish Dispatch to Website';
+        clearFormBtn.textContent = 'Clear Form';
+
+        // Remove ?edit= query parameter if present
+        if (window.location.search.includes('edit=')) {
+          const cleanUrl = new URL(window.location.href);
+          cleanUrl.searchParams.delete('edit');
+          history.replaceState(null, '', cleanUrl.pathname + cleanUrl.search + cleanUrl.hash);
+        }
+
+        if (clearFields) {
+          postTitle.value = '';
+          postCategory.selectedIndex = 0;
+          customCategoryInput.style.display = 'none';
+          customCategoryInput.value = '';
+          postAuthor.selectedIndex = 0;
+          customAuthorBox.style.display = 'none';
+          customAuthorName.value = '';
+          customAuthorRole.value = '';
+          postExcerpt.value = '';
+          postContent.value = '';
+          updateStats();
+        }
+      }
+
+      if (cancelEditBannerBtn) {
+        cancelEditBannerBtn.addEventListener('click', () => {
+          exitEditMode(true);
+          showToast('Exited edit mode.');
+        });
+      }
+
       publishBtn.addEventListener('click', async () => {
         const title = postTitle.value.trim();
         const content = postContent.value.trim();
@@ -1651,62 +1801,76 @@
           return;
         }
 
+        const isEditing = Boolean(editingPost && editingPost.slug);
         const category = postCategory.value === '__custom__' ? (customCategoryInput.value.trim() || 'Investigative Briefing') : postCategory.value;
         const author = postAuthor.value === '__custom__' ? (customAuthorName.value.trim() || 'CAD Investigator') : postAuthor.value;
         const authorRole = postAuthor.value === '__custom__' ? (customAuthorRole.value.trim() || 'Private Investigator') : (postAuthor.selectedOptions[0]?.getAttribute('data-role') || '');
         const excerpt = postExcerpt.value.trim() || content.replace(/<[^>]+>/g, ' ').slice(0, 180).trim() + '...';
 
         publishBtn.disabled = true;
-        publishBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Publishing to Cloudflare...';
+        publishBtn.innerHTML = isEditing
+          ? '<i class="fa-solid fa-spinner fa-spin" aria-hidden="true"></i> Saving Changes...'
+          : '<i class="fa-solid fa-spinner fa-spin" aria-hidden="true"></i> Publishing to Cloudflare...';
 
         try {
-          const res = await fetch('/api/admin/posts', {
-            method: 'POST',
+          const endpoint = isEditing
+            ? `/api/admin/posts/${encodeURIComponent(editingPost.slug)}`
+            : '/api/admin/posts';
+          const method = isEditing ? 'PUT' : 'POST';
+
+          const payload = {
+            title,
+            category,
+            author,
+            authorRole,
+            excerpt,
+            bodyHtml: content
+          };
+          if (isEditing) {
+            payload.slug = editingPost.slug;
+            if (editingPost.date) payload.date = editingPost.date;
+          }
+
+          const res = await fetch(endpoint, {
+            method,
             headers: {
               'Content-Type': 'application/json',
               'Authorization': `Bearer ${authToken}`
             },
-            body: JSON.stringify({
-              title,
-              category,
-              author,
-              authorRole,
-              excerpt,
-              bodyHtml: content
-            })
+            body: JSON.stringify(payload)
           });
 
           const data = await res.json();
           if (res.ok && data.success) {
-            showToast('Dispatch published successfully to Cloudflare KV!');
-            // Clear form
-            postTitle.value = '';
-            postExcerpt.value = '';
-            postContent.value = '';
-            updateStats();
+            showToast(isEditing ? 'Dispatch changes saved to Cloudflare KV!' : 'Dispatch published successfully to Cloudflare KV!');
+            exitEditMode(true);
 
             // Switch to manage tab
             setTimeout(() => {
               document.querySelector('.admin-tab-btn[data-tab="manage"]').click();
-            }, 800);
+            }, 600);
           } else {
-            alert('Failed to publish: ' + (data.error || 'Unknown error'));
+            alert('Failed to save dispatch: ' + (data.error || 'Unknown error'));
           }
         } catch (err) {
           alert('Publishing error: ' + err.message);
         } finally {
           publishBtn.disabled = false;
-          publishBtn.innerHTML = '<i class="fa-solid fa-cloud-arrow-up"></i> Publish Dispatch to Website';
+          publishBtn.innerHTML = editingPost
+            ? '<i class="fa-solid fa-floppy-disk" aria-hidden="true"></i> Save Changes to Dispatch'
+            : '<i class="fa-solid fa-cloud-arrow-up" aria-hidden="true"></i> Publish Dispatch to Website';
         }
       });
 
-      // Clear Form Action
+      // Clear Form / Cancel Edit Action
       clearFormBtn.addEventListener('click', () => {
-        if (confirm('Clear the current draft form?')) {
-          postTitle.value = '';
-          postExcerpt.value = '';
-          postContent.value = '';
-          updateStats();
+        if (editingPost) {
+          if (confirm('Discard unsaved edits and exit edit mode?')) {
+            exitEditMode(true);
+            showToast('Exited edit mode.');
+          }
+        } else if (confirm('Clear the current draft form?')) {
+          exitEditMode(true);
         }
       });
 
@@ -1719,21 +1883,38 @@
           const data = await res.json();
 
           if (res.ok && data.posts) {
+            loadedPosts = data.posts;
             customPostsCount.textContent = data.posts.length;
+
+            // Check if URL requested editing a specific slug on initial load
+            if (!initialEditSlugHandled) {
+              initialEditSlugHandled = true;
+              const requestedSlug = new URLSearchParams(window.location.search).get('edit');
+              if (requestedSlug) {
+                const targetPost = loadedPosts.find(p => p.slug === requestedSlug);
+                if (targetPost) {
+                  startEditingPost(targetPost);
+                }
+              }
+            }
 
             if (data.posts.length === 0) {
               postsListContainer.innerHTML = `
                 <div style="text-align: center; padding: 3rem 1rem;">
-                  <i class="fa-solid fa-folder-open" style="font-size: 2.5rem; color: var(--text-muted); margin-bottom: 1rem;"></i>
+                  <i class="fa-solid fa-folder-open" style="font-size: 2.5rem; color: var(--text-muted); margin-bottom: 1rem;" aria-hidden="true"></i>
                   <h3 style="font-size: 1.2rem; margin-bottom: 0.5rem;">No Custom Dispatches Yet</h3>
                   <p style="color: var(--text-muted); font-size: 0.9rem; max-width: 450px; margin: 0 auto 1.5rem auto;">
                     Use the "Create New Dispatch" tab to draft and publish your first custom investigative article directly to the live website.
                   </p>
-                  <button type="button" class="btn btn-gold btn-sm" onclick="document.querySelector('.admin-tab-btn[data-tab=\\'create\\']').click();">
+                  <button type="button" id="draft-first-dispatch-btn" class="btn btn-gold btn-sm">
                     + Draft First Dispatch
                   </button>
                 </div>
               `;
+              const draftFirstBtn = document.getElementById('draft-first-dispatch-btn');
+              if (draftFirstBtn && createTabBtn) {
+                draftFirstBtn.addEventListener('click', () => createTabBtn.click());
+              }
               return;
             }
 
@@ -1741,32 +1922,37 @@
               <table class="posts-table">
                 <thead>
                   <tr>
-                    <th>Headline</th>
-                    <th>Category</th>
-                    <th>Author</th>
-                    <th>Published</th>
-                    <th style="text-align: right;">Actions</th>
+                    <th scope="col">Headline</th>
+                    <th scope="col">Category</th>
+                    <th scope="col">Author</th>
+                    <th scope="col">Published</th>
+                    <th scope="col" style="text-align: right;">Actions</th>
                   </tr>
                 </thead>
                 <tbody>
             `;
 
             data.posts.forEach(p => {
+              const safeTitle = escapeHtml(p.title);
+              const safeSlug = escapeHtml(p.slug);
               html += `
                 <tr>
                   <td>
-                    <strong>${escapeHtml(p.title)}</strong><br>
-                    <small style="color: var(--text-muted);">${escapeHtml(p.slug)}</small>
+                    <strong>${safeTitle}</strong><br>
+                    <small style="color: var(--text-muted);">${safeSlug}</small>
                   </td>
                   <td><span class="blog-tag" style="font-size: 0.7rem;">${escapeHtml(p.category)}</span></td>
                   <td>${escapeHtml(p.author)}</td>
                   <td>${escapeHtml(p.date)}</td>
                   <td style="text-align: right; white-space: nowrap;">
-                    <a href="/blog/${encodeURIComponent(p.slug)}.html" target="_blank" class="btn btn-outline btn-sm" style="margin-right: 0.5rem; font-size: 0.75rem;">
-                      <i class="fa-solid fa-arrow-up-right-from-square"></i> Live Page
+                    <button type="button" class="btn btn-outline btn-sm btn-edit-post" data-slug="${safeSlug}" aria-label="Edit ${safeTitle}" style="margin-right: 0.4rem; font-size: 0.75rem; border-color: rgba(212, 175, 55, 0.45); color: var(--accent-gold);">
+                      <i class="fa-solid fa-pen-to-square" aria-hidden="true"></i> Edit
+                    </button>
+                    <a href="/blog/${encodeURIComponent(p.slug)}.html" target="_blank" class="btn btn-outline btn-sm" aria-label="Live Page for ${safeTitle}" style="margin-right: 0.4rem; font-size: 0.75rem;">
+                      <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i> Live Page
                     </a>
-                    <button type="button" class="btn btn-sm btn-delete-post" data-slug="${escapeHtml(p.slug)}" style="background: rgba(239, 68, 68, 0.15); color: #EF4444; border: 1px solid rgba(239, 68, 68, 0.3); font-size: 0.75rem;">
-                      <i class="fa-solid fa-trash"></i> Delete
+                    <button type="button" class="btn btn-sm btn-delete-post" data-slug="${safeSlug}" aria-label="Delete ${safeTitle}" style="background: rgba(239, 68, 68, 0.15); color: #EF4444; border: 1px solid rgba(239, 68, 68, 0.3); font-size: 0.75rem;">
+                      <i class="fa-solid fa-trash" aria-hidden="true"></i> Delete
                     </button>
                   </td>
                 </tr>
@@ -1776,13 +1962,27 @@
             html += `</tbody></table>`;
             postsListContainer.innerHTML = html;
 
+            // Attach Edit Handlers
+            document.querySelectorAll('.btn-edit-post').forEach(b => {
+              b.addEventListener('click', () => {
+                const slug = b.getAttribute('data-slug');
+                const postToEdit = loadedPosts.find(item => item.slug === slug);
+                if (postToEdit) {
+                  startEditingPost(postToEdit);
+                }
+              });
+            });
+
             // Attach Delete Handlers
             document.querySelectorAll('.btn-delete-post').forEach(b => {
               b.addEventListener('click', async () => {
                 const slug = b.getAttribute('data-slug');
                 if (confirm(`Are you sure you want to permanently delete and unpublish "${slug}"?`)) {
                   b.disabled = true;
-                  b.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i>';
+                  b.innerHTML = '<i class="fa-solid fa-spinner fa-spin" aria-hidden="true"></i>';
+                  if (editingPost && editingPost.slug === slug) {
+                    exitEditMode(true);
+                  }
                   await deletePost(slug);
                 }
               });

@@ -1582,14 +1582,17 @@ document.addEventListener('DOMContentLoaded', () => {
       article.setAttribute('data-custom', 'true');
     }
 
-    const deleteBtnHtml = isAdmin ? `
-      <button type="button" class="btn-card-delete" data-delete-slug="${escapeHtml(post.slug)}" aria-label="Delete dispatch ${escapeHtml(post.title)}" title="Delete dispatch">
+    const adminActionsHtml = isAdmin ? `
+      <a href="admin.html?edit=${encodeURIComponent(post.slug)}" class="btn-card-edit" aria-label="Edit dispatch ${escapeHtml(post.title)}">
+        <i class="fa-solid fa-pen-to-square" aria-hidden="true"></i>
+      </a>
+      <button type="button" class="btn-card-delete" data-delete-slug="${escapeHtml(post.slug)}" aria-label="Delete dispatch ${escapeHtml(post.title)}">
         <i class="fa-solid fa-trash-can" aria-hidden="true"></i>
       </button>
     ` : '';
 
     article.innerHTML = `
-      ${deleteBtnHtml}
+      ${adminActionsHtml}
       <div class="blog-card-header">
         <span class="blog-tag"><i class="${icon}" aria-hidden="true"></i> ${escapeHtml(post.category)}</span>
         <div class="blog-read-meta">
@@ -2026,16 +2029,13 @@ document.addEventListener('DOMContentLoaded', () => {
       const res = await fetch('/api/posts');
       if (!res.ok) return;
       const data = await res.json();
-      if (!data.success || !Array.isArray(data.posts) || data.posts.length === 0) return;
+      if (!data.success || !Array.isArray(data.posts)) return;
 
       const isAdmin = Boolean(localStorage.getItem('cadpi_admin_token'));
 
-      // Invert so newest post appears first
-      const posts = [...data.posts].reverse();
+      grid.innerHTML = '';
 
-      posts.forEach(post => {
-        if (grid.querySelector(`[data-slug="${post.slug}"]`)) return;
-
+      data.posts.forEach(post => {
         // Register in BLOG_ARTICLES for modal viewing
         BLOG_ARTICLES[post.slug] = {
           title: post.title,
@@ -2055,7 +2055,7 @@ document.addEventListener('DOMContentLoaded', () => {
         ensureCategoryFilter(post.category, catSlug);
 
         const cardEl = createBlogCardElement(post, isAdmin);
-        grid.prepend(cardEl);
+        grid.appendChild(cardEl);
       });
 
       applyCurrentFilter();

@@ -183,6 +183,220 @@ export default {
       return false;
     }
 
+    const DEFAULT_BLOG_POSTS = [
+      {
+        slug: 'tracing-hidden-assets-offshore-structures',
+        title: 'Tracing Hidden Assets & Offshore Corporate Shells in High-Stakes Disputes',
+        category: 'Financial Forensics',
+        categorySlug: 'asset-tracing',
+        date: 'Oct 2026',
+        readTime: '5 min read',
+        author: 'Michael Compitiello',
+        authorRole: 'Founder & Supervisory Special Agent (Ret.)',
+        avatarInitials: 'MC',
+        excerpt:
+          'How multi-layered LLCs, nominee trusts, and foreign accounts are systematically unraveled using federal financial tracing methodologies in matrimonial and corporate litigation.',
+        bodyHtml: `<p>In high-net-worth matrimonial dissolutions, commercial partnership battles, and post-judgment enforcement, the most valuable assets rarely appear on transparent balance sheets. Individuals facing multimillion-dollar liability frequently employ deliberate, multi-layered corporate obfuscation strategies designed to stonewall standard discovery requests.</p>
+<p>Throughout 26 years leading federal criminal and financial task forces at DHS/HSI—including supervising complex fraud rings and international kleptocracy asset seizures—our leadership proved one foundational rule: <em>money always leaves a digital and forensic footprint.</em></p>
+<div class="article-quote">
+  "Asset concealment is not magic; it is merely an architectural puzzle built on shell entities, nominee agreements, and banking friction. Given methodical forensic tracing, every layer can be peeled back."
+</div>
+<h3>The Anatomy of Modern Asset Concealment</h3>
+<p>Sophisticated targets rarely rely on physical cash; instead, they construct intricate corporate shields across domestic and foreign jurisdictions:</p>
+<ul>
+  <li><strong>Domestic Privacy LLCs:</strong> Formed in statutory secrecy states like Wyoming, Delaware, or Nevada, where ultimate beneficial ownership (UBO) is deliberately obscured from public secretary of state portals.</li>
+  <li><strong>Offshore Asset Protection Trusts (APTs):</strong> Established in Nevis, the Cook Islands, or Belize, frequently drafted with "flee clauses" that mandate immediate trustee relocation upon court scrutiny.</li>
+  <li><strong>Collusive Liens &amp; Straw Encumbrances:</strong> Creating fictitious friendly loans and mortgages against prime real estate, making high-value assets appear underwater to creditors and spouses.</li>
+  <li><strong>Digital Currency &amp; Cold Storage Layering:</strong> Dispersing liquid wealth across unhosted hardware wallets, non-KYC decentralized liquidity pools, and peer-to-peer exchanges.</li>
+</ul>
+<h3>Federal-Grade Forensic Tracing Methodologies</h3>
+<p>Standard civil subpoenas only uncover assets counsel already knows to ask for. Federal-grade private investigation approaches the problem from the outside in:</p>
+<h4>1. Source-and-Application Expenditure Audits</h4>
+<p>By establishing a rigorous forensic baseline of historical declared income against verifiable lifestyle expenditures (private aviation, luxury automotive leases, country club memberships, and real estate upkeep), mathematical discrepancies emerge. When annual outlays surpass declared income by hundreds of thousands of dollars, courts are legally permitted to infer undisclosed revenue streams.</p>
+<h4>2. Piercing Nominee Corporate Veilings</h4>
+<p>We trace registered agent histories, commercial domain whois archives, UCC financing statements, and related entity filings. Nominee managers frequently recycle identical mail-drop addresses or signature patterns across dozens of holding entities, linking the target directly to concealed assets.</p>
+<h4>3. Correspondent Banking &amp; SWIFT Wire Tracing</h4>
+<p>Financial institutions rely on domestic correspondent accounts to settle international wire transfers. Tracing recurring round-dollar transfers through intermediary banks allows us to identify offshore beneficiary accounts and locate hidden capital repositories.</p>
+<div class="article-takeaways">
+  <div class="takeaways-heading">
+    <i class="fa-solid fa-shield-halved" aria-hidden="true"></i> Strategic Takeaways for Litigants &amp; Legal Counsel
+  </div>
+  <ul>
+    <li><strong>Initiate asset tracing early:</strong> Move swiftly before assets can be layered through secondary Caribbean or South Pacific jurisdictions.</li>
+    <li><strong>Challenge voluntary disclosure affidavits:</strong> Targets with intent to deceive routinely provide sworn affidavits omitting shell-held interests.</li>
+    <li><strong>Leverage lifestyle audits in court:</strong> Demonstrating demonstrable lifestyle extravagance shifts the burden of proof to the concealing party under Arizona family and civil court standards.</li>
+  </ul>
+</div>
+<p>Ultimately, raw financial intelligence is useless unless it withstands adversarial scrutiny. Every CAD Private Investigations asset tracing dossier is assembled to supervisory federal law enforcement standards—complete with certified document trails, timeline exhibits, and courtroom-ready expert witness testimony.</p>`,
+        createdAt: 1790812800000,
+        isCustom: true,
+      },
+      {
+        slug: 'arizona-surveillance-law-admissibility-standards',
+        title: 'Arizona Surveillance Law: Evidentiary Admissibility in Maricopa County Courts',
+        category: 'Surveillance & Law',
+        categorySlug: 'surveillance',
+        date: 'Sep 2026',
+        readTime: '4 min read',
+        author: 'John Donofrio',
+        authorRole: 'Operations Manager & Private Investigator',
+        avatarInitials: 'JD',
+        excerpt:
+          'A critical analysis of A.R.S. § 13-3005, one-party consent parameters, reasonable expectation of privacy boundaries, and chain-of-custody protocols required to survive motion-in-limine challenges.',
+        bodyHtml: `<p>Physical surveillance remains the most definitive evidentiary asset in domestic infidelity disputes, child custody hearings, personal injury defense, and corporate fraud litigation. However, a single statutory misstep can render hundreds of hours of high-definition video inadmissible under the Arizona Rules of Evidence—or worse, expose counsel and their clients to civil tort liability or criminal misdemeanor charges.</p>
+<p>Operating in Maricopa County, Phoenix, and across Arizona demands absolute precision regarding statutory surveillance boundaries.</p>
+<div class="article-quote">
+  "Unassailable courtroom evidence requires both technical excellence in the field and strict adherence to Arizona privacy statutes. If evidence is gathered unlawfully, it is toxic to your case."
+</div>
+<h3>Arizona's One-Party Consent Rule (A.R.S. § 13-3005)</h3>
+<p>Arizona is statutory a "one-party consent" state for recording conversations under A.R.S. § 13-3005. This allows an individual to record an oral or wire communication provided at least one participating party consents.</p>
+<p><strong>The Critical Investigator Limitation:</strong> A private detective or client cannot plant an unattended audio recorder in a vehicle, office, or dining room where neither the investigator nor the client is physically present in the dialogue. Doing so constitutes felony eavesdropping. Video surveillance, however, operates under an entirely different legal standard: <em>the constitutional test of reasonable expectation of privacy.</em></p>
+<h3>The Reasonable Expectation of Privacy Test (A.R.S. § 13-3019)</h3>
+<p>Under A.R.S. § 13-3019 (Surreptitious Photographing, Videotaping, and Filming), capturing imagery of a person without consent is illegal only if the subject is in an area where they hold an objective, reasonable expectation of privacy.</p>
+<ul>
+  <li><strong>Public Domains:</strong> Any individual walking down Camelback Road, dining at a public outdoor patio in Scottsdale, or entering an office complex has no reasonable expectation of privacy. Visual evidence gathered from public easements is 100% lawful and admissible.</li>
+  <li><strong>Private Curtilage:</strong> Aiming lenses into residential bedroom windows, using ladders or drones to peer over privacy perimeter walls, or trespassing into backyards violates Arizona law. Elite investigators position vehicles lawfully on public thoroughfares, capturing subjects only when they enter plain view.</li>
+</ul>
+<h3>GPS Tracking Restrictions (A.R.S. § 13-2923)</h3>
+<p>One of the most frequent questions from prospective clients is whether a magnetic GPS tracker can be placed on an unfaithful spouse's vehicle. Under Arizona stalking statutes (A.R.S. § 13-2923), installing a tracking device on a vehicle without title ownership is unlawful.</p>
+<p>In Arizona, GPS tracking is legally permissible <em>only</em> if the client's name appears on the legal vehicle title or registration (such as marital joint property). If the vehicle is titled exclusively in the other party's name, GPS placement is strictly prohibited without a court order—making manual, discreet physical mobile surveillance the only legal recourse.</p>
+<div class="article-takeaways">
+  <div class="takeaways-heading">
+    <i class="fa-solid fa-scale-balanced" aria-hidden="true"></i> Best Practices for Surviving Motion in Limine Challenges
+  </div>
+  <ul>
+    <li><strong>Preserve raw, unaltered native video files:</strong> Maintain digital master copies with embedded camera EXIF timestamps and SHA-256 hashes.</li>
+    <li><strong>Maintain contemporaneous field logs:</strong> Every minute of surveillance must be recorded in an operational log detailing locations, weather, lighting, and investigator positioning.</li>
+    <li><strong>Never use amateur GPS tracking:</strong> Tainted evidence can trigger severe judicial sanctions and compromise your entire legal strategy.</li>
+  </ul>
+</div>
+<p>At CAD Private Investigations, all field surveillance operations are planned and executed to ensure that every minute of captured footage cleanly survives vigorous judicial cross-examination.</p>`,
+        createdAt: 1788220800000,
+        isCustom: true,
+      },
+      {
+        slug: 'corporate-mergers-due-diligence-red-flags',
+        title:
+          'Red Flags in Corporate Mergers: Vetting Beneficial Ownership Beyond the Balance Sheet',
+        category: 'Corporate Vetting',
+        categorySlug: 'due-diligence',
+        date: 'Aug 2026',
+        readTime: '6 min read',
+        author: 'Michael Compitiello',
+        authorRole: 'Founder & Supervisory Special Agent (Ret.)',
+        avatarInitials: 'MC',
+        excerpt:
+          'Why automated commercial checks fail to catch concealed regulatory sanctions, hidden litigation liabilities, and nominee director schemes before multimillion-dollar transactions close.',
+        bodyHtml: `<p>During the excitement of corporate acquisitions, joint ventures, and capital investments, executive teams and private equity partners routinely rely on traditional CPA auditing firms and commercial background database subscriptions. While these audits verify reported P&amp;L statements and public corporate filings, they routinely miss hidden operational and reputational landmines.</p>
+<p>Commercial databases only scan what is already indexed. Deep corporate vetting is not an accounting exercise—it is an intelligence operation designed to uncover undisclosed liabilities, hidden regulatory sanctions, and shadow beneficial owners before capital is committed.</p>
+<div class="article-quote">
+  "The greatest risks in corporate mergers are rarely on the balance sheet; they reside in what the founders and managing partners deliberately omitted from public view."
+</div>
+<h3>The Dangerous Blind Spots of Automated Screening Tools</h3>
+<p>Automated database portals aggregate public records through robotic scrapers. In practice, their structural blind spots include:</p>
+<ul>
+  <li><strong>County-Level Docket Gaps:</strong> Thousands of municipal and county court jurisdictions across the United States do not syndicate civil dockets to commercial background databases. Active litigation can easily slip through automated checks.</li>
+  <li><strong>Name Variation &amp; Entity Alias Obfuscation:</strong> Automated tools fail when principals alter legal spellings, utilize middle names, or register assets through slightly varied entity names across state lines.</li>
+  <li><strong>Inability to Penetrate Nominee Directorships:</strong> Automated platforms report only the registered agent service listed on a Secretary of State filing, failing to identify the true controlling beneficial interest.</li>
+</ul>
+<h3>Five Critical Red Flags Discovered in Pre-Deal Vetting</h3>
+<p>Our corporate investigations frequently expose warning signs that necessitate transaction restructuring or outright deal cancellation:</p>
+<h4>1. Rapid Jurisdictional Charter Migration</h4>
+<p>When an operating company repeatedly dissolves and re-incorporates in different states (e.g., Nevada to Delaware to Wyoming) within 24 to 36 months, the entity is almost always fleeing pending legal judgments, aggressive tax levies, or investigative scrutiny.</p>
+<h4>2. Circular Related-Party Vendor Transactions</h4>
+<p>Examining disbursement ledgers frequently uncovers substantial payments directed to secondary LLCs sharing registered agents, shared residential addresses, or common familial ties—effectively siphoning capital before acquisition.</p>
+<h4>3. Informal Regulatory Subpoenas &amp; Warnings</h4>
+<p>Long before the SEC, CFTC, EPA, or State Attorney General files a formal public lawsuit, regulatory bodies issue warning letters, informal inquiries, and target notices. These never appear on public balance sheets, yet represent existential business risk.</p>
+<h4>4. Executive Pedigree &amp; Resume Fabrication</h4>
+<p>Discrepancies in academic credentials, exaggerated previous executive tenures, or omitted bankruptcies and liquidated subsidiaries consistently correlate with broader managerial deception.</p>
+<h4>5. Secondary Factoring Liens &amp; UCC Conflicts</h4>
+<p>Concealed high-interest merchant cash advances and secondary factoring liens that jeopardize collateral priority for acquiring lenders and investors.</p>
+<div class="article-takeaways">
+  <div class="takeaways-heading">
+    <i class="fa-solid fa-building-shield" aria-hidden="true"></i> Strategic Guidelines for Corporate Counsel &amp; Acquirers
+  </div>
+  <ul>
+    <li><strong>Initiate investigative due diligence concurrently:</strong> Run private investigative inquiries in tandem with financial audits, not as a last-minute check right before closing.</li>
+    <li><strong>Investigate silent partners and beneficial owners:</strong> Uncover the ultimate beneficiaries behind holding companies to avoid OFAC and federal sanctions violations.</li>
+    <li><strong>Conduct discreet human source inquiries:</strong> Lawful, confidential interviews with former executives and suppliers uncover cultural and operational truths no spreadsheet can reveal.</li>
+  </ul>
+</div>
+<p>CAD Private Investigations provides deal teams with deep, discrete intelligence that protects balance sheets, corporate reputation, and shareholder equity.</p>`,
+        createdAt: 1785542400000,
+        isCustom: true,
+      },
+      {
+        slug: 'digital-forensics-insider-threat-data-theft',
+        title:
+          'Uncovering Insider Data Exfiltration: Digital Forensics in Corporate Trade Secret Theft',
+        category: 'Digital Forensics',
+        categorySlug: 'digital-forensics',
+        date: 'Jul 2026',
+        readTime: '5 min read',
+        author: 'Alex Nader & Scott Unger',
+        authorRole: 'Computer Forensic Specialists, CAD PI',
+        avatarInitials: 'DF',
+        excerpt:
+          'From bit-stream hard drive imaging to USB artifact examination and cloud audit log reconstruction: how electronic evidence is captured to secure emergency injunctions.',
+        bodyHtml: `<p>Over 70% of corporate trade secret and intellectual property thefts occur in the final 30 days preceding an employee’s departure. Whether a high-performing sales director downloading proprietary client pricing algorithms, an engineering lead copying confidential source code repositories, or an executive transferring strategic business plans to a competing venture, insider threats cost American enterprises billions in damages annually.</p>
+<p>When leadership suspects data exfiltration, the clock begins ticking immediately. Critical forensic artifacts can be overwritten within days, and improper internal IT tampering often compromises the evidence before court filings.</p>
+<div class="article-quote">
+  "Departing employees believe that deleting browsing history or emptying the recycle bin erases their digital footprints. In modern operating systems, every file movement leaves an indelible forensic record."
+</div>
+<h3>Common Modern Data Exfiltration Vectors</h3>
+<p>Rogue insiders rarely trigger conventional DLP alerts by sending massive email attachments. Instead, they exploit stealthier channels:</p>
+<ul>
+  <li><strong>High-Capacity USB &amp; Portable SSD Drives:</strong> Rapid bulk transfers initiated during off-hours, weekend shifts, or work-from-home remote desktop sessions.</li>
+  <li><strong>Personal Cloud Synchronization:</strong> Uploading proprietary folder hierarchies to personal Dropbox, Google Drive, or Microsoft OneDrive accounts via browser sessions or unapproved client sync utilities.</li>
+  <li><strong>AirDrop &amp; Wireless Peer-to-Peer Transfers:</strong> Direct transfers from corporate laptops to personal mobile devices, entirely bypassing local network perimeter firewalls.</li>
+  <li><strong>Encrypted Archive Containers:</strong> Compressing corporate databases into multi-part, password-protected 7-Zip or RAR archives before transmitting via webmail.</li>
+</ul>
+<h3>Key Forensic Artifacts Examined in Digital Audits</h3>
+<p>Our certified digital forensics specialists uncover evidence through rigorous operating system analysis:</p>
+<h4>1. USB Registry Hives &amp; Volume Serial Identifiers</h4>
+<p>Windows registry hives (<code>SYSTEM</code>, <code>SOFTWARE</code>) preserve an immutable log of every external USB drive ever connected to a machine—including manufacturer, model, unique device serial number, first connection date, and last disconnect timestamp.</p>
+<h4>2. LNK Files &amp; Jump Lists</h4>
+<p>When a user opens a confidential document directly from a connected USB flash drive, Windows automatically generates shortcut (LNK) files. These files document the exact file path, drive letter, and timestamp—proving the document was accessed from an external medium.</p>
+<h4>3. Shellbags Analysis</h4>
+<p>Shellbags are registry records that track folder view settings. Even if the external drive has been removed and destroyed, the host machine's Shellbags prove that the suspect browsed and opened specific folders on that external device.</p>
+<div class="article-takeaways">
+  <div class="takeaways-heading">
+    <i class="fa-solid fa-laptop-code" aria-hidden="true"></i> Critical Protocol for Corporate Incident Response
+  </div>
+  <ul>
+    <li><strong>Do not allow internal IT to 'browse' the suspect machine:</strong> Powering on a machine modifies thousands of system files and registry timestamps, handing opposing counsel grounds to claim evidence spoliation.</li>
+    <li><strong>Isolate and preserve devices immediately:</strong> Quarantine the suspect laptop, phone, and company-issued tablets in secure physical custody.</li>
+    <li><strong>Create bit-stream forensic images:</strong> Extract forensically verified bit-stream images with SHA-256 cryptographic hashes compliant with ISO/IEC 27037 standards.</li>
+  </ul>
+</div>
+<p>Our forensic team provides sworn Rule 702 Expert Witness Reports detailing exact timelines and file movements, empowering legal counsel to secure emergency Temporary Restraining Orders (TROs) and preliminary injunctions.</p>`,
+        createdAt: 1782864000000,
+        isCustom: true,
+      },
+    ];
+
+    async function ensureDefaultPostsSeeded() {
+      if (!env.BLOG_KV) return;
+      const seeded = await env.BLOG_KV.get('posts:defaults_seeded');
+      if (seeded === 'v1') return;
+
+      const indexRaw = await env.BLOG_KV.get('posts:index');
+      let index = indexRaw ? JSON.parse(indexRaw) : [];
+
+      for (const defPost of DEFAULT_BLOG_POSTS) {
+        const existing = await env.BLOG_KV.get('post:' + defPost.slug);
+        if (!existing) {
+          await env.BLOG_KV.put('post:' + defPost.slug, JSON.stringify(defPost));
+        }
+        if (!index.includes(defPost.slug)) {
+          index.push(defPost.slug);
+        }
+      }
+
+      await env.BLOG_KV.put('posts:index', JSON.stringify(index));
+      await env.BLOG_KV.put('posts:defaults_seeded', 'v1');
+    }
+
     // --- API ROUTES ---
     if (url.pathname.startsWith('/api/')) {
       // Enforce Fetch Metadata resource isolation on admin endpoints before auth checks
@@ -193,12 +407,13 @@ export default {
         }
       }
 
-      // 1. GET /api/posts - Get all dynamic published posts
+      // 1. GET /api/posts - Get all published posts
       if (request.method === 'GET' && url.pathname === '/api/posts') {
         if (!env.BLOG_KV) {
-          return jsonResponse({ success: true, posts: [] });
+          return jsonResponse({ success: true, posts: DEFAULT_BLOG_POSTS });
         }
         try {
+          await ensureDefaultPostsSeeded();
           const indexRaw = await env.BLOG_KV.get('posts:index');
           const index = indexRaw ? JSON.parse(indexRaw) : [];
           const posts = [];
@@ -254,6 +469,7 @@ export default {
         }
 
         try {
+          await ensureDefaultPostsSeeded();
           const body = await request.json();
           const candidatePassword = typeof body?.password === 'string' ? body.password : '';
           const isValid =
@@ -445,8 +661,11 @@ export default {
         }
       }
 
-      // 5. POST /api/admin/posts
-      if (request.method === 'POST' && url.pathname === '/api/admin/posts') {
+      // 5. POST /api/admin/posts or PUT /api/admin/posts/:slug
+      if (
+        (request.method === 'POST' && url.pathname === '/api/admin/posts') ||
+        (request.method === 'PUT' && url.pathname.startsWith('/api/admin/posts/'))
+      ) {
         const isAuthed = await verifyAdminAuth(request);
         if (!isAuthed) {
           return jsonResponse({ success: false, error: 'Unauthorized' }, 401);
@@ -456,6 +675,7 @@ export default {
         }
 
         try {
+          await ensureDefaultPostsSeeded();
           const body = await request.json();
           if (!body.title || !body.bodyHtml) {
             return jsonResponse({ success: false, error: 'Title and content are required' }, 400);
@@ -481,11 +701,23 @@ export default {
             return lower.replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '') || 'general';
           }
 
-          const rawSlug = (body.slug || body.title)
+          const pathSlug =
+            request.method === 'PUT'
+              ? decodeURIComponent(url.pathname.replace('/api/admin/posts/', '').trim())
+              : '';
+          const rawSlug = (pathSlug || body.slug || body.title)
             .toLowerCase()
             .replace(/[^a-z0-9]+/g, '-')
             .replace(/(^-|-$)/g, '');
           const slug = rawSlug || 'post-' + Date.now();
+
+          let existingPost = null;
+          const existingRaw = await env.BLOG_KV.get('post:' + slug);
+          if (existingRaw) {
+            try {
+              existingPost = JSON.parse(existingRaw);
+            } catch (e) {}
+          }
 
           const cleanBodyHtml = sanitizeBlogHtml(body.bodyHtml);
 
@@ -496,9 +728,10 @@ export default {
             .filter(Boolean).length;
           const readTime = body.readTime || `${Math.max(1, Math.ceil(wordCount / 200))} min read`;
 
-          // Date format
+          // Date format (preserve original published date when editing unless explicitly supplied)
           const date =
             body.date ||
+            existingPost?.date ||
             new Date().toLocaleDateString('en-US', { month: 'short', year: 'numeric' });
 
           // Category slug
@@ -530,20 +763,23 @@ export default {
               String(body.excerpt || '').trim() ||
               cleanBodyHtml.replace(/<[^>]+>/g, ' ').slice(0, 180).trim() + '...',
             bodyHtml: cleanBodyHtml,
-            createdAt: Date.now(),
+            createdAt: existingPost?.createdAt || Date.now(),
+            updatedAt: Date.now(),
             isCustom: true,
           };
 
           // Save post
           await env.BLOG_KV.put('post:' + slug, JSON.stringify(post));
 
-          // Update index
+          // Update index (preserve position if already in index; prepend if new)
           const indexRaw = await env.BLOG_KV.get('posts:index');
           let index = indexRaw ? JSON.parse(indexRaw) : [];
-          index = [slug, ...index.filter((s) => s !== slug)];
-          await env.BLOG_KV.put('posts:index', JSON.stringify(index));
+          if (!index.includes(slug)) {
+            index = [slug, ...index];
+            await env.BLOG_KV.put('posts:index', JSON.stringify(index));
+          }
 
-          return jsonResponse({ success: true, post });
+          return jsonResponse({ success: true, post, updated: Boolean(existingPost) });
         } catch (e) {
           return jsonResponse({ success: false, error: 'Failed to publish post' }, 500);
         }
@@ -565,6 +801,7 @@ export default {
           return jsonResponse({ success: false, error: 'Slug required' }, 400);
         }
 
+        await ensureDefaultPostsSeeded();
         await env.BLOG_KV.delete('post:' + slug);
 
         const indexRaw = await env.BLOG_KV.get('posts:index');
@@ -616,10 +853,9 @@ export default {
         assetRequest = new Request(new URL('/privacy-policy', request.url), request);
       }
 
-      const response = await env.ASSETS.fetch(assetRequest);
-
-      // If static file not found and it's a blog post request, check dynamic KV posts
-      if (response.status === 404 && cleanPath.startsWith('/blog/') && env.BLOG_KV) {
+      // If it's a blog post request, check dynamic KV posts first so edits/deletes apply to all dispatches
+      if (cleanPath.startsWith('/blog/') && env.BLOG_KV) {
+        await ensureDefaultPostsSeeded();
         const slug = cleanPath
           .replace('/blog/', '')
           .replace('.html', '')
@@ -773,7 +1009,12 @@ export default {
             return new Response(dynamicHtml, { status: 200, headers: dynHeaders });
           } catch (e) {}
         }
+        const notFoundHeaders = new Headers({ 'Content-Type': 'text/plain; charset=utf-8' });
+        applySecurityHeaders(notFoundHeaders);
+        return new Response('Not Found', { status: 404, headers: notFoundHeaders });
       }
+
+      const response = await env.ASSETS.fetch(assetRequest);
 
       const newHeaders = new Headers(response.headers);
       applySecurityHeaders(newHeaders);
