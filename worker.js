@@ -15,7 +15,7 @@ export default {
       headers.set('Cross-Origin-Opener-Policy', 'same-origin-allow-popups');
       headers.set(
         'Content-Security-Policy',
-        "frame-ancestors 'none'; object-src 'none'; base-uri 'self'; form-action 'self' https://api.web3forms.com; frame-src 'self' https://www.youtube-nocookie.com https://www.youtube.com https://*.hcaptcha.com https://hcaptcha.com; upgrade-insecure-requests"
+        "frame-ancestors 'none'; object-src 'none'; base-uri 'self'; form-action 'self' https://api.web3forms.com; frame-src 'self' https://www.google.com https://maps.google.com https://www.youtube-nocookie.com https://www.youtube.com https://*.hcaptcha.com https://hcaptcha.com; upgrade-insecure-requests"
       );
     }
 
