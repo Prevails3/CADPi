@@ -3,7 +3,7 @@
   <!-- Homepage -->
   <url>
     <loc>https://cadprivateinvestigations.com/</loc>
-    <lastmod>2026-11-03</lastmod>
+    <lastmod>2026-11-16</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
@@ -11,8 +11,8 @@
   <!-- Core Service Pillar Pages (Hubs) -->
   <url>
     <loc>https://cadprivateinvestigations.com/services/asset-tracing.html</loc>
-    <lastmod>2026-11-03</lastmod>
-    <changefreq>monthly</changefreq>
+    <lastmod>2026-11-16</lastmod>
+    <changefreq>weekly</changefreq>
     <priority>0.95</priority>
   </url>
   <url>
@@ -32,6 +32,46 @@
     <lastmod>2026-11-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.95</priority>
+  </url>
+
+  <!-- Specialized Asset Tracing Sub-Intent Pages -->
+  <url>
+    <loc>https://cadprivateinvestigations.com/services/divorce-asset-investigations.html</loc>
+    <lastmod>2026-11-16</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.92</priority>
+  </url>
+  <url>
+    <loc>https://cadprivateinvestigations.com/services/judgment-enforcement-asset-recovery.html</loc>
+    <lastmod>2026-11-16</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.92</priority>
+  </url>
+  <url>
+    <loc>https://cadprivateinvestigations.com/services/business-partner-asset-due-diligence.html</loc>
+    <lastmod>2026-11-16</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.92</priority>
+  </url>
+
+  <!-- Regional & Local Practice Locations -->
+  <url>
+    <loc>https://cadprivateinvestigations.com/locations/scottsdale-private-investigator.html</loc>
+    <lastmod>2026-11-16</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.92</priority>
+  </url>
+  <url>
+    <loc>https://cadprivateinvestigations.com/locations/phoenix-private-investigator.html</loc>
+    <lastmod>2026-11-16</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.92</priority>
+  </url>
+  <url>
+    <loc>https://cadprivateinvestigations.com/locations/paradise-valley-private-investigator.html</loc>
+    <lastmod>2026-11-16</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.90</priority>
   </url>
 
   <!-- Blog & Dispatches Archive -->
