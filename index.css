@@ -1063,7 +1063,7 @@
   .sms-legend a,
   .checkbox-label a,
   .sms-privacy-text a {
-    color: #9A7B1C;
+    color: #7C5F0B;
     text-decoration: underline;
     text-underline-offset: 2px;
     font-weight: 500;
@@ -1558,14 +1558,26 @@
     .socials-label {
       font-size: 0.8rem;
       font-weight: 700;
-      color: var(--accent-gold);
+      color: #7C5F0B;
       text-transform: uppercase;
       letter-spacing: 0.05em;
+    }
+
+    :root.night-theme & .socials-label {
+      color: var(--accent-gold);
     }
     
     .social-links-row {
       margin-block-start: 0.75rem;
     }
+  }
+
+  .socials-label {
+    color: #7C5F0B;
+  }
+
+  :root.night-theme .socials-label {
+    color: var(--accent-gold);
   }
 
   /* 11. FAQ Section */
@@ -2174,13 +2186,21 @@
 
 .call-bar-phone {
   background: linear-gradient(135deg, var(--gold-deep) 0%, var(--gold-primary) 100%);
-  color: var(--bg-primary);
+  color: #0B0F19;
+}
+
+:root.night-theme .call-bar-phone {
+  color: #0B0F19;
 }
 
 .call-bar-consult {
   background: rgba(212, 175, 55, 0.1);
-  color: var(--gold-primary);
+  color: #7C5F0B;
   border: 1.5px solid rgba(212, 175, 55, 0.35);
+}
+
+:root.night-theme .call-bar-consult {
+  color: var(--gold-primary);
 }
 
 @media (max-width: 768px) {
@@ -3619,14 +3639,25 @@ button.payment-badge:hover {
 }
 
 .footer-admin-link {
-  color: var(--text-muted);
-  opacity: 0.5;
+  color: #E2E8F0;
+  opacity: 0.9;
   font-size: 0.82rem;
   transition: var(--transition-fast);
-  text-decoration: none;
+  text-decoration: underline;
+  text-underline-offset: 2px;
 }
 
 .footer-admin-link:hover {
+  color: var(--accent-gold);
+  opacity: 1;
+}
+
+:root.night-theme .footer-admin-link {
+  color: #E2E8F0;
+  opacity: 0.9;
+}
+
+:root.night-theme .footer-admin-link:hover {
   color: var(--accent-gold);
   opacity: 1;
 }

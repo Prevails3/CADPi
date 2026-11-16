@@ -2,37 +2,36 @@
 
 > Discreet, trustworthy, and elite private investigation services led by former federal law enforcement supervisory special agents. Daily field operations centered in Maricopa County, with statewide Arizona coverage and nationwide federal network capabilities.
 
-## Agency Overview
 Compitiello & Donofrio Private Investigations (CAD PI) is an Arizona-licensed and bonded private investigative agency headquartered in Scottsdale, Arizona. The agency is founded and led by Michael Compitiello, a former Supervisory Special Agent with the U.S. Department of Homeland Security / Homeland Security Investigations (DHS/HSI) with over 25 years of federal law enforcement leadership and 35+ years of combined investigative experience.
 
-- **Headquarters**: 6991 E Camelback Rd. STE D-300, Scottsdale, AZ 85251
-- **Phone**: (480) 630-2533
-- **Confidential Contact Form**: https://cadprivateinvestigations.com/#contact
-- **Website**: https://cadprivateinvestigations.com
-- **Privacy Policy & Terms**: https://cadprivateinvestigations.com/privacy-policy.html
-- **Licensing**: Licensed & Bonded Private Investigative Agency (State of Arizona)
+## Key Resources
+- [CAD Private Investigations Homepage](https://cadprivateinvestigations.com): Primary agency portal featuring investigative services, leadership profiles, client reviews, and direct case intake.
+- [Confidential Case Consultation](https://cadprivateinvestigations.com/#contact): Encrypted intake form and direct communication channels for legal counsel, corporate entities, and private clients.
+- [Investigative Field Intelligence Archive](https://cadprivateinvestigations.com/blog.html): Comprehensive archive of investigative case studies, federal methodologies, and Arizona statutory standards.
+- [Privacy Policy & Compliance Terms](https://cadprivateinvestigations.com/privacy-policy.html): Complete agency privacy disclosures, evidentiary data retention standards, and SMS communication terms.
 
 ## Core Investigative Services
-- **Financial Investigations**: Forensic tracing of corporate and private funds, uncovering fraud, hidden assets, embezzlement, and complex financial schemes.
-- **Asset Tracing & Recovery**: Locating hidden holdings, real estate, offshore accounts, and corporate structures to support litigation, asset division, or debt recovery.
-- **Corporate Vetting & Due Diligence**: Deep background profiling of business entities, potential partners, executives, and vendors to mitigate corporate liability.
-- **Physical & Digital Surveillance**: Discreet, high-definition surveillance for family law, infidelity verification, insurance defense, and court proceedings.
-- **Missing Persons & Witness Locates**: Locating estranged relatives, runways, missing persons, debtors, or critical trial witnesses using national database queries and field tracing.
-- **Immigration Compliance & Vetting**: File verification, visa vetting, and immigration compliance backed by over 30 years of federal immigration oversight experience.
-- **Human Trafficking Investigations**: Specialized evidence collection and rescue coordination leveraging direct federal task-force leadership experience.
-- **Cyber Security & Digital Forensics**: Computer forensics, data breach analysis, and personal identifiable information (PII) security.
+- [Forensic Asset Tracing & Recovery](https://cadprivateinvestigations.com/services/asset-tracing.html): Forensic tracing of hidden holdings, domestic shell LLCs, offshore corporate structures, and judgment enforcement support.
+- [Corporate Due Diligence & Vetting](https://cadprivateinvestigations.com/services/corporate-vetting.html): Pre-transaction intelligence, executive background profiling, vendor risk mitigation, and corporate liability analysis.
+- [Physical & Technical Surveillance](https://cadprivateinvestigations.com/services/surveillance.html): High-definition, court-admissible surveillance for family law, infidelity verification, insurance SIU defense, and civil litigation.
+- [Digital Forensics & Incident Response](https://cadprivateinvestigations.com/services/digital-forensics.html): Computer forensics, trade secret theft investigation, mobile device analysis, and court-admissible digital evidence preservation.
+- [Federal Litigation Support](https://cadprivateinvestigations.com/#services): Evidentiary gathering, trial prep, chain of custody management, and expert testimony led by former federal law enforcement supervisory special agents.
+- [Financial Fraud & Embezzlement Investigations](https://cadprivateinvestigations.com/#services): Forensic accounting and tracing of misappropriated corporate and private funds across domestic and international accounts.
+- [Missing Persons & Witness Locates](https://cadprivateinvestigations.com/#services): Advanced skip tracing, locating estranged family members, runaways, debtors, and critical trial witnesses nationwide.
+- [Corporate Immigration & Form I-9 Audits](https://cadprivateinvestigations.com/#services): Employer compliance audits, internal Form I-9 reviews, and visa vetting backed by 30+ years of federal immigration oversight experience.
 
-## Target Audience
-- **Attorneys & Law Firms**: Family law, criminal defense, civil litigation, and corporate counsel requiring court-admissible evidence and expert witness testimony.
-- **Corporations & Businesses**: Executive leadership, HR departments, and risk managers seeking due diligence, fraud investigation, and internal theft resolution.
-- **High-Net-Worth Individuals & Families**: Private clients seeking confidential background vetting, domestic investigations, infidelity inquiries, or missing person location.
-- **Insurance Companies & Adjusters**: Special investigations units (SIU) and defense counsel investigating fraudulent claims and liability disputes.
-
-## Operational Geographic Coverage
-- **Primary Field Operations**: Maricopa County (Scottsdale, Phoenix, Mesa, Tempe, Chandler, Gilbert, Glendale, Peoria).
-- **Statewide Arizona**: Full investigative reach across Tucson, Flagstaff, Yuma, Prescott, Pima County, and Pinal County.
-- **National & Federal Network**: Nationwide case deployment and federal litigation support through established federal law enforcement partnerships.
+## Investigative Dispatches & Analysis
+- [Tracing Hidden Assets & Offshore Corporate Shells in High-Stakes Disputes](https://cadprivateinvestigations.com/blog/tracing-hidden-assets-offshore-structures.html): Analysis of domestic privacy LLCs (Wyoming, Delaware, Nevada), offshore trusts, and correspondent banking SWIFT tracing.
+- [Arizona Surveillance Law: Evidentiary Admissibility in Maricopa County Courts](https://cadprivateinvestigations.com/blog/arizona-surveillance-law-admissibility-standards.html): Examination of A.R.S. § 13-3005 (one-party consent), A.R.S. § 13-3019 (reasonable expectation of privacy), and GPS vehicle tracking rules.
+- [Red Flags in Corporate Mergers: Vetting Beneficial Ownership Beyond the Balance Sheet](https://cadprivateinvestigations.com/blog/corporate-mergers-due-diligence-red-flags.html): Pre-transaction due diligence uncovering jurisdictional charter migration, circular related-party vendor payments, and unindexed court records.
+- [Uncovering Insider Data Exfiltration: Digital Forensics in Corporate Trade Secret Theft](https://cadprivateinvestigations.com/blog/digital-forensics-insider-threat-data-theft.html): Forensic extraction of Windows USB registry hives, LNK shortcuts, and Shellbags artifacts to secure emergency Temporary Restraining Orders (TROs).
 
 ## Leadership & Credentials
-- **Michael Compitiello**: Founder & Director. Former DHS/HSI Supervisory Special Agent (26 years), Air Rescue Squadron Veteran (U.S. Air Force), Recipient of the HSI Director's Award for Excellence in Investigations and INS Commissioner's Award.
-- **John Donofrio**: Private Investigator & Operations Manager.
+- [Michael Compitiello - Founder & Director](https://cadprivateinvestigations.com/#leadership): Former DHS/HSI Supervisory Special Agent with 25+ years of federal law enforcement leadership and 35+ years of combined investigative experience. Recipient of the HSI Director's Award for Excellence in Investigations and INS Commissioner's Award.
+- [John Donofrio - Operations Manager](https://cadprivateinvestigations.com/#leadership): Licensed Arizona Private Investigator managing daily Maricopa County field operations, surveillance coordination, and client relations.
+
+## Optional
+- [Attorneys & Law Firms Practice Overview](https://cadprivateinvestigations.com/#services): Family law, criminal defense, civil litigation, and corporate counsel requiring court-admissible evidence and expert witness testimony.
+- [Corporations & Enterprises Due Diligence](https://cadprivateinvestigations.com/#services): Executive leadership, HR departments, and risk managers seeking due diligence, fraud investigation, and internal theft resolution.
+- [High-Net-Worth Individuals & Family Office Advisory](https://cadprivateinvestigations.com/#contact): Private clients seeking confidential background vetting, domestic investigations, infidelity inquiries, or missing person location.
+- [Insurance Special Investigations Units (SIU)](https://cadprivateinvestigations.com/#services): Special investigations units and defense counsel investigating fraudulent claims and liability disputes.

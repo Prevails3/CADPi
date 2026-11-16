@@ -31,16 +31,18 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css?family=Inter:300,400,500,600,700&display=swap" rel="stylesheet">
   
-  <!-- LocalBusiness + LegalService JSON-LD Schema -->
+  <!-- LocalBusiness + LegalService + ProfessionalService + Organization JSON-LD Schema -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
-    "@type": ["LocalBusiness", "LegalService"],
+    "@type": ["LocalBusiness", "LegalService", "ProfessionalService", "Organization"],
     "name": "Compitiello & Donofrio Private Investigations",
+    "alternateName": ["CAD Private Investigations", "CAD PI"],
     "image": "https://cadprivateinvestigations.com/assets/logo_horizontal_v7.png",
     "url": "https://cadprivateinvestigations.com",
     "telephone": "+14806302533",
-    "description": "Professional, trustworthy, and discreet private investigation services. While our daily field operations focus on Maricopa County, our extensive federal networks enable us to coordinate and execute complex investigations statewide across Arizona and nationally.",
+    "priceRange": "$$$$",
+    "description": "Discreet, trustworthy, and elite private investigation services led by former federal law enforcement supervisory special agents. Daily field operations centered in Maricopa County, with statewide Arizona coverage and nationwide federal network capabilities.",
     "address": {
       "@type": "PostalAddress",
       "streetAddress": "6991 E Camelback Rd. STE D-300",
@@ -54,6 +56,59 @@
       "latitude": 33.5023,
       "longitude": -111.9270
     },
+    "founder": {
+      "@type": "Person",
+      "name": "Michael Compitiello",
+      "jobTitle": "Founder & Director",
+      "description": "Former Supervisory Special Agent with the U.S. Department of Homeland Security / Homeland Security Investigations (DHS/HSI) with over 25 years of federal law enforcement leadership and 35+ years of combined investigative experience.",
+      "hasCredential": {
+        "@type": "EducationalOccupationalCredential",
+        "credentialCategory": "license",
+        "name": "State of Arizona Licensed Private Investigator"
+      },
+      "knowsAbout": [
+        "Forensic Asset Recovery",
+        "Corporate Due Diligence",
+        "Litigation Support",
+        "Digital Forensics"
+      ]
+    },
+    "employee": [
+      {
+        "@type": "Person",
+        "name": "Michael Compitiello",
+        "jobTitle": "Director & Former DHS/HSI Supervisory Special Agent",
+        "description": "Former DHS/HSI Supervisory Special Agent with 25+ years of federal law enforcement leadership and deep expertise in forensic asset recovery, corporate due diligence, litigation support, and federal cross-border investigations.",
+        "hasCredential": {
+          "@type": "EducationalOccupationalCredential",
+          "credentialCategory": "license",
+          "name": "State of Arizona Licensed Private Investigator"
+        }
+      },
+      {
+        "@type": "Person",
+        "name": "John Donofrio",
+        "jobTitle": "Private Investigator & Operations Manager",
+        "description": "Licensed Arizona Private Investigator directing daily surveillance, skip tracing, and field investigations throughout Maricopa County and statewide.",
+        "hasCredential": {
+          "@type": "EducationalOccupationalCredential",
+          "credentialCategory": "license",
+          "name": "State of Arizona Licensed Private Investigator"
+        }
+      }
+    ],
+    "hasCredential": [
+      {
+        "@type": "EducationalOccupationalCredential",
+        "credentialCategory": "license",
+        "name": "State of Arizona Licensed & Bonded Private Investigative Agency"
+      },
+      {
+        "@type": "EducationalOccupationalCredential",
+        "credentialCategory": "license",
+        "name": "Arizona Department of Public Safety (AZ DPS) Private Investigation Agency License"
+      }
+    ],
     "areaServed": [
       {
         "@type": "AdministrativeArea",
@@ -104,12 +159,20 @@
       }
     ],
     "knowsAbout": [
+      "Forensic Asset Recovery",
+      "Corporate Due Diligence",
+      "Litigation Support",
+      "Digital Forensics",
+      "Asset Tracing and Recovery",
+      "Corporate Due Diligence and Background Vetting",
+      "Federal Litigation Support",
+      "Financial Fraud and Embezzlement Investigations",
+      "Digital Forensics and Cyber Incident Analysis",
+      "Physical and Technical Surveillance",
       "Maricopa County Private Investigations",
       "Statewide Arizona Private Detective Services",
-      "National Federal Network Investigations",
-      "Corporate Asset Tracing & Vetting",
-      "Federal Litigation Support",
-      "Complex Field Surveillance"
+      "Nationwide Federal Law Enforcement Network Investigations",
+      "Form I-9 and Corporate Immigration Compliance"
     ],
     "openingHoursSpecification": {
       "@type": "OpeningHoursSpecification",
@@ -552,7 +615,7 @@
           <div class="testimonial-track" id="testimonial-track">
             <!-- Testimonial 1 -->
             <div class="testimonial-card glass-card">
-              <div class="stars" aria-label="5 out of 5 stars">
+              <div class="stars" role="img" aria-label="5 out of 5 stars">
                 <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
                 <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
                 <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
@@ -573,7 +636,7 @@
 
             <!-- Testimonial 2 -->
             <div class="testimonial-card glass-card">
-              <div class="stars" aria-label="5 out of 5 stars">
+              <div class="stars" role="img" aria-label="5 out of 5 stars">
                 <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
                 <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
                 <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
@@ -594,7 +657,7 @@
 
             <!-- Testimonial 3 -->
             <div class="testimonial-card glass-card">
-              <div class="stars" aria-label="5 out of 5 stars">
+              <div class="stars" role="img" aria-label="5 out of 5 stars">
                 <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
                 <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
                 <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
@@ -615,7 +678,7 @@
 
             <!-- Testimonial 4 -->
             <div class="testimonial-card glass-card">
-              <div class="stars" aria-label="5 out of 5 stars">
+              <div class="stars" role="img" aria-label="5 out of 5 stars">
                 <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
                 <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
                 <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
