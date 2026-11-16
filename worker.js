@@ -842,6 +842,79 @@ export default {
 
     // --- STATIC ASSET SERVING & CLEAN URL ROUTING ---
     if (env.ASSETS) {
+      // --- SEO 301 REDIRECTS FOR LEGACY LOCATION PATHS & CLEAN SLASHES ---
+      const LEGACY_LOCATION_REDIRECTS = {
+      "/locations/arizona-private-investigator.html": "/locations/arizona/",
+      "/locations/california-private-investigator.html": "/locations/california/",
+      "/locations/florida-private-investigator.html": "/locations/florida/",
+      "/locations/texas-private-investigator.html": "/locations/texas/",
+      "/locations/new-york-private-investigator.html": "/locations/new-york/",
+      "/locations/scottsdale-private-investigator.html": "/locations/arizona/scottsdale/",
+      "/locations/phoenix-private-investigator.html": "/locations/arizona/phoenix/",
+      "/locations/paradise-valley-private-investigator.html": "/locations/arizona/paradise-valley/",
+      "/locations/chandler-private-investigator.html": "/locations/arizona/chandler/",
+      "/locations/mesa-private-investigator.html": "/locations/arizona/mesa/",
+      "/locations/tempe-private-investigator.html": "/locations/arizona/tempe/",
+      "/locations/gilbert-private-investigator.html": "/locations/arizona/gilbert/",
+      "/locations/glendale-private-investigator.html": "/locations/arizona/glendale/",
+      "/locations/peoria-private-investigator.html": "/locations/arizona/peoria/",
+      "/locations/surprise-private-investigator.html": "/locations/arizona/surprise/",
+      "/locations/tucson-private-investigator.html": "/locations/arizona/tucson/",
+      "/locations/flagstaff-private-investigator.html": "/locations/arizona/flagstaff/",
+      "/locations/yuma-private-investigator.html": "/locations/arizona/yuma/",
+      "/locations/los-angeles-private-investigator.html": "/locations/california/los-angeles/",
+      "/locations/san-diego-private-investigator.html": "/locations/california/san-diego/",
+      "/locations/san-francisco-private-investigator.html": "/locations/california/san-francisco/",
+      "/locations/san-jose-private-investigator.html": "/locations/california/san-jose/",
+      "/locations/fresno-private-investigator.html": "/locations/california/fresno/",
+      "/locations/sacramento-private-investigator.html": "/locations/california/sacramento/",
+      "/locations/long-beach-private-investigator.html": "/locations/california/long-beach/",
+      "/locations/oakland-private-investigator.html": "/locations/california/oakland/",
+      "/locations/bakersfield-private-investigator.html": "/locations/california/bakersfield/",
+      "/locations/anaheim-private-investigator.html": "/locations/california/anaheim/",
+      "/locations/miami-private-investigator.html": "/locations/florida/miami/",
+      "/locations/fort-lauderdale-private-investigator.html": "/locations/florida/fort-lauderdale/",
+      "/locations/orlando-private-investigator.html": "/locations/florida/orlando/",
+      "/locations/tampa-private-investigator.html": "/locations/florida/tampa/",
+      "/locations/st-petersburg-private-investigator.html": "/locations/florida/st-petersburg/",
+      "/locations/jacksonville-private-investigator.html": "/locations/florida/jacksonville/",
+      "/locations/tallahassee-private-investigator.html": "/locations/florida/tallahassee/",
+      "/locations/cape-coral-private-investigator.html": "/locations/florida/cape-coral/",
+      "/locations/pembroke-pines-private-investigator.html": "/locations/florida/pembroke-pines/",
+      "/locations/port-st-lucie-private-investigator.html": "/locations/florida/port-st-lucie/",
+      "/locations/gainesville-private-investigator.html": "/locations/florida/gainesville/",
+      "/locations/hialeah-private-investigator.html": "/locations/florida/hialeah/",
+      "/locations/houston-private-investigator.html": "/locations/texas/houston/",
+      "/locations/dallas-private-investigator.html": "/locations/texas/dallas/",
+      "/locations/austin-private-investigator.html": "/locations/texas/austin/",
+      "/locations/san-antonio-private-investigator.html": "/locations/texas/san-antonio/",
+      "/locations/fort-worth-private-investigator.html": "/locations/texas/fort-worth/",
+      "/locations/el-paso-private-investigator.html": "/locations/texas/el-paso/",
+      "/locations/arlington-private-investigator.html": "/locations/texas/arlington/",
+      "/locations/corpus-christi-private-investigator.html": "/locations/texas/corpus-christi/",
+      "/locations/plano-private-investigator.html": "/locations/texas/plano/",
+      "/locations/lubbock-private-investigator.html": "/locations/texas/lubbock/",
+      "/locations/amarillo-private-investigator.html": "/locations/texas/amarillo/",
+      "/locations/brownsville-private-investigator.html": "/locations/texas/brownsville/",
+      "/locations/waco-private-investigator.html": "/locations/texas/waco/",
+      "/locations/new-york-city-private-investigator.html": "/locations/new-york/new-york-city/",
+      "/locations/buffalo-private-investigator.html": "/locations/new-york/buffalo/",
+      "/locations/rochester-private-investigator.html": "/locations/new-york/rochester/",
+      "/locations/syracuse-private-investigator.html": "/locations/new-york/syracuse/",
+      "/locations/albany-private-investigator.html": "/locations/new-york/albany/",
+      "/locations/hudson-valley-private-investigator.html": "/locations/new-york/hudson-valley/",
+      "/locations/westchester-county-private-investigator.html": "/locations/new-york/westchester-county/",
+      "/locations.html": "/locations/"
+};
+
+      if (LEGACY_LOCATION_REDIRECTS[url.pathname]) {
+        return Response.redirect(new URL(LEGACY_LOCATION_REDIRECTS[url.pathname], request.url).toString(), 301);
+      }
+
+      if (url.pathname.startsWith('/locations') && !url.pathname.endsWith('/') && !url.pathname.includes('.')) {
+        return Response.redirect(new URL(url.pathname + '/', request.url).toString(), 301);
+      }
+
       let assetRequest = request;
       const cleanPath = url.pathname.replace(/\/$/, '');
 

@@ -1,0 +1,1814 @@
+{
+  "states": [
+    {
+      "state_name": "Arizona",
+      "state_slug": "arizona",
+      "state_abbr": "AZ",
+      "is_hq": true,
+      "licensing_info": "State of Arizona Department of Public Safety (AZ DPS) Licensing Unit, License #1616599. Fully bonded and insured.",
+      "hq_address": {
+        "street": "6991 E Camelback Rd. STE D-300",
+        "city": "Scottsdale",
+        "state": "AZ",
+        "zip": "85251",
+        "country": "US"
+      },
+      "legal_context": {
+        "audio_consent": "One-Party Consent",
+        "recording_statute": "A.R.S. § 13-3005 & A.R.S. § 13-3012(9)",
+        "recording_summary": "Under Arizona law (A.R.S. § 13-3005), Arizona is a one-party consent state. An investigator or operative may record in-person or wire communications provided at least one party to the conversation has consented. Surreptitiously recording without any party's consent is a Class 6 felony.",
+        "gps_statute": "A.R.S. § 13-2923 (Stalking) & A.R.S. § 13-3019 (Surveillance)",
+        "gps_summary": "Under Arizona Revised Statutes, installing an electronic tracking or GPS device is lawful only when authorized with the effective consent of the registered vehicle owner or authorized corporate custodian. Tracking without owner consent violates Arizona anti-stalking laws and renders evidence inadmissible.",
+        "court_rules": "Arizona Rules of Evidence (Rule 901 Authentication & Chain of Custody)",
+        "court_summary": "All investigative reports, forensic financial audits, and surveillance media adhere to strict chain-of-custody protocols required by Arizona Superior Courts and the U.S. District Court for the District of Arizona under Rule 901."
+      },
+      "cities": [
+        {
+          "city_name": "Scottsdale",
+          "city_slug": "scottsdale",
+          "county_name": "Maricopa County",
+          "metro_name": "Phoenix East Valley",
+          "is_hq": true,
+          "lat": 33.4942,
+          "lng": -111.9261,
+          "zip_code": "85251",
+          "local_courthouses": [
+            "Maricopa County Superior Court - Northeast Regional Center",
+            "Scottsdale City Court",
+            "U.S. District Court for the District of Arizona - Sandra Day O'Connor Courthouse"
+          ],
+          "surrounding_suburbs": [
+            "Paradise Valley",
+            "Phoenix",
+            "Tempe",
+            "Fountain Hills",
+            "Mesa",
+            "Cave Creek",
+            "Carefree"
+          ],
+          "key_districts": [
+            "Old Town Scottsdale",
+            "Camelback Corridor",
+            "Gainey Ranch",
+            "DC Ranch",
+            "Silverleaf",
+            "Scottsdale Airpark",
+            "McCormick Ranch"
+          ],
+          "economic_context": "Corporate headquarters of CAD Private Investigations. Scottsdale is a prominent national center for family offices, luxury real estate development, private equity, and high-net-worth matrimonial litigation."
+        },
+        {
+          "city_name": "Phoenix",
+          "city_slug": "phoenix",
+          "county_name": "Maricopa County",
+          "metro_name": "Phoenix Central Metro",
+          "is_hq": false,
+          "lat": 33.4484,
+          "lng": -112.074,
+          "zip_code": "85003",
+          "local_courthouses": [
+            "Maricopa County Superior Court - Central Court Building",
+            "Phoenix Municipal Court",
+            "U.S. District Court for the District of Arizona - Sandra Day O'Connor Courthouse"
+          ],
+          "surrounding_suburbs": [
+            "Scottsdale",
+            "Paradise Valley",
+            "Glendale",
+            "Tempe",
+            "Peoria",
+            "Mesa",
+            "Chandler"
+          ],
+          "key_districts": [
+            "Downtown Financial District",
+            "Biltmore Area",
+            "Arcadia",
+            "Midtown",
+            "Desert Ridge",
+            "Ahwatukee Foothills",
+            "North Phoenix"
+          ],
+          "economic_context": "The commercial and governmental capital of the Southwest, featuring the Sandra Day O'Connor Federal Courthouse, Maricopa County judicial hubs, healthcare corporations, and major banking institutions."
+        },
+        {
+          "city_name": "Paradise Valley",
+          "city_slug": "paradise-valley",
+          "county_name": "Maricopa County",
+          "metro_name": "Phoenix East Valley",
+          "is_hq": false,
+          "lat": 33.5312,
+          "lng": -111.9426,
+          "zip_code": "85253",
+          "local_courthouses": [
+            "Maricopa County Superior Court - Northeast Regional Center",
+            "Paradise Valley Municipal Court",
+            "U.S. District Court for the District of Arizona"
+          ],
+          "surrounding_suburbs": [
+            "Scottsdale",
+            "Phoenix",
+            "Fountain Hills",
+            "Arcadia",
+            "Tempe"
+          ],
+          "key_districts": [
+            "Mummy Mountain",
+            "Camelback Golf Club Enclave",
+            "Clearwater Hills",
+            "Finisterre",
+            "Jokake",
+            "Cameldale"
+          ],
+          "economic_context": "Arizona's wealthiest municipality, home to ultra-high-net-worth estates, executive retreats, and family foundations requiring discreet asset tracing and marital lifestyle audits."
+        },
+        {
+          "city_name": "Chandler",
+          "city_slug": "chandler",
+          "county_name": "Maricopa County",
+          "metro_name": "Phoenix East Valley / Price Corridor",
+          "is_hq": false,
+          "lat": 33.3062,
+          "lng": -111.8413,
+          "zip_code": "85225",
+          "local_courthouses": [
+            "Maricopa County Superior Court - Southeast Regional Center (Mesa)",
+            "Chandler Municipal Court",
+            "U.S. District Court for the District of Arizona"
+          ],
+          "surrounding_suburbs": [
+            "Gilbert",
+            "Mesa",
+            "Tempe",
+            "Phoenix",
+            "Sun Lakes",
+            "Queen Creek"
+          ],
+          "key_districts": [
+            "Price Corridor Tech Hub",
+            "Ocotillo",
+            "Downtown Chandler",
+            "Sun Lakes",
+            "Fulton Ranch"
+          ],
+          "economic_context": "A semiconductor and advanced manufacturing powerhouse along the Price Corridor, driving corporate vetting, trade secret protection, and intellectual property litigation."
+        },
+        {
+          "city_name": "Mesa",
+          "city_slug": "mesa",
+          "county_name": "Maricopa County",
+          "metro_name": "Phoenix East Valley",
+          "is_hq": false,
+          "lat": 33.4152,
+          "lng": -111.8315,
+          "zip_code": "85201",
+          "local_courthouses": [
+            "Maricopa County Superior Court - Southeast Regional Center",
+            "Mesa Municipal Court",
+            "U.S. District Court for the District of Arizona"
+          ],
+          "surrounding_suburbs": [
+            "Gilbert",
+            "Chandler",
+            "Tempe",
+            "Scottsdale",
+            "Apache Junction",
+            "Queen Creek"
+          ],
+          "key_districts": [
+            "Downtown Mesa",
+            "Eastmark",
+            "Falcon District",
+            "Red Mountain",
+            "Dobson Ranch",
+            "Fiesta District"
+          ],
+          "economic_context": "The third-largest city in Arizona, housing the Southeast Regional Court Facility, aerospace defense contractors, commercial logistics hubs, and expanding master-planned developments."
+        },
+        {
+          "city_name": "Tempe",
+          "city_slug": "tempe",
+          "county_name": "Maricopa County",
+          "metro_name": "Phoenix East Valley / Tech Corridor",
+          "is_hq": false,
+          "lat": 33.4255,
+          "lng": -111.94,
+          "zip_code": "85281",
+          "local_courthouses": [
+            "Maricopa County Superior Court - Southeast Regional Center",
+            "Tempe Municipal Court",
+            "U.S. District Court for the District of Arizona"
+          ],
+          "surrounding_suburbs": [
+            "Phoenix",
+            "Scottsdale",
+            "Mesa",
+            "Chandler",
+            "Guadalupe"
+          ],
+          "key_districts": [
+            "Tempe Town Lake Financial District",
+            "Mill Avenue Corridor",
+            "ASU Research Park",
+            "South Tempe"
+          ],
+          "economic_context": "A dynamic regional center for fintech, software engineering, and corporate regional headquarters clustered around Tempe Town Lake and Arizona State University."
+        },
+        {
+          "city_name": "Gilbert",
+          "city_slug": "gilbert",
+          "county_name": "Maricopa County",
+          "metro_name": "Phoenix East Valley",
+          "is_hq": false,
+          "lat": 33.3528,
+          "lng": -111.789,
+          "zip_code": "85234",
+          "local_courthouses": [
+            "Maricopa County Superior Court - Southeast Regional Center",
+            "Gilbert Municipal Court",
+            "U.S. District Court for the District of Arizona"
+          ],
+          "surrounding_suburbs": [
+            "Chandler",
+            "Mesa",
+            "Queen Creek",
+            "Higley",
+            "Tempe"
+          ],
+          "key_districts": [
+            "Heritage District",
+            "Val Vista Lakes",
+            "Morrison Ranch",
+            "Power Ranch",
+            "San Tan Corridor"
+          ],
+          "economic_context": "An affluent residential and commercial East Valley community characterized by executive estates, healthcare technology facilities, and family court litigation support."
+        },
+        {
+          "city_name": "Glendale",
+          "city_slug": "glendale",
+          "county_name": "Maricopa County",
+          "metro_name": "Phoenix West Valley",
+          "is_hq": false,
+          "lat": 33.5387,
+          "lng": -112.186,
+          "zip_code": "85301",
+          "local_courthouses": [
+            "Maricopa County Superior Court - Northwest Regional Center",
+            "Glendale City Court",
+            "U.S. District Court for the District of Arizona"
+          ],
+          "surrounding_suburbs": [
+            "Peoria",
+            "Phoenix",
+            "Surprise",
+            "Sun City",
+            "El Mirage"
+          ],
+          "key_districts": [
+            "Westgate Entertainment District",
+            "Arrowhead Ranch",
+            "Downtown Glendale",
+            "Luke Air Force Base Environs"
+          ],
+          "economic_context": "West Valley sports, entertainment, and industrial transport hub requiring field surveillance, insurance fraud inquiries, and commercial contract dispute investigations."
+        },
+        {
+          "city_name": "Peoria",
+          "city_slug": "peoria",
+          "county_name": "Maricopa County",
+          "metro_name": "Phoenix Northwest Valley",
+          "is_hq": false,
+          "lat": 33.5806,
+          "lng": -112.2374,
+          "zip_code": "85345",
+          "local_courthouses": [
+            "Maricopa County Superior Court - Northwest Regional Center",
+            "Peoria Municipal Court",
+            "U.S. District Court for the District of Arizona"
+          ],
+          "surrounding_suburbs": [
+            "Glendale",
+            "Surprise",
+            "Sun City",
+            "Phoenix",
+            "Sun City West"
+          ],
+          "key_districts": [
+            "Vistancia",
+            "Lake Pleasant Regional Area",
+            "P83 Entertainment District",
+            "Westgreen Park"
+          ],
+          "economic_context": "Fast-growing Northwest Valley community spanning affluent master-planned communities like Vistancia and substantial commercial real estate holdings."
+        },
+        {
+          "city_name": "Surprise",
+          "city_slug": "surprise",
+          "county_name": "Maricopa County",
+          "metro_name": "Phoenix Northwest Valley",
+          "is_hq": false,
+          "lat": 33.6292,
+          "lng": -112.3679,
+          "zip_code": "85374",
+          "local_courthouses": [
+            "Maricopa County Superior Court - Northwest Regional Center",
+            "Surprise City Court",
+            "U.S. District Court for the District of Arizona"
+          ],
+          "surrounding_suburbs": [
+            "Peoria",
+            "Sun City West",
+            "El Mirage",
+            "Glendale",
+            "Waddell"
+          ],
+          "key_districts": [
+            "Surprise City Center",
+            "Marley Park",
+            "Sierra Montana",
+            "Sun City Grand"
+          ],
+          "economic_context": "Expanding residential and logistics hub in the Northwest Valley, demanding dedicated asset discovery, debtor locates, and civil litigation research."
+        },
+        {
+          "city_name": "Tucson",
+          "city_slug": "tucson",
+          "county_name": "Pima County",
+          "metro_name": "Southern Arizona / Sonoran Corridor",
+          "is_hq": false,
+          "lat": 32.2226,
+          "lng": -110.9747,
+          "zip_code": "85701",
+          "local_courthouses": [
+            "Pima County Superior Court",
+            "Tucson City Court",
+            "U.S. District Court for the District of Arizona - James A. Walsh Courthouse"
+          ],
+          "surrounding_suburbs": [
+            "Oro Valley",
+            "Marana",
+            "Catalina Foothills",
+            "Sahuarita",
+            "Vail"
+          ],
+          "key_districts": [
+            "Downtown Tucson",
+            "Catalina Foothills",
+            "University of Arizona Corridor",
+            "Tanque Verde",
+            "Rita Ranch"
+          ],
+          "economic_context": "Southern Arizona's major metropolitan anchor, centered on defense technology, cross-border commerce with Mexico, optics manufacturing, and Pima County judicial matters."
+        },
+        {
+          "city_name": "Flagstaff",
+          "city_slug": "flagstaff",
+          "county_name": "Coconino County",
+          "metro_name": "Northern Arizona / High Country",
+          "is_hq": false,
+          "lat": 35.1983,
+          "lng": -111.6513,
+          "zip_code": "86001",
+          "local_courthouses": [
+            "Coconino County Superior Court",
+            "Flagstaff Municipal Court",
+            "U.S. District Court for the District of Arizona"
+          ],
+          "surrounding_suburbs": [
+            "Sedona",
+            "Williams",
+            "Camp Verde",
+            "Cottonwood",
+            "Prescott"
+          ],
+          "key_districts": [
+            "Downtown Historic Flagstaff",
+            "Pine Canyon",
+            "Forest Highlands",
+            "Cheshire",
+            "Continental Country Club"
+          ],
+          "economic_context": "Northern Arizona's regional center for tourism, biosciences, and luxury second-home properties in exclusive gated golf and timber communities."
+        },
+        {
+          "city_name": "Yuma",
+          "city_slug": "yuma",
+          "county_name": "Yuma County",
+          "metro_name": "Southwest Arizona / Border Corridor",
+          "is_hq": false,
+          "lat": 32.6927,
+          "lng": -114.6277,
+          "zip_code": "85364",
+          "local_courthouses": [
+            "Yuma County Superior Court",
+            "Yuma Municipal Court",
+            "U.S. District Court for the District of Arizona"
+          ],
+          "surrounding_suburbs": [
+            "San Luis",
+            "Somerton",
+            "Fortuna Foothills",
+            "Wellton",
+            "El Centro"
+          ],
+          "key_districts": [
+            "Historic Downtown Yuma",
+            "Mesa Heights",
+            "Avenue B Industrial Corridor",
+            "San Luis Border Crossing"
+          ],
+          "economic_context": "Vital agricultural and cross-border commercial nexus near the California and Mexico borders, demanding cross-jurisdictional logistics and asset verification."
+        }
+      ]
+    },
+    {
+      "state_name": "California",
+      "state_slug": "california",
+      "state_abbr": "CA",
+      "is_hq": false,
+      "licensing_info": "Investigations coordinated through California BSIS (Bureau of Security and Investigative Services) licensed investigator partners and federal investigative reciprocity; supervisory oversight led by former federal supervisory special agents. AZ DPS Lic. #1616599.",
+      "hq_address": {
+        "street": "6991 E Camelback Rd. STE D-300",
+        "city": "Scottsdale",
+        "state": "AZ",
+        "zip": "85251",
+        "country": "US"
+      },
+      "legal_context": {
+        "audio_consent": "Two-Party (All-Party) Consent",
+        "recording_statute": "Cal. Penal Code § 632 (California Invasion of Privacy Act)",
+        "recording_summary": "California is a strict two-party (all-party) consent jurisdiction under Cal. Penal Code § 632. It is illegal to record confidential oral or electronic communications without the consent of every party involved. Unlawfully recorded audio is inadmissible in California courts and subjects parties to statutory damages.",
+        "gps_statute": "Cal. Penal Code § 637.7",
+        "gps_summary": "Under Cal. Penal Code § 637.7, using an electronic tracking device to determine the location or movement of a person without the registered owner's consent is a misdemeanor. Evidence gathered via unauthorized GPS installation cannot be authenticated or introduced in California civil or family courts.",
+        "court_rules": "California Evidence Code §§ 1400-1402 (Authentication & Chain of Custody)",
+        "court_summary": "Forensic evidence and intelligence reports are structured to meet the strict evidentiary standards of California Superior Courts and the Central, Northern, Southern, and Eastern Federal Districts of California under Evid. Code §§ 1400-1402."
+      },
+      "cities": [
+        {
+          "city_name": "Los Angeles",
+          "city_slug": "los-angeles",
+          "county_name": "Los Angeles County",
+          "metro_name": "Greater Los Angeles",
+          "is_hq": false,
+          "lat": 34.0522,
+          "lng": -118.2437,
+          "zip_code": "90012",
+          "local_courthouses": [
+            "Stanley Mosk Courthouse - Los Angeles County Superior Court",
+            "U.S. District Court for the Central District of California - First Street Courthouse",
+            "Clara Shortridge Foltz Criminal Justice Center"
+          ],
+          "surrounding_suburbs": [
+            "Beverly Hills",
+            "Santa Monica",
+            "Pasadena",
+            "Glendale",
+            "Burbank",
+            "Culver City",
+            "Long Beach"
+          ],
+          "key_districts": [
+            "Downtown Financial District",
+            "Century City",
+            "Westwood",
+            "Hollywood",
+            "Brentwood",
+            "Bel Air",
+            "Studio City"
+          ],
+          "economic_context": "The second-largest metropolitan economy in the nation, home to entertainment conglomerates, multinational corporations, global trade ports, and ultra-high-net-worth matrimonial battles."
+        },
+        {
+          "city_name": "San Diego",
+          "city_slug": "san-diego",
+          "county_name": "San Diego County",
+          "metro_name": "San Diego-Tijuana Border Region",
+          "is_hq": false,
+          "lat": 32.7157,
+          "lng": -117.1611,
+          "zip_code": "92101",
+          "local_courthouses": [
+            "San Diego County Superior Court - Central Courthouse",
+            "U.S. District Court for the Southern District of California - Edward J. Schwartz Courthouse"
+          ],
+          "surrounding_suburbs": [
+            "Chula Vista",
+            "La Jolla",
+            "Coronado",
+            "El Cajon",
+            "Carlsbad",
+            "Oceanside",
+            "Del Mar"
+          ],
+          "key_districts": [
+            "Downtown Gaslamp District",
+            "La Jolla Financial Core",
+            "Torrey Pines Biotech Cluster",
+            "Mission Valley",
+            "Point Loma"
+          ],
+          "economic_context": "Biotech hub, defense contractors, international border logistics, and prime coastal real estate generating multi-state asset concealment and commercial disputes."
+        },
+        {
+          "city_name": "San Francisco",
+          "city_slug": "san-francisco",
+          "county_name": "San Francisco County",
+          "metro_name": "San Francisco Bay Area",
+          "is_hq": false,
+          "lat": 37.7749,
+          "lng": -122.4194,
+          "zip_code": "94102",
+          "local_courthouses": [
+            "San Francisco County Superior Court - Civic Center Courthouse",
+            "U.S. District Court for the Northern District of California - Phillip Burton Federal Building"
+          ],
+          "surrounding_suburbs": [
+            "Oakland",
+            "Berkeley",
+            "Daly City",
+            "San Mateo",
+            "Marin County",
+            "South San Francisco"
+          ],
+          "key_districts": [
+            "Financial District (FiDi)",
+            "SoMa Tech Corridor",
+            "Pacific Heights",
+            "Mission Bay",
+            "Presidio Heights"
+          ],
+          "economic_context": "Global venture capital center, tech headquarters, cryptocurrency assets, and high-stakes trade secret litigation in Northern California federal and state courts."
+        },
+        {
+          "city_name": "San Jose",
+          "city_slug": "san-jose",
+          "county_name": "Santa Clara County",
+          "metro_name": "Silicon Valley / South Bay",
+          "is_hq": false,
+          "lat": 37.3382,
+          "lng": -121.8863,
+          "zip_code": "95113",
+          "local_courthouses": [
+            "Santa Clara County Superior Court - Downtown Superior Court",
+            "U.S. District Court for the Northern District of California - San Jose Division"
+          ],
+          "surrounding_suburbs": [
+            "Sunnyvale",
+            "Santa Clara",
+            "Cupertino",
+            "Palo Alto",
+            "Mountain View",
+            "Campbell",
+            "Milpitas"
+          ],
+          "key_districts": [
+            "Downtown San Jose",
+            "North San Jose Innovation District",
+            "Willow Glen",
+            "Santana Row",
+            "Silver Creek"
+          ],
+          "economic_context": "Capital of Silicon Valley, surrounded by the world's most valuable tech enterprises, startup equity disputes, complex cap table tracing, and corporate due diligence."
+        },
+        {
+          "city_name": "Fresno",
+          "city_slug": "fresno",
+          "county_name": "Fresno County",
+          "metro_name": "Central Valley Agricultural Corridor",
+          "is_hq": false,
+          "lat": 36.7468,
+          "lng": -119.7726,
+          "zip_code": "93721",
+          "local_courthouses": [
+            "Fresno County Superior Court - B.F. Sisk Courthouse",
+            "U.S. District Court for the Eastern District of California - Robert E. Coyle Federal Courthouse"
+          ],
+          "surrounding_suburbs": [
+            "Clovis",
+            "Madera",
+            "Sanger",
+            "Selma",
+            "Visalia",
+            "Hanford"
+          ],
+          "key_districts": [
+            "Downtown Judicial District",
+            "Woodward Park",
+            "Tower District",
+            "Sunnyside",
+            "Fig Garden"
+          ],
+          "economic_context": "The agricultural commercial hub of California, characterized by multi-million-dollar agribusiness holdings, water rights transactions, and commercial debtor tracing."
+        },
+        {
+          "city_name": "Sacramento",
+          "city_slug": "sacramento",
+          "county_name": "Sacramento County",
+          "metro_name": "Sacramento Valley / State Capital",
+          "is_hq": false,
+          "lat": 38.5816,
+          "lng": -121.4944,
+          "zip_code": "95814",
+          "local_courthouses": [
+            "Sacramento County Superior Court - Gordon D. Schaber Courthouse",
+            "U.S. District Court for the Eastern District of California - Robert T. Matsui Courthouse"
+          ],
+          "surrounding_suburbs": [
+            "Roseville",
+            "Folsom",
+            "Elk Grove",
+            "Davis",
+            "Citrus Heights",
+            "Rancho Cordova"
+          ],
+          "key_districts": [
+            "Downtown Capitol Mall",
+            "Midtown",
+            "Fab 40s (East Sacramento)",
+            "Natomas",
+            "Pocket-Greenhaven"
+          ],
+          "economic_context": "California's state government seat, administrative agency headquarters, and public sector regulatory investigation nexus."
+        },
+        {
+          "city_name": "Long Beach",
+          "city_slug": "long-beach",
+          "county_name": "Los Angeles County",
+          "metro_name": "Los Angeles South Bay / Port Corridor",
+          "is_hq": false,
+          "lat": 33.7701,
+          "lng": -118.1937,
+          "zip_code": "90802",
+          "local_courthouses": [
+            "Governor George Deukmejian Courthouse - Los Angeles County Superior Court",
+            "U.S. District Court for the Central District of California"
+          ],
+          "surrounding_suburbs": [
+            "Torrance",
+            "Carson",
+            "San Pedro",
+            "Lakewood",
+            "Seal Beach",
+            "Huntington Beach"
+          ],
+          "key_districts": [
+            "Downtown Long Beach",
+            "Belmont Shore",
+            "Bixby Knolls",
+            "Naples",
+            "Port of Long Beach Industrial Complex"
+          ],
+          "economic_context": "International maritime logistics port, aerospace ventures, and commercial freight distribution generating cargo theft inquiries and corporate vetting."
+        },
+        {
+          "city_name": "Oakland",
+          "city_slug": "oakland",
+          "county_name": "Alameda County",
+          "metro_name": "San Francisco East Bay",
+          "is_hq": false,
+          "lat": 37.8044,
+          "lng": -122.2712,
+          "zip_code": "94612",
+          "local_courthouses": [
+            "Alameda County Superior Court - René C. Davidson Courthouse",
+            "U.S. District Court for the Northern District of California - Ronald V. Dellums Federal Building"
+          ],
+          "surrounding_suburbs": [
+            "Berkeley",
+            "Alameda",
+            "San Leandro",
+            "Emeryville",
+            "Piedmont",
+            "Hayward",
+            "Walnut Creek"
+          ],
+          "key_districts": [
+            "Uptown Financial Center",
+            "Jack London Square",
+            "Rockridge",
+            "Montclair",
+            "Port of Oakland Maritime District"
+          ],
+          "economic_context": "East Bay trade, technology, and health sciences center housing Alameda County judicial administrative bodies and high-stakes commercial disputes."
+        },
+        {
+          "city_name": "Bakersfield",
+          "city_slug": "bakersfield",
+          "county_name": "Kern County",
+          "metro_name": "Southern San Joaquin Valley",
+          "is_hq": false,
+          "lat": 35.3733,
+          "lng": -119.0187,
+          "zip_code": "93301",
+          "local_courthouses": [
+            "Kern County Superior Court - Metropolitan Division",
+            "U.S. District Court for the Eastern District of California - Bakersfield Division"
+          ],
+          "surrounding_suburbs": [
+            "Oildale",
+            "Delano",
+            "Arvin",
+            "Shafter",
+            "Wasco",
+            "Tehachapi"
+          ],
+          "key_districts": [
+            "Downtown Arts & Judicial Core",
+            "Seven Oaks",
+            "Rosedale",
+            "Stockdale",
+            "Kern River Corridor"
+          ],
+          "economic_context": "Energy production, oil drilling operations, and agricultural supply chain hub in Kern County, requiring heavy equipment asset recovery and vendor fraud audits."
+        },
+        {
+          "city_name": "Anaheim",
+          "city_slug": "anaheim",
+          "county_name": "Orange County",
+          "metro_name": "Orange County Metro",
+          "is_hq": false,
+          "lat": 33.8366,
+          "lng": -117.9143,
+          "zip_code": "92805",
+          "local_courthouses": [
+            "Orange County Superior Court - North Justice Center (Fullerton)",
+            "Central Justice Center (Santa Ana)",
+            "U.S. District Court for the Central District of California - Ronald Reagan Courthouse"
+          ],
+          "surrounding_suburbs": [
+            "Fullerton",
+            "Orange",
+            "Santa Ana",
+            "Garden Grove",
+            "Irvine",
+            "Buena Park",
+            "Yorba Linda"
+          ],
+          "key_districts": [
+            "Anaheim Resort District",
+            "Platinum Triangle",
+            "Anaheim Hills",
+            "Anaheim Colony Historic District"
+          ],
+          "economic_context": "Orange County tourism, manufacturing, sports entertainment, and commercial distribution corridor requiring corporate counter-intelligence and fraud audits."
+        }
+      ]
+    },
+    {
+      "state_name": "Florida",
+      "state_slug": "florida",
+      "state_abbr": "FL",
+      "is_hq": false,
+      "licensing_info": "Investigations conducted through Florida Department of Agriculture and Consumer Services (FDACS) Division of Licensing Class 'A' & 'C' investigator partners and federal investigative reciprocity; CAD supervisory leadership AZ DPS Lic. #1616599.",
+      "hq_address": {
+        "street": "6991 E Camelback Rd. STE D-300",
+        "city": "Scottsdale",
+        "state": "AZ",
+        "zip": "85251",
+        "country": "US"
+      },
+      "legal_context": {
+        "audio_consent": "Two-Party (All-Party) Consent",
+        "recording_statute": "Fla. Stat. § 934.03 (Security of Communications)",
+        "recording_summary": "Florida is an all-party consent jurisdiction under Fla. Stat. § 934.03. Intercepting or recording oral or wire communications without the consent of all parties is a third-degree felony and strictly inadmissible in Florida state and administrative proceedings.",
+        "gps_statute": "Fla. Stat. § 934.425",
+        "gps_summary": "Under Fla. Stat. § 934.425, placing a tracking device or tracking application on a motor vehicle without the consent of all owners or authorized lessees is a second-degree misdemeanor, with narrow business fleet owner exemptions.",
+        "court_rules": "Florida Evidence Code (Fla. Stat. ch. 90) & UVTA (Fla. Stat. ch. 726)",
+        "court_summary": "Florida courts enforce strict authentication standards under Fla. Stat. ch. 90 and rigorous debtor clawback procedures under Florida's Uniform Voidable Transactions Act (UVTA) to pierce asset concealment mechanisms."
+      },
+      "cities": [
+        {
+          "city_name": "Miami",
+          "city_slug": "miami",
+          "county_name": "Miami-Dade County",
+          "metro_name": "South Florida / Brickell Financial District",
+          "is_hq": false,
+          "lat": 25.7617,
+          "lng": -80.1918,
+          "zip_code": "33130",
+          "local_courthouses": [
+            "Miami-Dade County Courthouse - 73 W Flagler St",
+            "U.S. District Court for the Southern District of Florida - Wilkie D. Ferguson Jr. Courthouse"
+          ],
+          "surrounding_suburbs": [
+            "Miami Beach",
+            "Coral Gables",
+            "Coconut Grove",
+            "Doral",
+            "Aventura",
+            "Brickell",
+            "Key Biscayne"
+          ],
+          "key_districts": [
+            "Brickell Financial Core",
+            "Downtown Miami",
+            "Design District",
+            "Wynwood",
+            "Coconut Grove",
+            "Star Island / Biscayne Bay"
+          ],
+          "economic_context": "The international banking capital of Latin America and Florida, known for complex cross-border financial transactions, luxury yacht/aviation holdings, and foreign capital flight."
+        },
+        {
+          "city_name": "Fort Lauderdale",
+          "city_slug": "fort-lauderdale",
+          "county_name": "Broward County",
+          "metro_name": "Greater Fort Lauderdale / Broward",
+          "is_hq": false,
+          "lat": 26.1224,
+          "lng": -80.1373,
+          "zip_code": "33301",
+          "local_courthouses": [
+            "Broward County Judicial Complex",
+            "U.S. District Court for the Southern District of Florida - Fort Lauderdale Division"
+          ],
+          "surrounding_suburbs": [
+            "Hollywood",
+            "Pompano Beach",
+            "Boca Raton",
+            "Coral Springs",
+            "Plantation",
+            "Davie",
+            "Weston"
+          ],
+          "key_districts": [
+            "Las Olas Boulevard",
+            "Downtown Riverwalk District",
+            "Port Everglades Maritime Center",
+            "Harbor Beach",
+            "Coral Ridge"
+          ],
+          "economic_context": "Yachting capital of the world and international maritime commerce center, demanding offshore vessel registration checks, maritime liens, and wealth recovery."
+        },
+        {
+          "city_name": "Orlando",
+          "city_slug": "orlando",
+          "county_name": "Orange County",
+          "metro_name": "Central Florida / I-4 Corridor",
+          "is_hq": false,
+          "lat": 28.5383,
+          "lng": -81.3792,
+          "zip_code": "32801",
+          "local_courthouses": [
+            "Orange County Courthouse",
+            "U.S. District Court for the Middle District of Florida - George C. Young Courthouse"
+          ],
+          "surrounding_suburbs": [
+            "Winter Park",
+            "Altamonte Springs",
+            "Kissimmee",
+            "Lake Mary",
+            "Windermere",
+            "Sanford",
+            "Maitland"
+          ],
+          "key_districts": [
+            "Downtown Orange Avenue Core",
+            "Lake Nona Medical City",
+            "International Drive Corridor",
+            "Baldwin Park",
+            "Windermere Butler Chain"
+          ],
+          "economic_context": "Global entertainment, hospitality, aerospace, and medical simulation hub generating multi-state commercial breach of contract and asset tracing actions."
+        },
+        {
+          "city_name": "Tampa",
+          "city_slug": "tampa",
+          "county_name": "Hillsborough County",
+          "metro_name": "Tampa Bay Metro",
+          "is_hq": false,
+          "lat": 27.9506,
+          "lng": -82.4572,
+          "zip_code": "33602",
+          "local_courthouses": [
+            "Hillsborough County Courthouse - George E. Edgecomb Courthouse",
+            "U.S. District Court for the Middle District of Florida - Sam M. Gibbons Courthouse"
+          ],
+          "surrounding_suburbs": [
+            "St. Petersburg",
+            "Clearwater",
+            "Brandon",
+            "Wesley Chapel",
+            "Riverview",
+            "Lakeland"
+          ],
+          "key_districts": [
+            "Water Street Tampa",
+            "Downtown Financial District",
+            "Westshore Business District",
+            "Hyde Park",
+            "Davis Islands",
+            "Ybor City"
+          ],
+          "economic_context": "West coast Florida financial and logistics nexus, home to major commercial shipping terminals, corporate risk departments, and high-net-worth matrimonial litigation."
+        },
+        {
+          "city_name": "St. Petersburg",
+          "city_slug": "st-petersburg",
+          "county_name": "Pinellas County",
+          "metro_name": "Tampa Bay / Pinellas Peninsula",
+          "is_hq": false,
+          "lat": 27.7676,
+          "lng": -82.6403,
+          "zip_code": "33701",
+          "local_courthouses": [
+            "Pinellas County Judicial Building",
+            "Pinellas County Civil Court",
+            "U.S. District Court for the Middle District of Florida"
+          ],
+          "surrounding_suburbs": [
+            "Tampa",
+            "Clearwater",
+            "Pinellas Park",
+            "Largo",
+            "Gulfport",
+            "Dunedin",
+            "Seminole"
+          ],
+          "key_districts": [
+            "Downtown Waterfront District",
+            "Grand Central District",
+            "Snell Isle",
+            "Old Northeast",
+            "Gateway Corridor"
+          ],
+          "economic_context": "Financial services, wealth advisory management, health sciences, and coastal estate enclaves driving financial forensics and judgment recovery."
+        },
+        {
+          "city_name": "Jacksonville",
+          "city_slug": "jacksonville",
+          "county_name": "Duval County",
+          "metro_name": "First Coast / Northeast Florida",
+          "is_hq": false,
+          "lat": 30.3322,
+          "lng": -81.6557,
+          "zip_code": "32202",
+          "local_courthouses": [
+            "Duval County Courthouse",
+            "U.S. District Court for the Middle District of Florida - Bryan Simpson Courthouse"
+          ],
+          "surrounding_suburbs": [
+            "Jacksonville Beach",
+            "Ponte Vedra Beach",
+            "Orange Park",
+            "St. Augustine",
+            "Fernandina Beach"
+          ],
+          "key_districts": [
+            "Downtown Core",
+            "San Marco",
+            "Riverside & Avondale",
+            "Deerwood",
+            "Southside Financial Corridor"
+          ],
+          "economic_context": "Florida's most populous municipality by city boundaries, serving as a primary rail, logistics, insurance, and banking center for the Southeast."
+        },
+        {
+          "city_name": "Tallahassee",
+          "city_slug": "tallahassee",
+          "county_name": "Leon County",
+          "metro_name": "Florida Panhandle / State Capital",
+          "is_hq": false,
+          "lat": 30.4383,
+          "lng": -84.2807,
+          "zip_code": "32301",
+          "local_courthouses": [
+            "Leon County Courthouse",
+            "Supreme Court of Florida",
+            "U.S. District Court for the Northern District of Florida"
+          ],
+          "surrounding_suburbs": [
+            "Crawfordville",
+            "Havana",
+            "Midway",
+            "Monticello",
+            "Thomasville"
+          ],
+          "key_districts": [
+            "Capitol Complex",
+            "Downtown Law District",
+            "Midtown",
+            "Southwood",
+            "Killearn Estates"
+          ],
+          "economic_context": "The seat of Florida government, home to the Florida Supreme Court, regulatory boards, and political lobbying institutions requiring legislative research and corporate compliance audits."
+        },
+        {
+          "city_name": "Cape Coral",
+          "city_slug": "cape-coral",
+          "county_name": "Lee County",
+          "metro_name": "Southwest Florida / Gulf Coast",
+          "is_hq": false,
+          "lat": 26.5629,
+          "lng": -81.9495,
+          "zip_code": "33904",
+          "local_courthouses": [
+            "Lee County Justice Center (Fort Myers)",
+            "U.S. District Court for the Middle District of Florida - Fort Myers Division"
+          ],
+          "surrounding_suburbs": [
+            "Fort Myers",
+            "Estero",
+            "Bonita Springs",
+            "Naples",
+            "Punta Gorda",
+            "Sanibel"
+          ],
+          "key_districts": [
+            "Cape Harbour",
+            "Tarpon Point Marina",
+            "Pelican Area",
+            "Burnt Store",
+            "Southwest Cape"
+          ],
+          "economic_context": "A preeminent Gulf Coast canal wonderland with over 400 miles of navigable waterways, focusing on real estate concealment, marine asset discovery, and debtor evasion."
+        },
+        {
+          "city_name": "Pembroke Pines",
+          "city_slug": "pembroke-pines",
+          "county_name": "Broward County",
+          "metro_name": "South Broward / Greater Miami",
+          "is_hq": false,
+          "lat": 26.0031,
+          "lng": -80.2239,
+          "zip_code": "33024",
+          "local_courthouses": [
+            "Broward County Judicial Complex - South Regional Courthouse (Hollywood)",
+            "Broward County Main Courthouse",
+            "U.S. District Court - Southern District of FL"
+          ],
+          "surrounding_suburbs": [
+            "Miramar",
+            "Hollywood",
+            "Davie",
+            "Cooper City",
+            "Weston",
+            "Southwest Ranches"
+          ],
+          "key_districts": [
+            "Pines City Center",
+            "Silver Lakes",
+            "Pembroke Falls",
+            "Chapel Trail",
+            "Grand Palms"
+          ],
+          "economic_context": "Thriving South Broward commercial and executive residential enclave bridging Miami-Dade and Broward litigation jurisdictions."
+        },
+        {
+          "city_name": "Port St. Lucie",
+          "city_slug": "port-st-lucie",
+          "county_name": "St. Lucie County",
+          "metro_name": "Treasure Coast Corridor",
+          "is_hq": false,
+          "lat": 27.273,
+          "lng": -80.3582,
+          "zip_code": "34952",
+          "local_courthouses": [
+            "St. Lucie County Courthouse (Fort Pierce)",
+            "U.S. District Court for the Southern District of Florida - Fort Pierce Division"
+          ],
+          "surrounding_suburbs": [
+            "Fort Pierce",
+            "Stuart",
+            "Jensen Beach",
+            "Vero Beach",
+            "Palm City"
+          ],
+          "key_districts": [
+            "Tradition Innovation Hub",
+            "St. Lucie West",
+            "Sandpiper Bay",
+            "River Park"
+          ],
+          "economic_context": "Treasure Coast medical, research, and high-growth residential corridor experiencing extensive commercial expansion and probate litigation."
+        },
+        {
+          "city_name": "Gainesville",
+          "city_slug": "gainesville",
+          "county_name": "Alachua County",
+          "metro_name": "North Central Florida",
+          "is_hq": false,
+          "lat": 29.6516,
+          "lng": -82.3248,
+          "zip_code": "32601",
+          "local_courthouses": [
+            "Alachua County Family & Civil Justice Center",
+            "U.S. District Court for the Northern District of Florida - Gainesville Division"
+          ],
+          "surrounding_suburbs": [
+            "Alachua",
+            "Newberry",
+            "High Springs",
+            "Ocala",
+            "Starke"
+          ],
+          "key_districts": [
+            "Downtown Innovation District",
+            "University Avenue",
+            "Haile Plantation",
+            "Tioga Town Center"
+          ],
+          "economic_context": "North Central Florida's biotechnology, healthcare, and research nexus surrounding the University of Florida, necessitating trade secret and patent investigations."
+        },
+        {
+          "city_name": "Hialeah",
+          "city_slug": "hialeah",
+          "county_name": "Miami-Dade County",
+          "metro_name": "Miami Metropolitan Area",
+          "is_hq": false,
+          "lat": 25.8576,
+          "lng": -80.2781,
+          "zip_code": "33010",
+          "local_courthouses": [
+            "Hialeah District Court",
+            "Miami-Dade County Courthouse",
+            "U.S. District Court for the Southern District of Florida"
+          ],
+          "surrounding_suburbs": [
+            "Miami",
+            "Miami Lakes",
+            "Doral",
+            "Hialeah Gardens",
+            "Opa-locka",
+            "Medley"
+          ],
+          "key_districts": [
+            "LeJeune Industrial District",
+            "West Hialeah Commercial Strip",
+            "Amelia District",
+            "Palmetto Expressway Corridor"
+          ],
+          "economic_context": "Major industrial manufacturing, freight forwarding, and commercial warehousing capital in Miami-Dade County requiring vendor vetting and cargo fraud verification."
+        }
+      ]
+    },
+    {
+      "state_name": "Texas",
+      "state_slug": "texas",
+      "state_abbr": "TX",
+      "is_hq": false,
+      "licensing_info": "Investigative operations conducted through Texas Department of Public Safety (TX DPS) Private Security Program (Tex. Occ. Code ch. 1702) licensed investigator affiliates and federal task force network; CAD agency oversight AZ DPS Lic. #1616599.",
+      "hq_address": {
+        "street": "6991 E Camelback Rd. STE D-300",
+        "city": "Scottsdale",
+        "state": "AZ",
+        "zip": "85251",
+        "country": "US"
+      },
+      "legal_context": {
+        "audio_consent": "One-Party Consent",
+        "recording_statute": "Tex. Penal Code § 16.02 (Unlawful Interception)",
+        "recording_summary": "Texas is a one-party consent jurisdiction under Tex. Penal Code § 16.02. A person can record a wire, oral, or electronic communication to which they are a party, or where one of the parties has given prior consent. Recording without at least one party's consent is a state jail felony.",
+        "gps_statute": "Tex. Penal Code § 16.06",
+        "gps_summary": "Under Tex. Penal Code § 16.06 (Unlawful Installation of Tracking Device), it is a Class A misdemeanor to install an electronic tracking device on a motor vehicle owned or leased by another without their effective consent. Evidence collected through unauthorized tracking is strictly barred in Texas courts.",
+        "court_rules": "Texas Rules of Evidence (TRE Rule 901) & TUFTA (Tex. Bus. & Com. Code ch. 24)",
+        "court_summary": "Texas civil courts demand rigorous authentication under Texas Rule of Evidence 901 and aggressive application of the Texas Uniform Fraudulent Transfer Act (TUFTA) to pierce asset protection trusts and alter-ego entities."
+      },
+      "cities": [
+        {
+          "city_name": "Houston",
+          "city_slug": "houston",
+          "county_name": "Harris County",
+          "metro_name": "Greater Houston / Energy Corridor",
+          "is_hq": false,
+          "lat": 29.7604,
+          "lng": -95.3698,
+          "zip_code": "77002",
+          "local_courthouses": [
+            "Harris County Civil Courthouse - 201 Caroline St",
+            "U.S. District Court for the Southern District of Texas - Bob Casey Courthouse"
+          ],
+          "surrounding_suburbs": [
+            "The Woodlands",
+            "Sugar Land",
+            "Katy",
+            "Pearland",
+            "Spring",
+            "Pasadena",
+            "Conroe"
+          ],
+          "key_districts": [
+            "Downtown Financial Center",
+            "Energy Corridor",
+            "Galleria / Uptown",
+            "River Oaks",
+            "Texas Medical Center",
+            "Port of Houston Maritime Hub"
+          ],
+          "economic_context": "Energy capital of the world and global maritime trading port, featuring massive corporate balance sheets, complex mineral lease holdings, and high-value commercial fraud."
+        },
+        {
+          "city_name": "Dallas",
+          "city_slug": "dallas",
+          "county_name": "Dallas County",
+          "metro_name": "Dallas-Fort Worth Metroplex",
+          "is_hq": false,
+          "lat": 32.7767,
+          "lng": -96.797,
+          "zip_code": "75201",
+          "local_courthouses": [
+            "George L. Allen Sr. Courts Building - Dallas County Civil District Court",
+            "U.S. District Court for the Northern District of Texas - Earle Cabell Courthouse"
+          ],
+          "surrounding_suburbs": [
+            "Highland Park",
+            "University Park",
+            "Plano",
+            "Irving",
+            "Richardson",
+            "Garland",
+            "Frisco"
+          ],
+          "key_districts": [
+            "Downtown Dallas Financial Core",
+            "Uptown",
+            "Preston Hollow",
+            "Highland Park Village",
+            "Las Colinas Business District"
+          ],
+          "economic_context": "Financial, private equity, telecom, and banking nerve center of Texas, recognized for high-stakes commercial litigation and marital dissolution asset audits."
+        },
+        {
+          "city_name": "Austin",
+          "city_slug": "austin",
+          "county_name": "Travis County",
+          "metro_name": "Central Texas / Silicon Hills",
+          "is_hq": false,
+          "lat": 30.2672,
+          "lng": -97.7431,
+          "zip_code": "78701",
+          "local_courthouses": [
+            "Travis County Civil and Family Courts Facility",
+            "U.S. District Court for the Western District of Texas - Austin Division"
+          ],
+          "surrounding_suburbs": [
+            "Round Rock",
+            "Cedar Park",
+            "Pflugerville",
+            "Georgetown",
+            "West Lake Hills",
+            "Bee Cave",
+            "Lakeway"
+          ],
+          "key_districts": [
+            "Congress Avenue Business Corridor",
+            "Silicon Hills Tech Hub",
+            "Domain Northside",
+            "Barton Creek",
+            "Tarrytown",
+            "Rainey Historic District"
+          ],
+          "economic_context": "Rapidly expanding tech and venture capital capital of Texas, characterized by intellectual property litigation, founder equity disputes, and cryptocurrency tracing."
+        },
+        {
+          "city_name": "San Antonio",
+          "city_slug": "san-antonio",
+          "county_name": "Bexar County",
+          "metro_name": "South Central Texas / Alamo City",
+          "is_hq": false,
+          "lat": 29.4241,
+          "lng": -98.4936,
+          "zip_code": "78205",
+          "local_courthouses": [
+            "Bexar County Courthouse - Cadena-Reeves Justice Center",
+            "U.S. District Court for the Western District of Texas - San Antonio Division"
+          ],
+          "surrounding_suburbs": [
+            "New Braunfels",
+            "Schertz",
+            "Boerne",
+            "Helotes",
+            "Cibolo",
+            "Converse",
+            "Alamo Heights"
+          ],
+          "key_districts": [
+            "Downtown Judicial Core",
+            "The Pearl District",
+            "Alamo Heights",
+            "Stone Oak",
+            "Medical Center District",
+            "Brooks City-Base"
+          ],
+          "economic_context": "South Texas defense, cybersecurity, healthcare, and tourism anchor experiencing significant cross-border manufacturing and business disputes."
+        },
+        {
+          "city_name": "Fort Worth",
+          "city_slug": "fort-worth",
+          "county_name": "Tarrant County",
+          "metro_name": "Tarrant County / DFW Metroplex",
+          "is_hq": false,
+          "lat": 32.7555,
+          "lng": -97.3308,
+          "zip_code": "76102",
+          "local_courthouses": [
+            "Tarrant County Family Law Center & Civil Courts Building",
+            "U.S. District Court for the Northern District of Texas - Fort Worth Division"
+          ],
+          "surrounding_suburbs": [
+            "Arlington",
+            "Southlake",
+            "Keller",
+            "Colleyville",
+            "Grapevine",
+            "Mansfield",
+            "Bedford"
+          ],
+          "key_districts": [
+            "Sundance Square Downtown",
+            "Cultural District",
+            "Fort Worth Stockyards",
+            "Alliance Industrial Corridor",
+            "Mira Vista"
+          ],
+          "economic_context": "Aviation manufacturing, defense contractor headquarters, oil & gas royalty trusts, and substantial ranchland wealth requiring forensic title and trust unraveling."
+        },
+        {
+          "city_name": "El Paso",
+          "city_slug": "el-paso",
+          "county_name": "El Paso County",
+          "metro_name": "West Texas Borderplex",
+          "is_hq": false,
+          "lat": 31.7619,
+          "lng": -106.485,
+          "zip_code": "79901",
+          "local_courthouses": [
+            "El Paso County Courthouse",
+            "U.S. District Court for the Western District of Texas - Albert Armendariz Sr. Courthouse"
+          ],
+          "surrounding_suburbs": [
+            "Socorro",
+            "Horizon City",
+            "Anthony",
+            "Canutillo",
+            "Sunland Park"
+          ],
+          "key_districts": [
+            "Downtown El Paso",
+            "Coronado Country Club Enclave",
+            "Zaragoza Commercial Corridor",
+            "Mission Valley",
+            "Cielo Vista"
+          ],
+          "economic_context": "Strategic international trade hub connected to Ciudad Juárez, requiring cross-border asset tracking, customs fraud audits, and dual-citizenship asset locates."
+        },
+        {
+          "city_name": "Arlington",
+          "city_slug": "arlington",
+          "county_name": "Tarrant County",
+          "metro_name": "DFW Mid-Cities Corridor",
+          "is_hq": false,
+          "lat": 32.7357,
+          "lng": -97.1081,
+          "zip_code": "76010",
+          "local_courthouses": [
+            "Tarrant County Sub-Courthouse in Arlington",
+            "Tarrant County Civil Courts Building",
+            "U.S. District Court - Northern District of Texas"
+          ],
+          "surrounding_suburbs": [
+            "Grand Prairie",
+            "Mansfield",
+            "Fort Worth",
+            "Dallas",
+            "Euless",
+            "Bedford"
+          ],
+          "key_districts": [
+            "Arlington Entertainment District",
+            "Downtown Arlington",
+            "Great Southwest Industrial District",
+            "Viridian"
+          ],
+          "economic_context": "Mid-Cities automotive assembly, entertainment stadium complex, and logistics transport center generating commercial litigation and surveillance needs."
+        },
+        {
+          "city_name": "Corpus Christi",
+          "city_slug": "corpus-christi",
+          "county_name": "Nueces County",
+          "metro_name": "Texas Coastal Bend",
+          "is_hq": false,
+          "lat": 27.8006,
+          "lng": -97.3964,
+          "zip_code": "78401",
+          "local_courthouses": [
+            "Nueces County Courthouse",
+            "U.S. District Court for the Southern District of Texas - Corpus Christi Division"
+          ],
+          "surrounding_suburbs": [
+            "Portland",
+            "Robstown",
+            "Ingleside",
+            "Aransas Pass",
+            "Port Aransas",
+            "Kingsville"
+          ],
+          "key_districts": [
+            "Uptown & Bayfront Financial District",
+            "Port of Corpus Christi Industrial Basin",
+            "Southside",
+            "Padre Island"
+          ],
+          "economic_context": "Major energy export seaport on the Gulf of Mexico, with petrochemical processing, naval aviation, and offshore maritime asset verification."
+        },
+        {
+          "city_name": "Plano",
+          "city_slug": "plano",
+          "county_name": "Collin County",
+          "metro_name": "North Dallas / Collin County Platinum Corridor",
+          "is_hq": false,
+          "lat": 33.0198,
+          "lng": -96.6989,
+          "zip_code": "75074",
+          "local_courthouses": [
+            "Collin County Courthouse (McKinney)",
+            "U.S. District Court for the Eastern District of Texas - Plano Courthouse"
+          ],
+          "surrounding_suburbs": [
+            "Frisco",
+            "McKinney",
+            "Allen",
+            "Richardson",
+            "Carrollton",
+            "The Colony"
+          ],
+          "key_districts": [
+            "Legacy West Corporate Headquarters",
+            "Downtown Plano Historic Core",
+            "Willow Bend Executive Enclave",
+            "Granite Park"
+          ],
+          "economic_context": "Collin County's premier corporate hub hosting global corporate headquarters, high-net-worth divorce cases, and patent enforcement litigation in EDTX."
+        },
+        {
+          "city_name": "Lubbock",
+          "city_slug": "lubbock",
+          "county_name": "Lubbock County",
+          "metro_name": "South Plains / West Texas",
+          "is_hq": false,
+          "lat": 33.5779,
+          "lng": -101.8552,
+          "zip_code": "79401",
+          "local_courthouses": [
+            "Lubbock County Courthouse",
+            "U.S. District Court for the Northern District of Texas - Lubbock Division"
+          ],
+          "surrounding_suburbs": [
+            "Wolfforth",
+            "Slaton",
+            "Levelland",
+            "Plainview",
+            "Brownfield"
+          ],
+          "key_districts": [
+            "Downtown Lubbock",
+            "Texas Tech University Campus Core",
+            "Overton",
+            "Kingsgate",
+            "Vintage Township"
+          ],
+          "economic_context": "South Plains agricultural, cotton production, healthcare, and education hub involving extensive land title disputes and commercial banking matters."
+        },
+        {
+          "city_name": "Amarillo",
+          "city_slug": "amarillo",
+          "county_name": "Potter / Randall County",
+          "metro_name": "Texas Panhandle",
+          "is_hq": false,
+          "lat": 35.222,
+          "lng": -101.8313,
+          "zip_code": "79101",
+          "local_courthouses": [
+            "Potter County Courts Building",
+            "Randall County Justice Center",
+            "U.S. District Court for the Northern District of Texas - J. Marvin Jones Courthouse"
+          ],
+          "surrounding_suburbs": [
+            "Canyon",
+            "Borger",
+            "Hereford",
+            "Dumas",
+            "Pampa"
+          ],
+          "key_districts": [
+            "Downtown Amarillo Center",
+            "Medical Center District",
+            "Wolflin Historic District",
+            "The Colonies",
+            "Greenways"
+          ],
+          "economic_context": "Texas Panhandle commercial livestock, nuclear weapons assembly (Pantex), and natural gas production center."
+        },
+        {
+          "city_name": "Brownsville",
+          "city_slug": "brownsville",
+          "county_name": "Cameron County",
+          "metro_name": "Rio Grande Valley Border Corridor",
+          "is_hq": false,
+          "lat": 25.9017,
+          "lng": -97.4975,
+          "zip_code": "78520",
+          "local_courthouses": [
+            "Cameron County Courthouse",
+            "U.S. District Court for the Southern District of Texas - Reynaldo G. Garza Courthouse"
+          ],
+          "surrounding_suburbs": [
+            "Harlingen",
+            "San Benito",
+            "Port Isabel",
+            "South Padre Island",
+            "Los Fresnos"
+          ],
+          "key_districts": [
+            "Historic Downtown Brownsville",
+            "Port of Brownsville Maritime Center",
+            "Boca Chica Space Corridor",
+            "North Brownsville Commercial Hub"
+          ],
+          "economic_context": "Border commerce, space exploration launch facilities (Starbase), and port ship-recycling operations along the US-Mexico international boundary."
+        },
+        {
+          "city_name": "Waco",
+          "city_slug": "waco",
+          "county_name": "McLennan County",
+          "metro_name": "Central Texas / I-35 Corridor",
+          "is_hq": false,
+          "lat": 31.5493,
+          "lng": -97.1467,
+          "zip_code": "76701",
+          "local_courthouses": [
+            "McLennan County Courthouse",
+            "U.S. District Court for the Western District of Texas - Waco Division"
+          ],
+          "surrounding_suburbs": [
+            "Hewitt",
+            "Woodway",
+            "Robinson",
+            "Bellmead",
+            "Temple",
+            "Killeen"
+          ],
+          "key_districts": [
+            "Downtown Waco & River Square",
+            "Baylor University Corridor",
+            "Woodway Executive Enclave",
+            "China Spring",
+            "Texas Central Industrial Park"
+          ],
+          "economic_context": "Strategically positioned along the I-35 innovation spine, known nationally for high-profile patent infringement litigation in the U.S. District Court for the Western District of Texas."
+        }
+      ]
+    },
+    {
+      "state_name": "New York",
+      "state_slug": "new-york",
+      "state_abbr": "NY",
+      "is_hq": false,
+      "licensing_info": "Investigations conducted through New York Department of State (NY DOS) Division of Licensing Services licensed investigator partners under General Business Law Article 7 and federal interstate reciprocity; CAD supervisory leadership AZ DPS Lic. #1616599.",
+      "hq_address": {
+        "street": "6991 E Camelback Rd. STE D-300",
+        "city": "Scottsdale",
+        "state": "AZ",
+        "zip": "85251",
+        "country": "US"
+      },
+      "legal_context": {
+        "audio_consent": "One-Party Consent",
+        "recording_statute": "N.Y. Penal Law §§ 250.00 & 250.05",
+        "recording_summary": "New York is a one-party consent state under N.Y. Penal Law §§ 250.00 and 250.05. It is legal to record an in-person conversation or telephone call as long as at least one party to the communication consents. Unlawfully intercepting communications without any party's consent is a Class E felony under New York law.",
+        "gps_statute": "N.Y. Penal Law § 120.45(4) (Stalking in the Fourth Degree)",
+        "gps_summary": "Under N.Y. Penal Law § 120.45(4), installing an unauthorized GPS device or electronic tracking beacon without the vehicle owner's consent constitutes criminal stalking and results in complete evidentiary suppression in New York Supreme Court proceedings.",
+        "court_rules": "New York Civil Practice Law and Rules (CPLR) Article 45",
+        "court_summary": "All evidence, surveillance documentation, and forensic reports are tailored to the strict evidentiary demands of the New York Supreme Court Commercial Division, Matrimonial Parts, and the Southern (SDNY) and Eastern (EDNY) Federal Districts of New York."
+      },
+      "cities": [
+        {
+          "city_name": "New York City",
+          "city_slug": "new-york-city",
+          "county_name": "New York County (Manhattan), Kings, Queens, Bronx, Richmond",
+          "metro_name": "New York Metropolitan Area",
+          "is_hq": false,
+          "lat": 40.7128,
+          "lng": -74.006,
+          "zip_code": "10007",
+          "local_courthouses": [
+            "New York County Supreme Court - 60 Centre St & 80 Centre St",
+            "U.S. District Court for the Southern District of New York (SDNY) - Thurgood Marshall Courthouse",
+            "Kings County Supreme Court (Brooklyn)",
+            "U.S. District Court for the Eastern District of New York (EDNY) - Cadman Plaza"
+          ],
+          "surrounding_suburbs": [
+            "Brooklyn",
+            "Queens",
+            "Bronx",
+            "Staten Island",
+            "Jersey City",
+            "Hoboken",
+            "Yonkers",
+            "Long Island"
+          ],
+          "key_districts": [
+            "Wall Street / Financial District",
+            "Midtown Manhattan",
+            "Hudson Yards",
+            "Upper East Side",
+            "Tribeca",
+            "DUMBO",
+            "Flatiron District"
+          ],
+          "economic_context": "The financial capital of the world, housing Wall Street investment banks, global hedge funds, international real estate syndicates, and complex multi-billion-dollar commercial litigations in SDNY and NY Supreme Court."
+        },
+        {
+          "city_name": "Buffalo",
+          "city_slug": "buffalo",
+          "county_name": "Erie County",
+          "metro_name": "Western New York / Niagara Frontier",
+          "is_hq": false,
+          "lat": 42.8864,
+          "lng": -78.8784,
+          "zip_code": "14202",
+          "local_courthouses": [
+            "Erie County Court & Supreme Court - 25 Delaware Ave",
+            "U.S. District Court for the Western District of New York - Robert H. Jackson Courthouse"
+          ],
+          "surrounding_suburbs": [
+            "Amherst",
+            "Cheektowaga",
+            "Tonawanda",
+            "Niagara Falls",
+            "West Seneca",
+            "Orchard Park"
+          ],
+          "key_districts": [
+            "Downtown Financial & Legal Core",
+            "Buffalo Niagara Medical Campus",
+            "Elmwood Village",
+            "Larkinville",
+            "North Buffalo"
+          ],
+          "economic_context": "Western New York's largest economic hub, with healthcare research, international cross-border trade with Canada, manufacturing, and Western District federal court actions."
+        },
+        {
+          "city_name": "Rochester",
+          "city_slug": "rochester",
+          "county_name": "Monroe County",
+          "metro_name": "Finger Lakes / Western NY",
+          "is_hq": false,
+          "lat": 43.1566,
+          "lng": -77.6088,
+          "zip_code": "14614",
+          "local_courthouses": [
+            "Monroe County Hall of Justice - 99 Exchange Blvd",
+            "U.S. District Court for the Western District of New York - Kenneth B. Keating Courthouse"
+          ],
+          "surrounding_suburbs": [
+            "Greece",
+            "Irondequoit",
+            "Henrietta",
+            "Brighton",
+            "Fairport",
+            "Webster",
+            "Pittsford"
+          ],
+          "key_districts": [
+            "Downtown Rochester Center",
+            "East Avenue Historic Enclave",
+            "Park Avenue District",
+            "High Falls",
+            "South Wedge"
+          ],
+          "economic_context": "Optics, photonics, medical devices, and university technology transfer corridor demanding intellectual property protection and corporate embezzlement audits."
+        },
+        {
+          "city_name": "Syracuse",
+          "city_slug": "syracuse",
+          "county_name": "Onondaga County",
+          "metro_name": "Central New York",
+          "is_hq": false,
+          "lat": 43.0481,
+          "lng": -76.1474,
+          "zip_code": "13202",
+          "local_courthouses": [
+            "Onondaga County Courthouse - 401 Montgomery St",
+            "U.S. District Court for the Northern District of New York - James M. Hanley Courthouse"
+          ],
+          "surrounding_suburbs": [
+            "Cicero",
+            "Clay",
+            "DeWitt",
+            "Salina",
+            "Camillus",
+            "Liverpool",
+            "Fayetteville"
+          ],
+          "key_districts": [
+            "Armory Square",
+            "Downtown Syracuse Judicial Center",
+            "University Hill",
+            "Franklin Square",
+            "Eastwood"
+          ],
+          "economic_context": "Central New York transportation crossroads and semiconductor manufacturing development area, requiring extensive vendor verification and civil litigation support."
+        },
+        {
+          "city_name": "Albany",
+          "city_slug": "albany",
+          "county_name": "Albany County",
+          "metro_name": "Capital District / Tech Valley",
+          "is_hq": false,
+          "lat": 42.6526,
+          "lng": -73.7562,
+          "zip_code": "12207",
+          "local_courthouses": [
+            "Albany County Courthouse & Supreme Court - 16 Eagle St",
+            "New York State Court of Appeals",
+            "U.S. District Court for the Northern District of New York - James T. Foley Courthouse"
+          ],
+          "surrounding_suburbs": [
+            "Schenectady",
+            "Troy",
+            "Colonie",
+            "Guilderland",
+            "Bethlehem",
+            "Saratoga Springs",
+            "Clifton Park"
+          ],
+          "key_districts": [
+            "Empire State Plaza",
+            "Downtown Financial District",
+            "Center Square",
+            "Pine Hills",
+            "SUNY Poly NanoTech Complex"
+          ],
+          "economic_context": "The state capital of New York, housing the Court of Appeals, state regulatory and enforcement agencies, and the Tech Valley nanotechnology corridor."
+        },
+        {
+          "city_name": "Hudson Valley",
+          "city_slug": "hudson-valley",
+          "county_name": "Dutchess, Orange & Ulster Counties",
+          "metro_name": "Hudson River Valley",
+          "is_hq": false,
+          "lat": 41.7004,
+          "lng": -73.921,
+          "zip_code": "12601",
+          "local_courthouses": [
+            "Dutchess County Supreme & County Court (Poughkeepsie)",
+            "Orange County Court (Goshen)",
+            "Ulster County Court (Kingston)"
+          ],
+          "surrounding_suburbs": [
+            "Poughkeepsie",
+            "Newburgh",
+            "Kingston",
+            "Beacon",
+            "Middletown",
+            "New Paltz",
+            "Fishkill"
+          ],
+          "key_districts": [
+            "Poughkeepsie Waterfront",
+            "Beacon Main Street",
+            "Kingston Stockade District",
+            "Goshen Historic Core",
+            "Rhinebeck Historic Enclave"
+          ],
+          "economic_context": "High-value estate residences, equestrian properties, arts institutions, and executive commuters spanning both banks of the Hudson River."
+        },
+        {
+          "city_name": "Westchester County",
+          "city_slug": "westchester-county",
+          "county_name": "Westchester County",
+          "metro_name": "Suburban NYC / Sound Shore & Hudson Enclaves",
+          "is_hq": false,
+          "lat": 41.0339,
+          "lng": -73.7629,
+          "zip_code": "10601",
+          "local_courthouses": [
+            "Westchester County Supreme & County Court - 111 Dr. Martin Luther King Jr. Blvd (White Plains)",
+            "U.S. District Court for the Southern District of New York - White Plains Courthouse"
+          ],
+          "surrounding_suburbs": [
+            "White Plains",
+            "Yonkers",
+            "New Rochelle",
+            "Scarsdale",
+            "Rye",
+            "Greenwich",
+            "Tarrytown",
+            "Chappaqua"
+          ],
+          "key_districts": [
+            "Downtown White Plains Financial Center",
+            "Scarsdale Village",
+            "Rye Sound Shore",
+            "Bedford Estates",
+            "Armonk Corporate Center",
+            "Bronxville Village"
+          ],
+          "economic_context": "One of the wealthiest suburban counties in the United States, home to Fortune 500 headquarters, hedge fund titans, and high-stakes matrimonial property disputes in White Plains Supreme Court."
+        }
+      ]
+    }
+  ]
+}

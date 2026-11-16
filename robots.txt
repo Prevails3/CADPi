@@ -1,4 +1,5 @@
 User-agent: *
 Allow: /
 
+Sitemap: https://cadprivateinvestigations.com/sitemap_index.xml
 Sitemap: https://cadprivateinvestigations.com/sitemap.xml
