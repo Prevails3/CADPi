@@ -582,7 +582,7 @@ def render_city_hub(state: Dict[str, Any], city: Dict[str, Any], all_states: Lis
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer">
   
   <!-- Main Stylesheet -->
-  <link rel="stylesheet" href="/index.css?v=1.3.0">
+  <link rel="stylesheet" href="/index.css?v=1.3.1">
 
   <!-- Structured Data (JSON-LD) -->
   <script type="application/ld+json">
@@ -899,7 +899,7 @@ def render_service_page(state: Dict[str, Any], city: Dict[str, Any], service: Di
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer">
   
   <!-- Main Stylesheet -->
-  <link rel="stylesheet" href="/index.css?v=1.3.0">
+  <link rel="stylesheet" href="/index.css?v=1.3.1">
 
   <!-- Structured Data (JSON-LD) -->
   <script type="application/ld+json">
@@ -1148,7 +1148,7 @@ def render_state_hub(state: Dict[str, Any], all_states: List[Dict[str, Any]]) ->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer">
   
   <!-- Main Stylesheet -->
-  <link rel="stylesheet" href="/index.css?v=1.3.0">
+  <link rel="stylesheet" href="/index.css?v=1.3.1">
 
   <!-- Structured Data (JSON-LD) -->
   <script type="application/ld+json">
@@ -1376,7 +1376,7 @@ def render_master_directory(all_states: List[Dict[str, Any]]) -> str:
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer">
   
   <!-- Main Stylesheet -->
-  <link rel="stylesheet" href="/index.css?v=1.3.0">
+  <link rel="stylesheet" href="/index.css?v=1.3.1">
 
   <!-- Structured Data (JSON-LD) -->
   <script type="application/ld+json">

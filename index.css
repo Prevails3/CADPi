@@ -218,28 +218,41 @@
   }
   
   .header-container {
-    max-width: var(--max-width);
+    max-width: 1520px;
+    width: 100%;
     height: 100%;
     margin: 0 auto;
-    padding: 0 1.5rem;
+    padding: 0 clamp(1rem, 2vw, 2.5rem);
     display: flex;
     justify-content: space-between;
     align-items: center;
+    gap: 1rem;
   }
   
   .header-actions {
     display: flex;
     align-items: center;
-    gap: 0.75rem;
+    gap: clamp(0.5rem, 0.8vw, 0.85rem);
+    flex-shrink: 0;
+  }
+
+  .btn-header {
+    white-space: nowrap;
+    padding: 0.55rem clamp(0.85rem, 1.1vw, 1.35rem);
+    font-size: clamp(0.8rem, 0.88vw, 0.88rem);
+    font-weight: 600;
+    letter-spacing: 0.01em;
+    flex-shrink: 0;
   }
   
   .logo {
     display: flex;
     align-items: center;
     text-decoration: none;
+    flex-shrink: 0;
     
     .logo-img {
-      height: 84px;
+      height: 76px;
       width: auto;
       display: block;
       transition: var(--transition-smooth);
@@ -247,25 +260,38 @@
   }
   
   .global-header.scrolled .logo .logo-img {
-    height: 62px;
+    height: 60px;
   }
   
   .nav-menu {
     display: flex;
     align-items: center;
+    flex-shrink: 1;
+    min-width: 0;
   }
   
   .nav-list {
     display: flex;
-    gap: 2rem;
+    align-items: center;
+    gap: clamp(0.6rem, 1.2vw, 1.6rem);
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .nav-list li {
+    white-space: nowrap;
+    flex-shrink: 0;
   }
   
   .nav-link {
-    font-size: 0.9rem;
+    font-size: clamp(0.82rem, 0.9vw, 0.9rem);
     font-weight: 500;
     color: var(--text-secondary);
     position: relative;
-    padding: 0.5rem 0;
+    padding: 0.5rem 0.15rem;
+    white-space: nowrap;
+    display: inline-block;
     transition: var(--transition-fast);
     
     &::after {
@@ -1668,37 +1694,29 @@
 }
 
 /* Responsive Media Queries */
-@media (max-width: 968px) {
-  .global-header {
-    .header-actions {
-      .btn-header {
-        display: none; /* Hide primary consultation button in nav on tablet, keep toggle visible */
-      }
-    }
+@media (min-width: 1081px) and (max-width: 1280px) {
+  .nav-list {
+    gap: 0.75rem;
   }
-  
-  .founder-spotlight {
-    grid-template-columns: 1fr;
-    gap: 2.5rem;
-    padding: 2rem;
+  .nav-link {
+    font-size: 0.82rem;
+    padding: 0.5rem 0.1rem;
   }
-  
-  .trust-grid {
-    grid-template-columns: 1fr;
-    gap: 3rem;
-  }
-  
-  .contact-grid {
-    grid-template-columns: 1fr;
-    gap: 3rem;
-  }
-  
-  .footer-grid {
-    grid-template-columns: repeat(2, 1fr);
+  .btn-header {
+    padding: 0.5rem 0.85rem;
+    font-size: 0.82rem;
   }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1080px) {
+  .global-header {
+    .header-actions {
+      .btn-header {
+        display: none; /* Hide primary consultation button in nav on tablet/compact screens */
+      }
+    }
+  }
+
   .mobile-toggle {
     display: flex;
   }
@@ -1736,7 +1754,31 @@
   .global-header.scrolled .nav-menu {
     top: 80px;
   }
+}
+
+@media (max-width: 968px) {
+  .founder-spotlight {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+    padding: 2rem;
+  }
   
+  .trust-grid {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+  
+  .contact-grid {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+  
+  .footer-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
   .hero-section {
     min-height: auto;
     padding-block-start: calc(var(--header-height) + 2rem);
