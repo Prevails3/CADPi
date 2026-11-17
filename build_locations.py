@@ -436,6 +436,7 @@ def get_shared_footer():
             <li><a href="/locations/florida/">Florida State Hub</a></li>
             <li><a href="/locations/texas/">Texas State Hub</a></li>
             <li><a href="/locations/new-york/">New York State Hub</a></li>
+            <li><a href="/locations/new-jersey/">New Jersey State Hub</a></li>
             <li><a href="/locations/">All Service Locations &rarr;</a></li>
           </ul>
         </div>
@@ -1265,10 +1266,12 @@ def render_state_hub(state: Dict[str, Any], all_states: List[Dict[str, Any]]) ->
 </html>"""
 
 def render_master_directory(all_states: List[Dict[str, Any]]) -> str:
+    total_cities = sum(len(s["cities"]) for s in all_states)
+    states_str = ", ".join([s["state_name"] for s in all_states[:-1]]) + f", and {all_states[-1]['state_name']}"
     canonical_url = f"{BASE_URL}/locations/"
     page_title = "Service Locations & Nationwide Investigative Reach | CAD Private Investigations"
-    meta_desc = "Explore CAD Private Investigations' multi-state practice hubs and localized investigative offices across Arizona, California, Florida, Texas, and New York."
-    og_desc = "Federal-grade private investigations across Arizona, California, Florida, New York, Texas, and nationwide. Corporate HQ in Scottsdale, AZ."
+    meta_desc = f"Explore CAD Private Investigations' multi-state practice hubs and localized investigative offices across {states_str}."
+    og_desc = f"Federal-grade private investigations across {states_str}, and nationwide. Corporate HQ in Scottsdale, AZ."
     h1 = "CAD Private Investigations: Nationwide Practice Locations &amp; Regional Hubs"
 
     breadcrumbs = [
@@ -1394,7 +1397,7 @@ def render_master_directory(all_states: List[Dict[str, Any]]) -> str:
           <svg class="badge-icon" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true">
             <path fill="currentColor" d="M12,1L3,5v6c0,5.55,3.84,10.74,9,12c5.16-1.26,9-6.45,9-12V5L12,1L12,1z M12,11.99h7c-0.53,4.12-3.28,7.79-7,8.94V12H5V6.3l7-3.11V11.99z"/>
           </svg>
-          NATIONWIDE INVESTIGATIVE REACH • 5 STATES • 55 METROPOLITAN MARKETS
+          NATIONWIDE INVESTIGATIVE REACH • {len(all_states)} STATES • {total_cities} METROPOLITAN MARKETS
         </div>
 
         <h1 class="section-title" style="font-size: clamp(2rem, 4vw, 3.1rem); max-width: 960px; margin: 0 auto 1rem auto;">
@@ -1402,7 +1405,7 @@ def render_master_directory(all_states: List[Dict[str, Any]]) -> str:
         </h1>
         
         <p class="section-subtitle" style="max-width: 860px; margin: 0 auto 2rem auto; font-size: 1.15rem; line-height: 1.7;">
-          Explore CAD Private Investigations' multi-state practice hubs and localized investigative offices across Arizona, California, Florida, Texas, and New York. Directed by former federal supervisory special agents with over 25 years of federal law enforcement leadership.
+          Explore CAD Private Investigations' multi-state practice hubs and localized investigative offices across {states_str}. Directed by former federal supervisory special agents with over 25 years of federal law enforcement leadership.
         </p>
 
         <div class="hero-cta-group" style="justify-content: center; gap: 1rem; display: flex; flex-wrap: wrap;">

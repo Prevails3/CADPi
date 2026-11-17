@@ -1809,6 +1809,395 @@
           "economic_context": "One of the wealthiest suburban counties in the United States, home to Fortune 500 headquarters, hedge fund titans, and high-stakes matrimonial property disputes in White Plains Supreme Court."
         }
       ]
+    },
+    {
+      "state_name": "New Jersey",
+      "state_slug": "new-jersey",
+      "state_abbr": "NJ",
+      "is_hq": false,
+      "licensing_info": "State of New Jersey Licensed Private Detective Agency Operations (N.J.S.A. 45:19-8 et seq.) and Interstate Federal Task Force Reciprocity.",
+      "hq_address": {
+        "street": "6991 E Camelback Rd. STE D-300",
+        "city": "Scottsdale",
+        "state": "AZ",
+        "zip": "85251",
+        "country": "US"
+      },
+      "legal_context": {
+        "audio_consent": "One-Party Consent",
+        "recording_statute": "N.J.S.A. 2A:156A-4(d) (New Jersey Wiretapping and Electronic Surveillance Control Act)",
+        "recording_summary": "Under New Jersey law (N.J.S.A. 2A:156A-4), New Jersey is a one-party consent jurisdiction. An investigator or party to a conversation may record in-person or wire communications provided at least one participant has given prior consent. Intercepting communications without consent is a crime of the third degree.",
+        "gps_statute": "N.J.S.A. 2C:12-10 (Stalking) & State v. Earls (214 N.J. 564)",
+        "gps_summary": "In New Jersey, deploying GPS or electronic mobile location monitoring on private property requires explicit authorization from the vehicle's registered title owner or authorized corporate custodian. Tracking without owner consent violates New Jersey anti-stalking statutes and Article I, Paragraph 7 of the NJ Constitution.",
+        "court_rules": "New Jersey Rules of Evidence (N.J.R.E. 901) & Chancery Division Practice",
+        "court_summary": "All investigative reports, forensic asset discoveries, and digital evidence adhere strictly to N.J.R.E. 901 authentication standards for admissibility across the New Jersey Superior Court (Chancery Division, Family Part, and Law Division) and the U.S. District Court for the District of New Jersey."
+      },
+      "cities": [
+        {
+          "city_name": "Newark",
+          "city_slug": "newark",
+          "county_name": "Essex County",
+          "metro_name": "Northern New Jersey / Gateway Region",
+          "is_hq": false,
+          "lat": 40.7357,
+          "lng": -74.1724,
+          "zip_code": "07102",
+          "local_courthouses": [
+            "Essex County Superior Court - Historic Courthouse & Veterans Courthouse (Newark)",
+            "U.S. District Court for the District of New Jersey - Martin Luther King Jr. Federal Building & Courthouse (Newark)"
+          ],
+          "surrounding_suburbs": [
+            "Jersey City",
+            "Paterson",
+            "Montclair",
+            "Short Hills",
+            "Livingston",
+            "Hoboken",
+            "Elizabeth"
+          ],
+          "key_districts": [
+            "Downtown Newark Financial Core",
+            "Ironbound District",
+            "University Heights",
+            "Port Newark-Elizabeth Marine Terminal",
+            "Broad Street Commercial Corridor"
+          ],
+          "economic_context": "New Jersey's largest city and economic center, home to Prudential Financial, Port Newark shipping operations, and the busiest federal courthouse in the District of New Jersey."
+        },
+        {
+          "city_name": "Jersey City",
+          "city_slug": "jersey-city",
+          "county_name": "Hudson County",
+          "metro_name": "Northern New Jersey / Gold Coast Metro",
+          "is_hq": false,
+          "lat": 40.7178,
+          "lng": -74.0431,
+          "zip_code": "07302",
+          "local_courthouses": [
+            "Hudson County Superior Court - William J. Brennan Courthouse (Jersey City)",
+            "Hudson County Administration Building"
+          ],
+          "surrounding_suburbs": [
+            "Hoboken",
+            "Weehawken",
+            "Newark",
+            "Bayonne",
+            "Secaucus",
+            "Union City",
+            "Edgewater"
+          ],
+          "key_districts": [
+            "Exchange Place ('Wall Street West')",
+            "Newport Waterfront",
+            "Paulus Hook Historic District",
+            "Downtown Jersey City",
+            "Journal Square Transport Center"
+          ],
+          "economic_context": "Known as 'Wall Street West', Jersey City commands massive global financial back-office operations, prime Hudson River waterfront luxury high-rises, and major matrimonial asset flight along the NY-NJ border."
+        },
+        {
+          "city_name": "Paterson",
+          "city_slug": "paterson",
+          "county_name": "Passaic County",
+          "metro_name": "Northern New Jersey / Passaic Valley",
+          "is_hq": false,
+          "lat": 40.9168,
+          "lng": -74.1718,
+          "zip_code": "07505",
+          "local_courthouses": [
+            "Passaic County Superior Court - Courthouse Complex (Paterson)",
+            "Passaic County Administration Building"
+          ],
+          "surrounding_suburbs": [
+            "Wayne",
+            "Clifton",
+            "Totowa",
+            "Hawthorne",
+            "Fair Lawn",
+            "Paramus",
+            "Little Falls"
+          ],
+          "key_districts": [
+            "Historic Downtown Commercial Core",
+            "Great Falls National Historical Park",
+            "Eastside Park Enclave",
+            "South Paterson Commercial Corridor"
+          ],
+          "economic_context": "Historic industrial seat of Passaic County with extensive commercial manufacturing, distribution networks, and regional civil litigation in Passaic County Superior Court."
+        },
+        {
+          "city_name": "Edison",
+          "city_slug": "edison",
+          "county_name": "Middlesex County",
+          "metro_name": "Central New Jersey / Raritan Valley",
+          "is_hq": false,
+          "lat": 40.5187,
+          "lng": -74.4121,
+          "zip_code": "08817",
+          "local_courthouses": [
+            "Middlesex County Superior Court (New Brunswick)",
+            "Edison Municipal Court"
+          ],
+          "surrounding_suburbs": [
+            "Metuchen",
+            "Woodbridge",
+            "Highland Park",
+            "Piscataway",
+            "New Brunswick",
+            "East Brunswick",
+            "Plainfield"
+          ],
+          "key_districts": [
+            "Raritan Center Business Park",
+            "Oak Tree Road Commercial Hub",
+            "Clara Barton Enclave",
+            "Route 1 Retail & Technology Corridor"
+          ],
+          "economic_context": "Central Jersey corporate logistics and technology epicenter, home to Raritan Center (the East Coast's largest industrial park) and multinational corporate distribution centers."
+        },
+        {
+          "city_name": "New Brunswick",
+          "city_slug": "new-brunswick",
+          "county_name": "Middlesex County",
+          "metro_name": "Central New Jersey / Healthcare City",
+          "is_hq": false,
+          "lat": 40.4862,
+          "lng": -74.4518,
+          "zip_code": "08901",
+          "local_courthouses": [
+            "Middlesex County Superior Court - Courthouse Complex (56 Paterson St)",
+            "Middlesex County Family Court"
+          ],
+          "surrounding_suburbs": [
+            "Piscataway",
+            "East Brunswick",
+            "Highland Park",
+            "Franklin Township",
+            "North Brunswick",
+            "Somerset"
+          ],
+          "key_districts": [
+            "Downtown Corporate Core",
+            "Johnson & Johnson Global World Headquarters",
+            "Rutgers University Research Parks",
+            "Robert Wood Johnson Healthcare Corridor"
+          ],
+          "economic_context": "New Jersey's 'Healthcare City', global headquarters of Johnson & Johnson, Rutgers research facilities, and county seat for Middlesex County civil and matrimonial litigation."
+        },
+        {
+          "city_name": "Trenton",
+          "city_slug": "trenton",
+          "county_name": "Mercer County",
+          "metro_name": "Central New Jersey / State Capital & Delaware Valley",
+          "is_hq": false,
+          "lat": 40.2206,
+          "lng": -74.7597,
+          "zip_code": "08608",
+          "local_courthouses": [
+            "Mercer County Superior Court - Civil Courts Complex (Trenton)",
+            "U.S. District Court for the District of New Jersey - Clarkson S. Fisher Federal Building & Courthouse",
+            "New Jersey Supreme Court (Richard J. Hughes Justice Complex)"
+          ],
+          "surrounding_suburbs": [
+            "Princeton",
+            "Hamilton",
+            "Lawrenceville",
+            "Hopewell",
+            "Ewing",
+            "Yardley (PA)",
+            "Pennington"
+          ],
+          "key_districts": [
+            "State Capitol Complex",
+            "Downtown Federal Court District",
+            "Mill Hill Historic Enclave",
+            "Mercer Waterfront Corridor"
+          ],
+          "economic_context": "Capital city of New Jersey and seat of state government, housing state regulatory enforcement departments, the New Jersey Supreme Court, and federal dockets."
+        },
+        {
+          "city_name": "Camden",
+          "city_slug": "camden",
+          "county_name": "Camden County",
+          "metro_name": "South Jersey / Greater Philadelphia Metro",
+          "is_hq": false,
+          "lat": 39.9259,
+          "lng": -75.1196,
+          "zip_code": "08102",
+          "local_courthouses": [
+            "Camden County Superior Court - Hall of Justice",
+            "U.S. District Court for the District of New Jersey - Mitchell H. Cohen Federal Building & Courthouse"
+          ],
+          "surrounding_suburbs": [
+            "Cherry Hill",
+            "Pennsauken",
+            "Collingswood",
+            "Haddonfield",
+            "Gloucester City",
+            "Philadelphia (PA)"
+          ],
+          "key_districts": [
+            "Camden Waterfront",
+            "Campbell Soup Global Headquarters",
+            "Subaru of America Corporate Campus",
+            "Cooper University Health Sciences District"
+          ],
+          "economic_context": "South Jersey's industrial waterfront gateway to Philadelphia, housing major corporate headquarters, port terminals along the Delaware River, and federal courts."
+        },
+        {
+          "city_name": "Cherry Hill",
+          "city_slug": "cherry-hill",
+          "county_name": "Camden County",
+          "metro_name": "South Jersey / Affluent Philadelphia Suburbs",
+          "is_hq": false,
+          "lat": 39.9348,
+          "lng": -74.9979,
+          "zip_code": "08002",
+          "local_courthouses": [
+            "Camden County Superior Court - Hall of Justice (Camden)",
+            "Cherry Hill Municipal Court"
+          ],
+          "surrounding_suburbs": [
+            "Haddonfield",
+            "Moorestown",
+            "Voorhees",
+            "Marlton",
+            "Camden",
+            "Mount Laurel",
+            "Mount Ephraim"
+          ],
+          "key_districts": [
+            "Cherry Hill Mall Commercial District",
+            "Barclay Enclave",
+            "Kingston Estates",
+            "Fox Hollow Enclave",
+            "Woodcrest Country Club Enclave"
+          ],
+          "economic_context": "Premier affluent residential and commercial executive hub for the South Jersey / Philadelphia metropolitan area, prominent for high-net-worth divorce asset tracing, executive vetting, and commercial debt collection."
+        },
+        {
+          "city_name": "Vineland",
+          "city_slug": "vineland",
+          "county_name": "Cumberland County",
+          "metro_name": "South Jersey / Cumberland Valley",
+          "is_hq": false,
+          "lat": 39.4864,
+          "lng": -75.0257,
+          "zip_code": "08360",
+          "local_courthouses": [
+            "Cumberland County Superior Court - Courthouse Complex (Bridgeton)",
+            "Vineland Municipal Court"
+          ],
+          "surrounding_suburbs": [
+            "Millville",
+            "Bridgeton",
+            "Buena",
+            "Franklinville",
+            "Hammonton",
+            "Pittsgrove"
+          ],
+          "key_districts": [
+            "Landis Avenue Commercial Center",
+            "Vineland Industrial Park",
+            "South Jersey Food Processing Corridor",
+            "Chestnut Avenue Historic District"
+          ],
+          "economic_context": "Largest municipality by area in New Jersey, serving as the commercial food distribution, agribusiness, and manufacturing hub of South Jersey."
+        },
+        {
+          "city_name": "Toms River",
+          "city_slug": "toms-river",
+          "county_name": "Ocean County",
+          "metro_name": "Jersey Shore / Ocean County Seat",
+          "is_hq": false,
+          "lat": 39.9537,
+          "lng": -74.1979,
+          "zip_code": "08753",
+          "local_courthouses": [
+            "Ocean County Superior Court - Justice Complex (Toms River)",
+            "Ocean County Court House (118 Washington St)"
+          ],
+          "surrounding_suburbs": [
+            "Brick Township",
+            "Lakewood",
+            "Seaside Heights",
+            "Point Pleasant",
+            "Lavallette",
+            "Island Heights",
+            "Manchester"
+          ],
+          "key_districts": [
+            "Downtown Toms River Financial District",
+            "Silverton Waterfront",
+            "Green Island",
+            "Ortley Beach Enclave",
+            "Ocean County Mall Retail Corridor"
+          ],
+          "economic_context": "Ocean County seat and primary Jersey Shore judicial and financial center, with extensive luxury waterfront residential properties, boat slips, and coastal probate/family estate litigation."
+        },
+        {
+          "city_name": "Atlantic City",
+          "city_slug": "atlantic-city",
+          "county_name": "Atlantic County",
+          "metro_name": "Jersey Shore / Gaming & Tourism Capital",
+          "is_hq": false,
+          "lat": 39.3643,
+          "lng": -74.4229,
+          "zip_code": "08401",
+          "local_courthouses": [
+            "Atlantic County Superior Court - Civil Courts Complex (Atlantic City)",
+            "Atlantic County Criminal Courts Complex (Mays Landing)"
+          ],
+          "surrounding_suburbs": [
+            "Ventnor City",
+            "Margate City",
+            "Longport",
+            "Brigantine",
+            "Pleasantville",
+            "Somers Point",
+            "Absecon"
+          ],
+          "key_districts": [
+            "Marina District (Borgata / Golden Nugget)",
+            "Boardwalk Casino Corridor",
+            "Bader Field Corridor",
+            "Ducktown",
+            "Gardner's Basin Marine District"
+          ],
+          "economic_context": "East Coast gaming, hospitality, and entertainment capital, demanding strict corporate compliance, gaming fraud defense, casino vendor background vetting, and marine asset verification."
+        },
+        {
+          "city_name": "Long Branch",
+          "city_slug": "long-branch",
+          "county_name": "Monmouth County",
+          "metro_name": "Jersey Shore / Monmouth Coastal Enclaves",
+          "is_hq": false,
+          "lat": 40.3043,
+          "lng": -73.9924,
+          "zip_code": "07740",
+          "local_courthouses": [
+            "Monmouth County Superior Court - Courthouse Complex (Freehold)",
+            "Long Branch Municipal Court"
+          ],
+          "surrounding_suburbs": [
+            "Asbury Park",
+            "Deal",
+            "Elberon",
+            "West Long Branch",
+            "Monmouth Beach",
+            "Rumson",
+            "Red Bank"
+          ],
+          "key_districts": [
+            "Pier Village Oceanfront Resort",
+            "Elberon Historic Luxury Enclave",
+            "Broadway Commercial District",
+            "North End Oceanfront",
+            "West End Arts District"
+          ],
+          "economic_context": "Premier Monmouth County oceanfront enclave bordering billionaire enclaves like Deal and Rumson, home to Wall Street executive second homes, beachfront luxury condos, and high-net-worth matrimonial property concealment."
+        }
+      ]
     }
   ]
 }
