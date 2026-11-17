@@ -2076,35 +2076,6 @@
           "economic_context": "Premier affluent residential and commercial executive hub for the South Jersey / Philadelphia metropolitan area, prominent for high-net-worth divorce asset tracing, executive vetting, and commercial debt collection."
         },
         {
-          "city_name": "Vineland",
-          "city_slug": "vineland",
-          "county_name": "Cumberland County",
-          "metro_name": "South Jersey / Cumberland Valley",
-          "is_hq": false,
-          "lat": 39.4864,
-          "lng": -75.0257,
-          "zip_code": "08360",
-          "local_courthouses": [
-            "Cumberland County Superior Court - Courthouse Complex (Bridgeton)",
-            "Vineland Municipal Court"
-          ],
-          "surrounding_suburbs": [
-            "Millville",
-            "Bridgeton",
-            "Buena",
-            "Franklinville",
-            "Hammonton",
-            "Pittsgrove"
-          ],
-          "key_districts": [
-            "Landis Avenue Commercial Center",
-            "Vineland Industrial Park",
-            "South Jersey Food Processing Corridor",
-            "Chestnut Avenue Historic District"
-          ],
-          "economic_context": "Largest municipality by area in New Jersey, serving as the commercial food distribution, agribusiness, and manufacturing hub of South Jersey."
-        },
-        {
           "city_name": "Toms River",
           "city_slug": "toms-river",
           "county_name": "Ocean County",
@@ -2165,37 +2136,6 @@
             "Gardner's Basin Marine District"
           ],
           "economic_context": "East Coast gaming, hospitality, and entertainment capital, demanding strict corporate compliance, gaming fraud defense, casino vendor background vetting, and marine asset verification."
-        },
-        {
-          "city_name": "Long Branch",
-          "city_slug": "long-branch",
-          "county_name": "Monmouth County",
-          "metro_name": "Jersey Shore / Monmouth Coastal Enclaves",
-          "is_hq": false,
-          "lat": 40.3043,
-          "lng": -73.9924,
-          "zip_code": "07740",
-          "local_courthouses": [
-            "Monmouth County Superior Court - Courthouse Complex (Freehold)",
-            "Long Branch Municipal Court"
-          ],
-          "surrounding_suburbs": [
-            "Asbury Park",
-            "Deal",
-            "Elberon",
-            "West Long Branch",
-            "Monmouth Beach",
-            "Rumson",
-            "Red Bank"
-          ],
-          "key_districts": [
-            "Pier Village Oceanfront Resort",
-            "Elberon Historic Luxury Enclave",
-            "Broadway Commercial District",
-            "North End Oceanfront",
-            "West End Arts District"
-          ],
-          "economic_context": "Premier Monmouth County oceanfront enclave bordering billionaire enclaves like Deal and Rumson, home to Wall Street executive second homes, beachfront luxury condos, and high-net-worth matrimonial property concealment."
         }
       ]
     }
