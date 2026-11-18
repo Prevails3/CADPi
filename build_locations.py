@@ -1086,7 +1086,7 @@ def render_state_hub(state: Dict[str, Any], all_states: List[Dict[str, Any]]) ->
         city_cards_html.append(f'''        <div class="glass-card legal-card" style="padding: 1.75rem; display: flex; flex-direction: column; justify-content: space-between;">
           <div>
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
-              <h3 style="font-size: 1.3rem; margin: 0; color: var(--text-primary);"><a href="/locations/{state['state_slug']}/{c['city_slug']}/" style="color: inherit; text-decoration: none;" class="hover-link">{c['city_name']}</a></h3>
+              <h3 style="font-size: 1.3rem; margin: 0; color: var(--text-primary);"><a href="/locations/{state['state_slug']}/{c['city_slug']}/" style="color: inherit; text-decoration: none;" class="hover-link">{c['city_name']} Private Investigator</a></h3>
               <span style="font-size: 0.8rem; color: var(--text-gold); font-weight: 600;">{c['county_name']}</span>
             </div>
             <p style="font-size: 0.92rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 1rem;">
@@ -1307,7 +1307,7 @@ def render_master_directory(all_states: List[Dict[str, Any]]) -> str:
         city_links_html = []
         for c in s["cities"]:
             city_links_html.append(f'''            <div class="location-item-card">
-              <h4 class="location-item-title"><a href="/locations/{s['state_slug']}/{c['city_slug']}/" class="hover-link">{c['city_name']}</a></h4>
+              <h4 class="location-item-title"><a href="/locations/{s['state_slug']}/{c['city_slug']}/" class="hover-link">{c['city_name']} Private Investigator</a></h4>
               <p class="location-item-meta">{c['county_name']} &bull; {c['metro_name']}</p>
               <div class="location-item-services">
                 <a href="/locations/{s['state_slug']}/{c['city_slug']}/asset-tracing/">Asset Tracing</a> &bull;
